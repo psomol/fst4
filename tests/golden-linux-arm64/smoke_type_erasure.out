@@ -1,0 +1,177 @@
+Starting type-erasure smoke test (runtime component selection)...
+
+Opening file: data/wdbc_30.trn
+Features: 30
+Classes: 2
+  Class 0 size: 357
+  Class 1 size: 212
+Splitting depth: 1
+Reading data to memory...done.
+
+Scaling data (per-feature, over all classes) using Data_Scaler_void()...done.
+
+==== criterion=gmaha evaluator=seq ====
+Feature selection setup:
+Data_Accessor_Splitting() splitters: Data_Splitter_5050() 
+Data_Accessor_Splitting_Mem(file=data/wdbc_30.trn)
+Data_Accessor_Splitting_MemTRN()
+SFS  [Search_SFS() with Sequential_Step_Straight()]
+Criterion_Normal_GMahalanobis()
+
+---------------------------------------
+Starting SFS  [Search_SFS() with Sequential_Step_Straight()]
+with Criterion: Criterion_Normal_GMahalanobis()
+with initial subset: Subset<n=30, d=0>: empty
+Target subset size set to: 7
+
+subresult=7.10982 Subset<n=30, d=1>: 27 
+
+subresult=8.96153 Subset<n=30, d=2>: 20 27 
+
+subresult=10.3119 Subset<n=30, d=3>: 20 21 27 
+
+subresult=10.8167 Subset<n=30, d=4>: 3 20 21 27 
+
+subresult=11.2761 Subset<n=30, d=5>: 3 10 20 21 27 
+
+subresult=11.8079 Subset<n=30, d=6>: 3 10 16 20 21 27 
+
+subresult=12.1045 Subset<n=30, d=7>: 3 10 16 20 21 26 27 
+
+.......................................
+Search_SFS() search finished. StopWatch time: <ELAPSED>
+Search result: 
+Subset<n=30, d=7>: 3 10 16 20 21 26 27 
+Criterion value: 12.1045
+
+
+Search result: 
+Subset<n=30, d=7>: 3 10 16 20 21 26 27 
+Criterion value=12.1045
+
+Validated 3-NN accuracy=0.894737
+
+==== criterion=gmaha evaluator=thread ====
+Feature selection setup:
+Data_Accessor_Splitting() splitters: Data_Splitter_5050() 
+Data_Accessor_Splitting_Mem(file=data/wdbc_30.trn)
+Data_Accessor_Splitting_MemTRN()
+SFS  [Search_SFS() with Sequential_Step_Straight(threads=2)]
+Criterion_Normal_GMahalanobis()
+
+---------------------------------------
+Starting SFS  [Search_SFS() with Sequential_Step_Straight(threads=2)]
+with Criterion: Criterion_Normal_GMahalanobis()
+with initial subset: Subset<n=30, d=0>: empty
+Target subset size set to: 7
+
+subresult=7.10982 Subset<n=30, d=1>: 27 
+
+subresult=8.96153 Subset<n=30, d=2>: 20 27 
+
+subresult=10.3119 Subset<n=30, d=3>: 20 21 27 
+
+subresult=10.8167 Subset<n=30, d=4>: 3 20 21 27 
+
+subresult=11.2761 Subset<n=30, d=5>: 3 10 20 21 27 
+
+subresult=11.8079 Subset<n=30, d=6>: 3 10 16 20 21 27 
+
+subresult=12.1045 Subset<n=30, d=7>: 3 10 16 20 21 26 27 
+
+.......................................
+Search_SFS() search finished. StopWatch time: <ELAPSED>
+Search result: 
+Subset<n=30, d=7>: 3 10 16 20 21 26 27 
+Criterion value: 12.1045
+
+
+Search result: 
+Subset<n=30, d=7>: 3 10 16 20 21 26 27 
+Criterion value=12.1045
+
+Validated 3-NN accuracy=0.894737
+
+==== criterion=wknn evaluator=seq ====
+Feature selection setup:
+Data_Accessor_Splitting() splitters: Data_Splitter_5050() 
+Data_Accessor_Splitting_Mem(file=data/wdbc_30.trn)
+Data_Accessor_Splitting_MemTRN()
+SFS  [Search_SFS() with Sequential_Step_Straight()]
+Criterion_Wrapper() with Classifier_kNN(k=3)
+
+---------------------------------------
+Starting SFS  [Search_SFS() with Sequential_Step_Straight()]
+with Criterion: Criterion_Wrapper() with Classifier_kNN(k=3)
+with initial subset: Subset<n=30, d=0>: empty
+Target subset size set to: 7
+
+subresult=0.908772 Subset<n=30, d=1>: 22 
+
+subresult=0.933333 Subset<n=30, d=2>: 1 22 
+
+subresult=0.94386 Subset<n=30, d=3>: 0 1 22 
+
+subresult=0.94386 Subset<n=30, d=4>: 0 1 4 22 
+
+subresult=0.94386 Subset<n=30, d=5>: 0 1 4 5 22 
+
+subresult=0.94386 Subset<n=30, d=6>: 0 1 4 5 6 22 
+
+subresult=0.94386 Subset<n=30, d=7>: 0 1 4 5 6 7 22 
+
+.......................................
+Search_SFS() search finished. StopWatch time: <ELAPSED>
+Search result: 
+Subset<n=30, d=7>: 0 1 4 5 6 7 22 
+Criterion value: 0.94386
+
+
+Search result: 
+Subset<n=30, d=7>: 0 1 4 5 6 7 22 
+Criterion value=0.94386
+
+Validated 3-NN accuracy=0.94386
+
+==== criterion=wknn evaluator=thread ====
+Feature selection setup:
+Data_Accessor_Splitting() splitters: Data_Splitter_5050() 
+Data_Accessor_Splitting_Mem(file=data/wdbc_30.trn)
+Data_Accessor_Splitting_MemTRN()
+SFS  [Search_SFS() with Sequential_Step_Straight(threads=2)]
+Criterion_Wrapper() with Classifier_kNN(k=3)
+
+---------------------------------------
+Starting SFS  [Search_SFS() with Sequential_Step_Straight(threads=2)]
+with Criterion: Criterion_Wrapper() with Classifier_kNN(k=3)
+with initial subset: Subset<n=30, d=0>: empty
+Target subset size set to: 7
+
+subresult=0.908772 Subset<n=30, d=1>: 22 
+
+subresult=0.933333 Subset<n=30, d=2>: 1 22 
+
+subresult=0.94386 Subset<n=30, d=3>: 0 1 22 
+
+subresult=0.94386 Subset<n=30, d=4>: 0 1 4 22 
+
+subresult=0.94386 Subset<n=30, d=5>: 0 1 4 5 22 
+
+subresult=0.94386 Subset<n=30, d=6>: 0 1 4 5 6 22 
+
+subresult=0.94386 Subset<n=30, d=7>: 0 1 4 5 6 7 22 
+
+.......................................
+Search_SFS() search finished. StopWatch time: <ELAPSED>
+Search result: 
+Subset<n=30, d=7>: 0 1 4 5 6 7 22 
+Criterion value: 0.94386
+
+
+Search result: 
+Subset<n=30, d=7>: 0 1 4 5 6 7 22 
+Criterion value=0.94386
+
+Validated 3-NN accuracy=0.94386
+
+Type-erasure smoke test finished successfully.

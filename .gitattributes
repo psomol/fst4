@@ -1,0 +1,12 @@
+# Golden outputs are byte-exact reference files written by tests/golden.sh.
+# Never let line-ending conversion rewrite them on checkout: with
+# core.autocrlf=true a fresh clone would turn their LF into CRLF and every
+# exact-mode comparison would fail whole-file.
+tests/golden*/** -text
+
+# GitHub language statistics (linguist): count the toolbox, not the vendored
+# CLI11, the documentation or the reference outputs.
+cli11/** linguist-vendored
+FST4_INTRO.html linguist-documentation
+doc/** linguist-documentation
+tests/golden*/** linguist-generated

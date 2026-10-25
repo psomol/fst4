@@ -1,0 +1,9 @@
+{
+  "version": "4.2.0",
+  "invocation": {"data": "data/waveform_40.trn", "format": "trn", "splitter": "5050", "splitter2": "cv", "splitter2_cv_folds": 3, "validate": "same", "scaler": "void", "criterion": "wrapper-rbfsvm", "rbfsvm_c": 1, "rbfsvm_gamma": 0, "rbfsvm_loss": "l1", "search": "sfs", "target_d": 5, "threads": 4, "seed": 1, "top_k": 5, "stable_output": true},
+  "data": {"file": "data/waveform_40.trn", "format": "trn", "classes": 3, "features": 40, "samples": 5000, "class_sizes": [1692, 1653, 1655]},
+  "result": {"features": [5, 6, 10, 14, 15], "size": 5, "value": 0.800329545441},
+  "per_split": [0.813701923077, 0.797118847539, 0.790167865707],
+  "validation": [{"classifier": "rbfsvm", "accuracy": 0.794082367053}],
+  "top_k": [{"value": 0.800329545441, "size": 5, "features": [5, 6, 10, 14, 15]}, {"value": 0.780334014947, "size": 4, "features": [6, 10, 14, 15]}, {"value": 0.75831894047, "size": 3, "features": [6, 10, 14]}, {"value": 0.709102089923, "size": 2, "features": [6, 10]}, {"value": 0.564628793779, "size": 1, "features": [6]}]
+}

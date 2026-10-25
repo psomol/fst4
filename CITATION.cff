@@ -1,0 +1,77 @@
+# Citation metadata for FST4 in the Citation File Format (CFF 1.2.0). GitHub
+# renders it as "Cite this repository"; README.md ("Citing FST4") states the same.
+cff-version: 1.2.0
+message: >-
+  If FST4 contributes to your research, please cite the toolbox paper given
+  under preferred-citation. Work that uses the budgeted stochastic (sampled)
+  sequential search should also cite the preprint listed under references.
+type: software
+title: "Feature Selection Toolbox 4 (FST4)"
+abstract: >-
+  A standalone C++17 header-only library and command-line tool for feature
+  selection and, more generally, for finding near-optimal or provably optimal
+  subsets of a large finite set under any subset-quality criterion. Criteria:
+  built-in filters (normal and multinomial model based) and wrappers over
+  deterministic classifiers and regressors, or a user-supplied set function,
+  including one computed by an external program. Searches: optimal Branch &
+  Bound and exhaustive search, sequential, floating, oscillating and budgeted
+  stochastic search, with result trackers for stability and similarity
+  evaluation. Deterministic and bit-identical at any thread count.
+version: 4.2.0
+license: AGPL-3.0-only
+url: "https://fst.utia.cz"
+repository-code: "https://github.com/psomol/fst4"
+keywords:
+  - feature selection
+  - subset selection
+  - variable selection
+  - combinatorial optimization
+  - set function optimization
+  - black-box optimization
+  - dimensionality reduction
+  - pattern recognition
+  - machine learning
+  - branch and bound
+  - floating search
+  - C++
+authors:
+  - family-names: Somol
+    given-names: Petr
+    email: somol@utia.cas.cz
+    affiliation: >-
+      Institute of Information Theory and Automation of the Czech Academy of
+      Sciences (ÚTIA), Prague
+preferred-citation:
+  type: article
+  title: "Feature Selection Toolbox"
+  authors:
+    - family-names: Somol
+      given-names: Petr
+    - family-names: Pudil
+      given-names: Pavel
+  journal: "Pattern Recognition"
+  volume: 35
+  issue: 12
+  start: 2749
+  end: 2759
+  year: 2002
+  doi: 10.1016/S0031-3203(01)00245-X
+references:
+  - type: article
+    title: "Stochastic Sequential Search in Very-High-Dimensional Feature Selection"
+    authors:
+      - family-names: Somol
+        given-names: Petr
+      - family-names: Grim
+        given-names: Jiri
+    year: 2026
+    url: "https://arxiv.org/abs/2608.01502"
+    identifiers:
+      - type: other
+        value: "arXiv:2608.01502"
+        description: "arXiv preprint (cs.LG)"
+    notes: >-
+      Describes the budgeted stochastic (sampled) sequential search
+      (fst4 --evaluator sampled; demos/demo36.cfg and demos/demo37t.cfg), a
+      new principal component of FST4 and one of the main contributions of
+      this release; it does not describe the toolbox as a whole.

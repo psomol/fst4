@@ -1,0 +1,9 @@
+{
+  "version": "4.2.0",
+  "invocation": {"data": "data/waveform_40.trn", "format": "trn", "splitter": "5050", "splitter2": "cv", "splitter2_cv_folds": 3, "validate": "same", "wrapper_metric": "auc", "scaler": "void", "criterion": "wrapper-svm", "svm_kernel": "rbf", "search": "sfs", "target_d": 3, "threads": 2, "seed": 1, "top_k": 5, "stable_output": true},
+  "data": {"file": "data/waveform_40.trn", "format": "trn", "classes": 3, "features": 40, "samples": 5000, "class_sizes": [1692, 1653, 1655]},
+  "result": {"features": [5, 10, 15], "size": 3, "value": 0.897631930191},
+  "per_split": [0.89783869097, 0.900613603805, 0.894443495797],
+  "validation": [{"classifier": "svm", "accuracy": 0.750099960016, "metric": "auc", "metric_value": 0.897624718773}],
+  "top_k": [{"value": 0.897631930191, "size": 3, "features": [5, 10, 15]}, {"value": 0.861168824286, "size": 2, "features": [5, 10]}, {"value": 0.717085148355, "size": 1, "features": [5]}]
+}

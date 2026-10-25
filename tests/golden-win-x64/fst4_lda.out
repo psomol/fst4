@@ -1,0 +1,9 @@
+{
+  "version": "4.2.0",
+  "invocation": {"data": "data/waveform_40.trn", "format": "trn", "splitter": "5050", "splitter2": "cv", "splitter2_cv_folds": 3, "validate": "same", "scaler": "void", "criterion": "wrapper-lda", "search": "sfs", "target_d": 5, "threads": 1, "seed": 1, "top_k": 5, "stable_output": true},
+  "data": {"file": "data/waveform_40.trn", "format": "trn", "classes": 3, "features": 40, "samples": 5000, "class_sizes": [1692, 1653, 1655]},
+  "result": {"features": [5, 6, 7, 8, 10], "size": 5, "value": 0.796321694607},
+  "per_split": [0.800480769231, 0.795918367347, 0.792565947242],
+  "validation": [{"classifier": "lda", "accuracy": 0.782886845262}],
+  "top_k": [{"value": 0.796321694607, "size": 5, "features": [5, 6, 7, 8, 10]}, {"value": 0.77751223045, "size": 4, "features": [5, 7, 8, 10]}, {"value": 0.752712359386, "size": 3, "features": [5, 7, 10]}, {"value": 0.699085095438, "size": 2, "features": [7, 10]}, {"value": 0.547816759751, "size": 1, "features": [7]}]
+}

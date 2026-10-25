@@ -1,0 +1,8 @@
+{
+  "version": "4.2.0",
+  "invocation": {"data": "data/wdbc_30.trn", "format": "trn", "splitter": "cv", "cv_folds": 3, "scaler": "white", "scaler_fit": "train", "criterion": "wrapper-knn", "knn_k": 3, "knn_distance": "L2", "search": "sfs", "target_d": 7, "threads": 1, "seed": 1, "top_k": 5, "stable_output": true},
+  "data": {"file": "data/wdbc_30.trn", "format": "trn", "classes": 2, "features": 30, "samples": 569, "class_sizes": [357, 212]},
+  "result": {"features": [0, 3, 10, 21, 22, 24, 28], "size": 7, "value": 0.96662025434},
+  "per_split": [0.973544973545, 0.957894736842, 0.968421052632],
+  "top_k": [{"value": 0.96662025434, "size": 7, "features": [0, 3, 10, 21, 22, 24, 28]}, {"value": 0.959593428014, "size": 6, "features": [0, 3, 10, 21, 22, 24]}, {"value": 0.957829759584, "size": 4, "features": [0, 3, 22, 24]}, {"value": 0.956075373619, "size": 5, "features": [0, 3, 10, 22, 24]}, {"value": 0.956066091154, "size": 3, "features": [0, 22, 24]}]
+}

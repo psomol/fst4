@@ -1,0 +1,34 @@
+% Regression fixture for the ARFF loader's handling of unsupported attribute
+% types. Same attribute header as
+% mixedtypes_dense.arff, but SPARSE row form: the sparse parser must remap the
+% file column indices written in each row through the same skip map, so
+% {1 3.00, ...} addresses file column 1 (= loaded feature 0), NOT attribute 1.
+% Skipped columns are addressed explicitly in some rows (0, 2, 5) and omitted in
+% others — both must load. Omitted numeric columns mean value 0 in sparse ARFF,
+% so rows here always state f0..f3 to keep the data equivalent to the dense
+% fixture's separability story (values are not identical to it by design: this
+% file stands alone).
+@RELATION mixedtypes_sparse
+
+@ATTRIBUTE docid STRING
+@ATTRIBUTE f0 NUMERIC
+@ATTRIBUTE stamp DATE "yyyy-MM-dd"
+@ATTRIBUTE f1 NUMERIC
+@ATTRIBUTE f2 REAL
+@ATTRIBUTE note STRING
+@ATTRIBUTE f3 INTEGER
+@ATTRIBUTE class {alpha,beta}
+
+@DATA
+{0 'doc, 1', 1 1.00, 3 5.20, 4 0.30, 5 'note, with comma', 6 2, 7 alpha}
+{1 1.10, 3 4.90, 4 0.40, 6 2, 7 alpha}
+{0 doc3, 1 0.90, 2 2020-01-03, 3 5.00, 4 0.20, 6 3, 7 alpha}
+{1 1.20, 3 5.10, 4 0.50, 6 2, 7 alpha}
+{0 'doc, 5', 1 1.05, 3 4.95, 4 0.35, 5 'x, y, z', 6 3, 7 alpha}
+{1 0.95, 3 5.05, 4 0.25, 6 2, 7 alpha}
+{0 'doc, 7', 1 3.00, 3 1.20, 4 0.35, 5 'note, seven', 6 5, 7 beta}
+{1 3.10, 3 0.90, 4 0.25, 6 5, 7 beta}
+{0 doc9, 1 2.90, 2 2020-01-09, 3 1.10, 4 0.45, 6 6, 7 beta}
+{1 3.20, 3 1.00, 4 0.30, 6 5, 7 beta}
+{0 'doc, 11', 1 3.05, 3 1.05, 4 0.40, 5 'p, q', 6 6, 7 beta}
+{1 2.95, 3 0.95, 4 0.20, 6 5, 7 beta}

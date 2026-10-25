@@ -1,0 +1,163 @@
+/*! \mainpage FST4 Documentation
+
+<!--This is the commentary that appears on the first documentation page (source: doc/_notation.txt).-->
+
+This is Doxygen-generated documentation of the C++ Feature Selection Toolbox 4 library.
+The library implements several cutting edge feature selection methods
+as well as feature selection criteria + supporting data modeling tools and classifiers
+
+The library makes extensive use of templates. It is header-only and depends only
+on the C++17 standard library (unlike FST3, no Boost is needed). The toolbox
+functionality is also available without
+C++ coding through the fst4 command-line tool — see the
+\clidoc{fst4 CLI flag reference} (shipped in the distribution
+as <TT>doc/FST4_CLI.md</TT>). The compiled demo programs, shown with their
+sources cross-referenced to the classes they use, are collected under
+\examplespage{Examples}.
+
+This is the documentation of library version 4.2.0.
+
+<hr>
+
+<DIV CLASS="right box ja fixwidth2"> <SPAN CLASS="dfh">Data format(s)</SPAN>
+<BR>
+<SPAN>
+Since FST3 version 3.0.1 the <A href="http://www.cs.waikato.ac.nz/~ml/weka/arff.html">ARFF</A> format (format of <A href="http://www.cs.waikato.ac.nz/ml/weka">Weka</A> machine learning library) is supported. 
+</SPAN>
+<BR><BR>
+<SPAN>
+FST4 adds delimited text (CSV/TSV, the simplest spreadsheet-export path), read by the fst4 tool with <CODE>\--format csv</CODE>
+(inferred from a <CODE>.csv</CODE>/<CODE>.tsv</CODE> name): the delimiter (comma, semicolon or tab) and a header row are
+detected automatically, decimal commas are accepted whenever the delimiter is not the comma, and the class label is taken
+from the last column unless <CODE>\--csv-class</CODE> names another column (by 0-based index or header name). Rows with missing
+values are skipped unless <CODE>\--csv-missing-to</CODE> maps the missing cells to a numeric code. See the
+\clidoc{fst4 CLI reference} for the flags and the class \ref FST::Data_File_CSV for the parsing rules.
+</SPAN>
+<BR><BR>
+<SPAN>
+The original FST3 data file format has been TRN. TRN is a trivial textual format, where
+the class-ordered collection of vectors of C-style numerical values separated by whitespace
+is preceded by a simple textual header. The data section (everything after header)
+may not contain anything else than N white-space-separated numerical values,
+where N=D*(S<SUB>1</SUB>+S<SUB>2</SUB>+...+S<SUB>c</SUB>) for D-dimensional data representing c-classes
+of sizes S<SUB>1</SUB>,...,S<SUB>c</SUB>. An example of a TRN file is shown below.
+</SPAN>
+<BR>
+<CODE>
+ <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;\#\#datafile&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;\#\#title&nbsp;Medical&nbsp;data&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;2-class&nbsp;33-dimensional&nbsp;data&nbsp;representing&nbsp;tissue&nbsp;samples&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;128&nbsp;samples&nbsp;of&nbsp;benign&nbsp;tissue,&nbsp;222&nbsp;samples&nbsp;of&nbsp;malignant&nbsp;tissue&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;\#\#features&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;33&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;\#\#classes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;128,222&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;\#\#data&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;13.54&nbsp;&nbsp;14.36&nbsp;&nbsp;87.46&nbsp;&nbsp;566.3&nbsp;&nbsp;0.09779&nbsp;&nbsp;0.08129&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;0.06664&nbsp;&nbsp;0.04781&nbsp;&nbsp;0.1885&nbsp;&nbsp;0.05766&nbsp;&nbsp;0.2699&nbsp;&nbsp;0.7886&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;2.058&nbsp;&nbsp;23.56&nbsp;&nbsp;0.008462&nbsp;&nbsp;0.0146&nbsp;&nbsp;0.02387&nbsp;&nbsp;0.01315&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;.&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;.&nbsp;<BR>
+</CODE>
+<BR>
+<SPAN>
+All keywords must be placed at the beginning of lines. The first
+line must contain the <CODE>\#\#datafile</CODE> keyword. The <CODE>\#\#title</CODE> line is optional. The
+<CODE>\#\#features</CODE> and <CODE>\#\#classes</CODE> lines are mandatory. The <CODE>\#\#features</CODE> keyword must
+be followed by a value depicting the number of features, separated by whitespace.
+The <CODE>\#\#classes</CODE> keyword must be followed by a value depicting the number of classes,
+then by whitespace, and then by a series of class sizes separated by commas.
+The ";" character at the beginning of a line depicts comment. Comments
+may appear anywhere inside header, but not after the header.
+No keywords, comments or special characters may occur after the
+<CODE>\#\#data</CODE> keyword, which depicts the start of the actual data.
+</SPAN>
+</DIV>
+
+<DIV CLASS="right box ja fixwidth2"> <SPAN CLASS="dfh">Compiling FST4</SPAN>
+<BR>
+<SPAN>
+FST4 requires a C++17 conforming compiler and has no required external library
+dependencies (LibSVM is optional and needed for the wrapper-svm criterion only;
+Eigen is optional and used for cross-validating the linear-algebra core; CLI11
+is bundled and used by the fst4 command-line tool only). Build with CMake:
+<CODE>cmake -S . -B build-mac -DCMAKE_BUILD_TYPE=Release</CODE> then
+<CODE>cmake \--build build-mac \--parallel</CODE> (use <CODE>build-win</CODE> /
+<CODE>build-linux</CODE> as the build-tree name on Windows / Linux, by
+convention); executables are placed in <CODE>build-mac/bin</CODE> (etc). For
+Visual C++ manual project setup and further details see README.md in the
+distribution root.
+</SPAN>
+</DIV>
+
+\section naming General FST4 template parameter naming conventions:
+
+<B>Basic numeric types:</B> (these are template parameters -- the library never fixes
+them; the concrete type given with each name is the one the fst4 tool and the demos
+instantiate it with, a sound default for new applications)
+<DL>
+<!-- Basic numeric types-->
+<DT><TT><B>IDXTYPE</B></TT></DT>        <DD>index values for enumeration of data samples - (nonnegative) integers, extent depends on numbers of samples in data; concrete type: <TT>unsigned int</TT></DD>
+<DT><TT><B>DIMTYPE</B></TT></DT>        <DD>index values for enumeration of features (dimensions), or classes (not class sizes) - (nonnegative) integers, usually lower extent than IDXTYPE, but be aware of expressions like _classes*_features*_features ! (should be able to address linearized representations of feature matrices for all classes); concrete type: <TT>unsigned int</TT></DD>
+<DT><TT><B>BINTYPE</B></TT></DT>        <DD>feature selection marker type - should allow representing ca. <10 different feature states (selected, deselected, selected/deselected temporarily 1st nested loop, 2nd nested loop...); concrete type: <TT>short</TT></DD>
+<DT><TT><B>REALTYPE</B></TT></DT>       <DD>must be real numbers - for representing intermediate results of calculations like mean, covariance etc.; concrete type: <TT>double</TT></DD>
+<DT><TT><B>DATATYPE</B></TT></DT>       <DD>data sample values - usually real numbers, but may be integers in text processing etc.; concrete type: <TT>double</TT></DD>
+<!--  -->
+<DT><TT><B>RETURNTYPE</B></TT></DT>     <DD>criterion value: real numerical value, but may be extended in future to support multiple values; concrete type: <TT>double</TT></DD>
+</DL>
+
+<B>Class types:</B>
+<!-- Every term links explicitly to the abstract class it stands for: bare names do not resolve (the classes live in namespace FST), -->
+<!-- and CLASSIFIER/EVALUATOR/DATAACCESSOR would auto-link to the same-named typedefs in fst4.cpp instead. -->
+<!-- Keep HTML comments OUTSIDE the DL and on ONE line each: a multi-line comment inside a DL derails Doxygen's list parser. -->
+<DL>
+<!-- Class types -->
+<DT><TT><B>\ref FST::Subset "SUBSET"</B></TT></DT>                       <DD>class of class type \ref FST::Subset "Subset"</DD>
+<DT><TT><B>\ref FST::Classifier "CLASSIFIER"</B></TT></DT>               <DD>class implementing interface defined in abstract class \ref FST::Classifier "Classifier"</DD>
+<DT><TT><B>\ref FST::Sequential_Step "EVALUATOR"</B></TT></DT>           <DD>class implementing interface defined in abstract class \ref FST::Sequential_Step "Sequential_Step"</DD>
+<DT><TT><B>\ref FST::Distance "DISTANCE"</B></TT></DT>                   <DD>class implementing interface defined in abstract class \ref FST::Distance "Distance"</DD>
+<DT><TT><B>\ref FST::Data_Accessor "DATAACCESSOR"</B></TT></DT>          <DD>class implementing interface defined in abstract class \ref FST::Data_Accessor "Data_Accessor"</DD>
+<DT><TT><B>\ref FST::Data_Intervaller "INTERVALCONTAINER"</B></TT></DT>  <DD>class of class type \ref FST::Data_Intervaller "Data_Intervaller"</DD>
+<DT><TT><B>\ref FST::Data_Interval "CONTAINER"</B></TT></DT>             <DD>STL container of class type \ref FST::Data_Interval "Data_Interval"</DD>
+</DL>
+
+<hr>
+
+\section citing Citing FST4:
+
+If FST4 contributes to your research, please cite the toolbox paper:
+Petr Somol and Pavel Pudil, <I>Feature Selection Toolbox</I>, Pattern Recognition 35(12):2749-2759, 2002.<br>
+The budgeted stochastic (sampled) sequential search (\ref FST::Sequential_Step_Sampled "Sequential_Step_Sampled") is described in:
+Petr Somol and Jiri Grim, <I>Stochastic Sequential Search in Very-High-Dimensional Feature Selection</I>,
+<a href="https://arxiv.org/abs/2608.01502">arXiv:2608.01502</a>, 2026.
+
+\section contact Maintainer:
+
+Dept. of Pattern Recognition<br>
+UTIA, Institute of Information Theory and Automation<br>
+Pod vodarenskou vezi 4<br>
+18208 Praha 8<br>
+Czech Republic<br>
+(see Contacts at https://fst.utia.cz)
+
+\section authorship Authorship:
+
+FST4 builds on the human-written FST3 codebase. Version 4 was developed by
+Petr Somol with Anthropic Claude models as coding assistants: Claude Fable 5
+for most of the 2026 development (with minor contributions by Claude Opus 5),
+Claude Fable 5.1 for the full-codebase reviews before publication, and
+Claude Opus 4.5 for the December 2025 audit of the FST3 codebase. Design,
+decisions, review and the acceptance of every change are human work.
+
+\section copyright Copyright and license:
+
+<I>Copyright &copy; 2000&ndash;present Institute of Information Theory and
+Automation of the Czech Academy of Sciences (UTIA), Prague.</I><br>
+FST4 is dual-licensed: it is free software under the GNU Affero General
+Public License, version 3 (the full text ships as <TT>LICENSE</TT>), and
+closed-source use without the AGPL's copyleft obligations requires a
+commercial license from UTIA. <TT>LICENSING.md</TT> in the distribution
+root explains both options and the contributor license agreement that every
+contribution requires. In case of interest in a commercial license, or with
+any licensing question, write to utia@utia.cas.cz; technical questions and
+pull requests go to somol@utia.cas.cz (please put "FST" in the subject line).
+*/

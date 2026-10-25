@@ -1,0 +1,8 @@
+{
+  "version": "4.2.0",
+  "invocation": {"data": "data/wdbc_30.trn", "format": "trn", "splitter": "5050", "validate": "knn,bayes,lda,logreg,rf,linsvm,rbfsvm", "scaler": "void", "criterion": "bhattacharyya", "search": "sfs", "target_d": 7, "threads": 1, "seed": 1, "top_k": 5, "stable_output": true},
+  "data": {"file": "data/wdbc_30.trn", "format": "trn", "classes": 2, "features": 30, "samples": 569, "class_sizes": [357, 212]},
+  "result": {"features": [6, 10, 13, 16, 20, 23, 27], "size": 7, "value": 3.23765162181},
+  "validation": [{"classifier": "knn", "accuracy": 0.891228070175}, {"classifier": "bayes", "accuracy": 0.957894736842}, {"classifier": "lda", "accuracy": 0.950877192982}, {"classifier": "logreg", "accuracy": 0.961403508772}, {"classifier": "rf", "accuracy": 0.947368421053}, {"classifier": "linsvm", "accuracy": 0.947368421053}, {"classifier": "rbfsvm", "accuracy": 0.957894736842}],
+  "top_k": [{"value": 3.23765162181, "size": 7, "features": [6, 10, 13, 16, 20, 23, 27]}, {"value": 2.45009654384, "size": 6, "features": [6, 10, 13, 16, 23, 27]}, {"value": 2.03823300362, "size": 5, "features": [6, 10, 13, 16, 27]}, {"value": 1.78959208417, "size": 4, "features": [6, 13, 16, 27]}, {"value": 1.52937985761, "size": 3, "features": [13, 16, 27]}]
+}

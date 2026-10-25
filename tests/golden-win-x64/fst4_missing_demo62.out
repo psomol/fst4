@@ -1,0 +1,9 @@
+{
+  "version": "4.2.0",
+  "invocation": {"data": "data/sonar_60_missing_data.trn", "format": "trn", "splitter": "randrand", "rr_splits": 1, "rr_train": 50, "rr_test": 40, "splitter2": "cv", "splitter2_cv_folds": 3, "validate": "same", "scaler": "void", "missing_value": 5, "criterion": "wrapper-svm", "svm_kernel": "rbf", "svm_optimize": "alternating", "search": "dos", "target_d": 0, "dos_delta": 3, "threads": 1, "seed": 1, "top_k": 5, "stable_output": true},
+  "data": {"file": "data/sonar_60_missing_data.trn", "format": "trn", "classes": 2, "features": 60, "samples": 208, "class_sizes": [97, 111]},
+  "result": {"features": [0, 8, 10, 35], "size": 4, "value": 0.757142857143},
+  "per_split": [0.794117647059, 0.705882352941, 0.771428571429],
+  "validation": [{"classifier": "svm", "accuracy": 0.634146341463}],
+  "top_k": [{"value": 0.757142857143, "size": 4, "features": [0, 8, 10, 35]}, {"value": 0.757142857143, "size": 5, "features": [0, 1, 8, 10, 35]}, {"value": 0.757142857143, "size": 5, "features": [0, 8, 10, 35, 49]}, {"value": 0.757142857143, "size": 6, "features": [0, 1, 2, 8, 10, 35]}, {"value": 0.757142857143, "size": 6, "features": [0, 1, 8, 10, 35, 49]}]
+}

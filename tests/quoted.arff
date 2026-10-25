@@ -1,0 +1,18 @@
+% Quoted ARFF fixture: a quoted attribute name containing a space, quoted numeric
+% values and quoted nominal (class) values in dense rows - all valid Weka output.
+@RELATION 'quoted fixture'
+
+@ATTRIBUTE 'first attr' NUMERIC
+@ATTRIBUTE second REAL
+@ATTRIBUTE "third one" INTEGER
+@ATTRIBUTE class {alpha,beta}
+
+@DATA
+"1.0",2.0,3,'alpha'
+1.5,"2.5",4,alpha
+'1.2',2.2,"3",alpha
+1.1, 2.9 ,5,"alpha"
+'7.0',8.0,9,'beta'
+7.5,"8.5",10,beta
+"7.2",8.2,'9',beta
+7.1, 8.9 ,11,"beta"

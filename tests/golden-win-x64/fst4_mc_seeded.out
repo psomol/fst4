@@ -1,0 +1,8 @@
+{
+  "version": "4.2.0",
+  "invocation": {"data": "data/wdbc_30.trn", "format": "trn", "splitter": "5050", "splitter2": "cv", "splitter2_cv_folds": 3, "scaler": "void", "criterion": "wrapper-knn", "knn_k": 3, "knn_distance": "L2", "search": "montecarlo", "target_d": 0, "mc_trials": 500, "mc_seconds": 0, "mc_card_min": 4, "mc_card_max": 10, "threads": 1, "seed": 1, "top_k": 5, "stable_output": true},
+  "data": {"file": "data/wdbc_30.trn", "format": "trn", "classes": 2, "features": 30, "samples": 569, "class_sizes": [357, 212]},
+  "result": {"features": [1, 2, 15, 18, 19, 20, 21, 22, 26], "size": 9, "value": 0.954122340426},
+  "per_split": [0.978723404255, 0.914893617021, 0.96875],
+  "top_k": [{"value": 0.954122340426, "size": 9, "features": [1, 2, 15, 18, 19, 20, 21, 22, 26]}, {"value": 0.950576241135, "size": 9, "features": [0, 2, 6, 9, 16, 21, 22, 26, 29]}, {"value": 0.947030141844, "size": 8, "features": [1, 2, 5, 7, 8, 21, 22, 25]}, {"value": 0.9400856974, "size": 5, "features": [1, 8, 22, 26, 28]}, {"value": 0.9400856974, "size": 8, "features": [1, 10, 14, 22, 24, 27, 28, 29]}]
+}

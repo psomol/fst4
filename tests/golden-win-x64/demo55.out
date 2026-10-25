@@ -1,0 +1,2643 @@
+Starting Example 55: Evaluating Similarity of Two Feature Selection Processes...
+Opening file: data/wdbc_30.trn
+Features: 30
+Classes: 2
+  Class 0 size: 357
+  Class 1 size: 212
+Splitting depth: 2
+Reading data to memory...done.
+
+Scaling data (per-feature, over all classes) using Data_Scaler_void()...done.
+
+Feature selection setup:
+Data_Accessor_Splitting() splitters: Data_Splitter_RandomRandom(splits=10, %train=95, %test=5) Data_Splitter_CV(3) 
+Data_Accessor_Splitting_Mem(file=data/wdbc_30.trn)
+Data_Accessor_Splitting_MemTRN()
+Criterion_Wrapper() with Classifier_kNN(k=3)
+Result_Tracker_Stability_Evaluator(limit=0) size 0
+
+
+TRIAL A1 ---------------------------------------------------------------------
+---------------------------------------
+Starting DOS, delta=10  [Search_DOS() with Sequential_Step_Straight()]
+with Criterion: Criterion_Wrapper() with Classifier_kNN(k=3)
+with initial subset: Subset<n=30, d=0>: empty
+Subset size to be optimized.
+
+new pivmax=0.909259, Subset<n=30, d=1>: 22 
+StopWatch time: <ELAPSED>
+
+new pivmax=0.944444, Subset<n=30, d=2>: 1 22 
+StopWatch time: <ELAPSED>
+
+new pivmax=0.946296, Subset<n=30, d=3>: 1 20 22 
+StopWatch time: <ELAPSED>
+
+new pivmax=0.948148, Subset<n=30, d=4>: 1 20 22 25 
+StopWatch time: <ELAPSED>
+
+new pivmax=0.95, Subset<n=30, d=11>: 0 1 4 5 6 7 8 11 20 22 25 
+StopWatch time: <ELAPSED>
+
+new pivmax=0.95, Subset<n=30, d=10>: 1 4 5 6 7 8 20 22 25 26 
+StopWatch time: <ELAPSED>
+
+new pivmax=0.95, Subset<n=30, d=9>: 1 5 6 7 8 20 22 25 26 
+StopWatch time: <ELAPSED>
+
+new pivmax=0.95, Subset<n=30, d=8>: 1 5 6 7 20 22 25 26 
+StopWatch time: <ELAPSED>
+
+new pivmax=0.95, Subset<n=30, d=6>: 0 1 20 22 26 27 
+StopWatch time: <ELAPSED>
+
+new pivmax=0.951852, Subset<n=30, d=13>: 0 1 4 7 8 9 14 15 17 20 22 24 27 
+StopWatch time: <ELAPSED>
+
+new pivmax=0.951852, Subset<n=30, d=12>: 0 1 4 7 9 14 15 17 20 22 24 27 
+StopWatch time: <ELAPSED>
+
+new pivmax=0.951852, Subset<n=30, d=11>: 0 1 4 7 9 15 17 20 22 24 27 
+StopWatch time: <ELAPSED>
+
+new pivmax=0.951852, Subset<n=30, d=10>: 0 1 4 7 9 17 20 22 24 27 
+StopWatch time: <ELAPSED>
+
+new pivmax=0.951852, Subset<n=30, d=9>: 0 1 4 7 9 20 22 24 27 
+StopWatch time: <ELAPSED>
+
+new pivmax=0.951852, Subset<n=30, d=8>: 0 1 5 20 22 24 27 28 
+StopWatch time: <ELAPSED>
+
+.......................................
+Search_DOS() search finished. StopWatch time: <ELAPSED>
+Search result: 
+Subset<n=30, d=8>: 0 1 5 20 22 24 27 28 
+Criterion value: 0.951852
+
+
+(TRIAL A1) Search result: 
+Subset<n=30, d=8>: 0 1 5 20 22 24 27 28 Criterion value=0.951852
+
+TRIAL A2 ---------------------------------------------------------------------
+---------------------------------------
+Starting DOS, delta=10  [Search_DOS() with Sequential_Step_Straight()]
+with Criterion: Criterion_Wrapper() with Classifier_kNN(k=3)Distance_L1()
+with initial subset: Subset<n=30, d=8>: 0 1 5 20 22 24 27 28 
+Subset size to be optimized.
+
+new pivmax=0.940741, Subset<n=30, d=8>: 0 1 5 20 22 24 27 28 
+StopWatch time: <ELAPSED>
+
+new pivmax=0.940741, Subset<n=30, d=7>: 0 1 20 22 24 27 28 
+StopWatch time: <ELAPSED>
+
+new pivmax=0.940741, Subset<n=30, d=5>: 1 22 24 27 28 
+StopWatch time: <ELAPSED>
+
+new pivmax=0.940741, Subset<n=30, d=4>: 1 22 27 28 
+StopWatch time: <ELAPSED>
+
+.......................................
+Search_DOS() search finished. StopWatch time: <ELAPSED>
+Search result: 
+Subset<n=30, d=4>: 1 22 27 28 
+Criterion value: 0.940741
+
+
+(TRIAL A2) Search result: 
+Subset<n=30, d=4>: 1 22 27 28 Criterion value=0.940741
+
+TRIAL A3 ---------------------------------------------------------------------
+---------------------------------------
+Starting DOS, delta=10  [Search_DOS() with Sequential_Step_Straight()]
+with Criterion: Criterion_Wrapper() with Classifier_kNN(k=3)Distance_L1()
+with initial subset: Subset<n=30, d=4>: 1 22 27 28 
+Subset size to be optimized.
+
+new pivmax=0.940741, Subset<n=30, d=4>: 1 22 27 28 
+StopWatch time: <ELAPSED>
+
+new pivmax=0.942593, Subset<n=30, d=5>: 1 4 22 27 28 
+StopWatch time: <ELAPSED>
+
+.......................................
+Search_DOS() search finished. StopWatch time: <ELAPSED>
+Search result: 
+Subset<n=30, d=5>: 1 4 22 27 28 
+Criterion value: 0.942593
+
+
+(TRIAL A3) Search result: 
+Subset<n=30, d=5>: 1 4 22 27 28 Criterion value=0.942593
+
+TRIAL A4 ---------------------------------------------------------------------
+---------------------------------------
+Starting DOS, delta=10  [Search_DOS() with Sequential_Step_Straight()]
+with Criterion: Criterion_Wrapper() with Classifier_kNN(k=3)Distance_L1()
+with initial subset: Subset<n=30, d=5>: 1 4 22 27 28 
+Subset size to be optimized.
+
+new pivmax=0.940741, Subset<n=30, d=5>: 1 4 22 27 28 
+StopWatch time: <ELAPSED>
+
+new pivmax=0.940741, Subset<n=30, d=4>: 0 1 22 28 
+StopWatch time: <ELAPSED>
+
+.......................................
+Search_DOS() search finished. StopWatch time: <ELAPSED>
+Search result: 
+Subset<n=30, d=4>: 0 1 22 28 
+Criterion value: 0.940741
+
+
+(TRIAL A4) Search result: 
+Subset<n=30, d=4>: 0 1 22 28 Criterion value=0.940741
+
+TRIAL A5 ---------------------------------------------------------------------
+---------------------------------------
+Starting DOS, delta=10  [Search_DOS() with Sequential_Step_Straight()]
+with Criterion: Criterion_Wrapper() with Classifier_kNN(k=3)Distance_L1()
+with initial subset: Subset<n=30, d=4>: 0 1 22 28 
+Subset size to be optimized.
+
+new pivmax=0.937037, Subset<n=30, d=4>: 0 1 22 28 
+StopWatch time: <ELAPSED>
+
+new pivmax=0.938889, Subset<n=30, d=4>: 1 10 22 28 
+StopWatch time: <ELAPSED>
+
+new pivmax=0.940741, Subset<n=30, d=5>: 1 5 10 22 28 
+StopWatch time: <ELAPSED>
+
+new pivmax=0.940741, Subset<n=30, d=4>: 0 1 21 22 
+StopWatch time: <ELAPSED>
+
+new pivmax=0.942593, Subset<n=30, d=5>: 0 1 21 22 25 
+StopWatch time: <ELAPSED>
+
+new pivmax=0.944444, Subset<n=30, d=6>: 0 1 20 21 22 25 
+StopWatch time: <ELAPSED>
+
+.......................................
+Search_DOS() search finished. StopWatch time: <ELAPSED>
+Search result: 
+Subset<n=30, d=6>: 0 1 20 21 22 25 
+Criterion value: 0.944444
+
+
+(TRIAL A5) Search result: 
+Subset<n=30, d=6>: 0 1 20 21 22 25 Criterion value=0.944444
+
+TRIAL A6 ---------------------------------------------------------------------
+---------------------------------------
+Starting DOS, delta=10  [Search_DOS() with Sequential_Step_Straight()]
+with Criterion: Criterion_Wrapper() with Classifier_kNN(k=3)Distance_L1()
+with initial subset: Subset<n=30, d=6>: 0 1 20 21 22 25 
+Subset size to be optimized.
+
+new pivmax=0.942593, Subset<n=30, d=6>: 0 1 20 21 22 25 
+StopWatch time: <ELAPSED>
+
+new pivmax=0.942593, Subset<n=30, d=6>: 0 1 20 22 25 26 
+StopWatch time: <ELAPSED>
+
+.......................................
+Search_DOS() search finished. StopWatch time: <ELAPSED>
+Search result: 
+Subset<n=30, d=6>: 0 1 20 22 25 26 
+Criterion value: 0.942593
+
+
+(TRIAL A6) Search result: 
+Subset<n=30, d=6>: 0 1 20 22 25 26 Criterion value=0.942593
+
+TRIAL A7 ---------------------------------------------------------------------
+---------------------------------------
+Starting DOS, delta=10  [Search_DOS() with Sequential_Step_Straight()]
+with Criterion: Criterion_Wrapper() with Classifier_kNN(k=3)Distance_L1()
+with initial subset: Subset<n=30, d=6>: 0 1 20 22 25 26 
+Subset size to be optimized.
+
+new pivmax=0.942593, Subset<n=30, d=6>: 0 1 20 22 25 26 
+StopWatch time: <ELAPSED>
+
+new pivmax=0.942593, Subset<n=30, d=4>: 1 20 22 26 
+StopWatch time: <ELAPSED>
+
+.......................................
+Search_DOS() search finished. StopWatch time: <ELAPSED>
+Search result: 
+Subset<n=30, d=4>: 1 20 22 26 
+Criterion value: 0.942593
+
+
+(TRIAL A7) Search result: 
+Subset<n=30, d=4>: 1 20 22 26 Criterion value=0.942593
+
+TRIAL A8 ---------------------------------------------------------------------
+---------------------------------------
+Starting DOS, delta=10  [Search_DOS() with Sequential_Step_Straight()]
+with Criterion: Criterion_Wrapper() with Classifier_kNN(k=3)Distance_L1()
+with initial subset: Subset<n=30, d=4>: 1 20 22 26 
+Subset size to be optimized.
+
+new pivmax=0.938889, Subset<n=30, d=4>: 1 20 22 26 
+StopWatch time: <ELAPSED>
+
+new pivmax=0.940741, Subset<n=30, d=5>: 0 1 20 22 26 
+StopWatch time: <ELAPSED>
+
+new pivmax=0.944444, Subset<n=30, d=4>: 0 1 22 26 
+StopWatch time: <ELAPSED>
+
+.......................................
+Search_DOS() search finished. StopWatch time: <ELAPSED>
+Search result: 
+Subset<n=30, d=4>: 0 1 22 26 
+Criterion value: 0.944444
+
+
+(TRIAL A8) Search result: 
+Subset<n=30, d=4>: 0 1 22 26 Criterion value=0.944444
+
+TRIAL A9 ---------------------------------------------------------------------
+---------------------------------------
+Starting DOS, delta=10  [Search_DOS() with Sequential_Step_Straight()]
+with Criterion: Criterion_Wrapper() with Classifier_kNN(k=3)Distance_L1()
+with initial subset: Subset<n=30, d=4>: 0 1 22 26 
+Subset size to be optimized.
+
+new pivmax=0.940741, Subset<n=30, d=4>: 0 1 22 26 
+StopWatch time: <ELAPSED>
+
+new pivmax=0.942593, Subset<n=30, d=4>: 0 1 21 22 
+StopWatch time: <ELAPSED>
+
+.......................................
+Search_DOS() search finished. StopWatch time: <ELAPSED>
+Search result: 
+Subset<n=30, d=4>: 0 1 21 22 
+Criterion value: 0.942593
+
+
+(TRIAL A9) Search result: 
+Subset<n=30, d=4>: 0 1 21 22 Criterion value=0.942593
+
+TRIAL A10 ---------------------------------------------------------------------
+---------------------------------------
+Starting DOS, delta=10  [Search_DOS() with Sequential_Step_Straight()]
+with Criterion: Criterion_Wrapper() with Classifier_kNN(k=3)Distance_L1()
+with initial subset: Subset<n=30, d=4>: 0 1 21 22 
+Subset size to be optimized.
+
+new pivmax=0.940741, Subset<n=30, d=4>: 0 1 21 22 
+StopWatch time: <ELAPSED>
+
+new pivmax=0.942593, Subset<n=30, d=4>: 0 1 22 28 
+StopWatch time: <ELAPSED>
+
+.......................................
+Search_DOS() search finished. StopWatch time: <ELAPSED>
+Search result: 
+Subset<n=30, d=4>: 0 1 22 28 
+Criterion value: 0.942593
+
+
+(TRIAL A10) Search result: 
+Subset<n=30, d=4>: 0 1 22 28 Criterion value=0.942593
+Feature selection setup:
+Data_Accessor_Splitting() splitters: Data_Splitter_RandomRandom(splits=10, %train=95, %test=5) Data_Splitter_CV(3) 
+Data_Accessor_Splitting_Mem(file=data/wdbc_30.trn)
+Data_Accessor_Splitting_MemTRN()
+SFFS, delta=0  [Search_SFFS() with Sequential_Step_Straight()]
+Criterion_Normal_Bhattacharyya()
+Result_Tracker_Stability_Evaluator(limit=0) size 0
+
+
+TRIAL B1 ---------------------------------------------------------------------
+---------------------------------------
+Starting SFFS, delta=0  [Search_SFFS() with Sequential_Step_Straight()]
+with Criterion: Criterion_Normal_Bhattacharyya()
+with initial subset: Subset<n=30, d=0>: empty
+Target subset size set to: 7
+
+new MAXCRIT=0.870137, Subset<n=30, d=1>: 27 
+StopWatch time: <ELAPSED>
+
+new subresult[1]=0.870137, Subset<n=30, d=1>: 27 
+
+new MAXCRIT=1.51658, Subset<n=30, d=2>: 13 27 
+StopWatch time: <ELAPSED>
+
+new subresult[2]=1.51658, Subset<n=30, d=2>: 13 27 
+
+new MAXCRIT=1.80437, Subset<n=30, d=3>: 13 23 27 
+StopWatch time: <ELAPSED>
+
+new subresult[3]=1.80437, Subset<n=30, d=3>: 13 23 27 
+
+new MAXCRIT=2.62318, Subset<n=30, d=4>: 13 20 23 27 
+StopWatch time: <ELAPSED>
+
+new subresult[4]=2.62318, Subset<n=30, d=4>: 13 20 23 27 
+
+new subresult[3]=2.26702, Subset<n=30, d=3>: 13 20 23 
+
+new subresult[2]=1.83194, Subset<n=30, d=2>: 20 23 
+
+new subresult[3]=2.38153, Subset<n=30, d=3>: 3 20 23 
+
+new MAXCRIT=2.92231, Subset<n=30, d=4>: 0 3 20 23 
+StopWatch time: <ELAPSED>
+
+new subresult[4]=2.92231, Subset<n=30, d=4>: 0 3 20 23 
+
+new MAXCRIT=3.32254, Subset<n=30, d=5>: 0 3 13 20 23 
+StopWatch time: <ELAPSED>
+
+new subresult[5]=3.32254, Subset<n=30, d=5>: 0 3 13 20 23 
+
+new MAXCRIT=3.91944, Subset<n=30, d=6>: 0 3 10 13 20 23 
+StopWatch time: <ELAPSED>
+
+new subresult[6]=3.91944, Subset<n=30, d=6>: 0 3 10 13 20 23 
+
+new subresult[5]=3.33292, Subset<n=30, d=5>: 3 10 13 20 23 
+
+new MAXCRIT=4.2305, Subset<n=30, d=7>: 0 3 7 10 13 20 23 
+StopWatch time: <ELAPSED>
+
+new subresult[7]=4.2305, Subset<n=30, d=7>: 0 3 7 10 13 20 23 
+
+new MAXCRIT=4.4104, Subset<n=30, d=8>: 0 3 7 10 13 20 23 27 
+StopWatch time: <ELAPSED>
+
+new subresult[8]=4.4104, Subset<n=30, d=8>: 0 3 7 10 13 20 23 27 
+
+new MAXCRIT=4.60833, Subset<n=30, d=9>: 0 3 7 10 13 20 22 23 27 
+StopWatch time: <ELAPSED>
+
+new subresult[9]=4.60833, Subset<n=30, d=9>: 0 3 7 10 13 20 22 23 27 
+
+new subresult[8]=4.42382, Subset<n=30, d=8>: 0 3 10 13 20 22 23 27 
+
+new MAXCRIT=4.78914, Subset<n=30, d=10>: 0 3 7 10 13 20 22 23 25 27 
+StopWatch time: <ELAPSED>
+
+new subresult[10]=4.78914, Subset<n=30, d=10>: 0 3 7 10 13 20 22 23 25 27 
+
+new subresult[9]=4.61472, Subset<n=30, d=9>: 0 3 7 10 13 20 22 23 25 
+
+new subresult[8]=4.43478, Subset<n=30, d=8>: 0 3 10 13 20 22 23 25 
+
+new subresult[9]=4.63787, Subset<n=30, d=9>: 0 2 3 10 13 20 22 23 25 
+
+new MAXCRIT=4.82061, Subset<n=30, d=10>: 0 2 3 10 13 16 20 22 23 25 
+StopWatch time: <ELAPSED>
+
+new subresult[10]=4.82061, Subset<n=30, d=10>: 0 2 3 10 13 16 20 22 23 25 
+
+new MAXCRIT=5.10132, Subset<n=30, d=11>: 0 2 3 6 10 13 16 20 22 23 25 
+StopWatch time: <ELAPSED>
+
+new subresult[11]=5.10132, Subset<n=30, d=11>: 0 2 3 6 10 13 16 20 22 23 25 
+
+new subresult[10]=4.93268, Subset<n=30, d=10>: 0 3 6 10 13 16 20 22 23 25 
+
+new subresult[9]=4.706, Subset<n=30, d=9>: 0 3 6 10 13 16 20 22 23 
+
+new subresult[8]=4.51345, Subset<n=30, d=8>: 0 3 6 10 13 16 20 23 
+
+new MAXCRIT=5.10495, Subset<n=30, d=11>: 0 3 6 10 13 14 16 20 22 23 25 
+StopWatch time: <ELAPSED>
+
+new subresult[11]=5.10495, Subset<n=30, d=11>: 0 3 6 10 13 14 16 20 22 23 25 
+
+new MAXCRIT=5.29469, Subset<n=30, d=12>: 0 3 6 10 13 14 16 20 22 23 25 26 
+StopWatch time: <ELAPSED>
+
+new subresult[12]=5.29469, Subset<n=30, d=12>: 0 3 6 10 13 14 16 20 22 23 25 26 
+
+new subresult[11]=5.11481, Subset<n=30, d=11>: 0 3 6 10 13 14 16 20 22 23 26 
+
+new MAXCRIT=5.48829, Subset<n=30, d=13>: 0 2 3 6 10 13 14 16 20 22 23 25 26 
+StopWatch time: <ELAPSED>
+
+new subresult[13]=5.48829, Subset<n=30, d=13>: 0 2 3 6 10 13 14 16 20 22 23 25 26 
+
+new MAXCRIT=5.64199, Subset<n=30, d=14>: 0 2 3 6 10 13 14 15 16 20 22 23 25 26 
+StopWatch time: <ELAPSED>
+
+new subresult[14]=5.64199, Subset<n=30, d=14>: 0 2 3 6 10 13 14 15 16 20 22 23 25 26 
+
+new MAXCRIT=5.83089, Subset<n=30, d=15>: 0 2 3 4 6 10 13 14 15 16 20 22 23 25 26 
+StopWatch time: <ELAPSED>
+
+new subresult[15]=5.83089, Subset<n=30, d=15>: 0 2 3 4 6 10 13 14 15 16 20 22 23 25 26 
+
+new MAXCRIT=5.97078, Subset<n=30, d=16>: 0 2 3 4 5 6 10 13 14 15 16 20 22 23 25 26 
+StopWatch time: <ELAPSED>
+
+new subresult[16]=5.97078, Subset<n=30, d=16>: 0 2 3 4 5 6 10 13 14 15 16 20 22 23 25 26 
+
+new MAXCRIT=6.11218, Subset<n=30, d=17>: 0 2 3 4 5 6 10 12 13 14 15 16 20 22 23 25 26 
+StopWatch time: <ELAPSED>
+
+new subresult[17]=6.11218, Subset<n=30, d=17>: 0 2 3 4 5 6 10 12 13 14 15 16 20 22 23 25 26 
+
+new MAXCRIT=6.2471, Subset<n=30, d=18>: 0 2 3 4 5 6 10 12 13 14 15 16 20 22 23 25 26 27 
+StopWatch time: <ELAPSED>
+
+new subresult[18]=6.2471, Subset<n=30, d=18>: 0 2 3 4 5 6 10 12 13 14 15 16 20 22 23 25 26 27 
+
+new MAXCRIT=6.38447, Subset<n=30, d=19>: 0 2 3 4 5 6 10 12 13 14 15 16 20 21 22 23 25 26 27 
+StopWatch time: <ELAPSED>
+
+new subresult[19]=6.38447, Subset<n=30, d=19>: 0 2 3 4 5 6 10 12 13 14 15 16 20 21 22 23 25 26 27 
+
+new MAXCRIT=6.52277, Subset<n=30, d=20>: 0 2 3 4 5 6 10 12 13 14 15 16 17 20 21 22 23 25 26 27 
+StopWatch time: <ELAPSED>
+
+new subresult[20]=6.52277, Subset<n=30, d=20>: 0 2 3 4 5 6 10 12 13 14 15 16 17 20 21 22 23 25 26 27 
+
+new subresult[19]=6.38724, Subset<n=30, d=19>: 0 2 3 4 5 6 10 12 13 14 15 16 17 20 21 22 23 25 26 
+
+new MAXCRIT=6.5365, Subset<n=30, d=20>: 0 2 3 4 5 6 10 12 13 14 15 16 17 19 20 21 22 23 25 26 
+StopWatch time: <ELAPSED>
+
+new subresult[20]=6.5365, Subset<n=30, d=20>: 0 2 3 4 5 6 10 12 13 14 15 16 17 19 20 21 22 23 25 26 
+
+new subresult[19]=6.39332, Subset<n=30, d=19>: 0 2 3 4 5 6 10 12 13 14 15 16 17 19 20 22 23 25 26 
+
+new MAXCRIT=6.58771, Subset<n=30, d=20>: 0 2 3 4 5 6 10 12 13 14 15 16 17 19 20 22 23 25 26 29 
+StopWatch time: <ELAPSED>
+
+new subresult[20]=6.58771, Subset<n=30, d=20>: 0 2 3 4 5 6 10 12 13 14 15 16 17 19 20 22 23 25 26 29 
+
+new subresult[19]=6.42604, Subset<n=30, d=19>: 0 2 3 4 5 6 10 12 13 14 15 16 19 20 22 23 25 26 29 
+
+new subresult[18]=6.27234, Subset<n=30, d=18>: 0 2 3 4 6 10 12 13 14 15 16 19 20 22 23 25 26 29 
+
+new MAXCRIT=6.74842, Subset<n=30, d=21>: 0 2 3 4 5 6 10 12 13 14 15 16 17 19 20 22 23 25 26 27 29 
+StopWatch time: <ELAPSED>
+
+new subresult[21]=6.74842, Subset<n=30, d=21>: 0 2 3 4 5 6 10 12 13 14 15 16 17 19 20 22 23 25 26 27 29 
+
+new MAXCRIT=6.8968, Subset<n=30, d=22>: 0 2 3 4 5 6 10 12 13 14 15 16 17 19 20 21 22 23 25 26 27 29 
+StopWatch time: <ELAPSED>
+
+new subresult[22]=6.8968, Subset<n=30, d=22>: 0 2 3 4 5 6 10 12 13 14 15 16 17 19 20 21 22 23 25 26 27 29 
+
+new MAXCRIT=7.0394, Subset<n=30, d=23>: 0 2 3 4 5 6 10 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 29 
+StopWatch time: <ELAPSED>
+
+new subresult[23]=7.0394, Subset<n=30, d=23>: 0 2 3 4 5 6 10 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 29 
+
+new MAXCRIT=7.16571, Subset<n=30, d=24>: 0 2 3 4 5 6 7 10 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 29 
+StopWatch time: <ELAPSED>
+
+new subresult[24]=7.16571, Subset<n=30, d=24>: 0 2 3 4 5 6 7 10 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 29 
+
+new MAXCRIT=7.28627, Subset<n=30, d=25>: 0 2 3 4 5 6 7 10 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+StopWatch time: <ELAPSED>
+
+new subresult[25]=7.28627, Subset<n=30, d=25>: 0 2 3 4 5 6 7 10 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+
+new MAXCRIT=7.38037, Subset<n=30, d=26>: 0 2 3 4 5 6 7 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+StopWatch time: <ELAPSED>
+
+new subresult[26]=7.38037, Subset<n=30, d=26>: 0 2 3 4 5 6 7 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+
+new MAXCRIT=7.47126, Subset<n=30, d=27>: 0 1 2 3 4 5 6 7 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+StopWatch time: <ELAPSED>
+
+new subresult[27]=7.47126, Subset<n=30, d=27>: 0 1 2 3 4 5 6 7 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+
+new MAXCRIT=7.5396, Subset<n=30, d=28>: 0 1 2 3 4 5 6 7 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+StopWatch time: <ELAPSED>
+
+new subresult[28]=7.5396, Subset<n=30, d=28>: 0 1 2 3 4 5 6 7 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+
+new MAXCRIT=7.67023, Subset<n=30, d=29>: 0 1 2 3 4 5 6 7 8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+StopWatch time: <ELAPSED>
+
+new subresult[29]=7.67023, Subset<n=30, d=29>: 0 1 2 3 4 5 6 7 8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+
+new subresult[28]=7.58632, Subset<n=30, d=28>: 0 2 3 4 5 6 7 8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+
+new subresult[27]=7.48248, Subset<n=30, d=27>: 0 2 3 4 5 6 7 8 10 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+
+new MAXCRIT=7.73375, Subset<n=30, d=30>: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+StopWatch time: <ELAPSED>
+
+new subresult[30]=7.73375, Subset<n=30, d=30>: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+
+.......................................
+Search_SFFS() search finished. StopWatch time: <ELAPSED>
+Search result: 
+Subset<n=30, d=7>: 0 3 7 10 13 20 23 
+Criterion value: 4.2305
+
+
+(TRIAL B1) Search result: 
+Subset<n=30, d=7>: 0 3 7 10 13 20 23 Criterion value=4.2305
+
+TRIAL B2 ---------------------------------------------------------------------
+---------------------------------------
+Starting SFFS, delta=0  [Search_SFFS() with Sequential_Step_Straight()]
+with Criterion: Criterion_Normal_Bhattacharyya()
+with initial subset: Subset<n=30, d=0>: empty
+Target subset size set to: 7
+
+new MAXCRIT=0.848407, Subset<n=30, d=1>: 27 
+StopWatch time: <ELAPSED>
+
+new subresult[1]=0.848407, Subset<n=30, d=1>: 27 
+
+new MAXCRIT=1.5256, Subset<n=30, d=2>: 13 27 
+StopWatch time: <ELAPSED>
+
+new subresult[2]=1.5256, Subset<n=30, d=2>: 13 27 
+
+new MAXCRIT=1.84328, Subset<n=30, d=3>: 10 13 27 
+StopWatch time: <ELAPSED>
+
+new subresult[3]=1.84328, Subset<n=30, d=3>: 10 13 27 
+
+new MAXCRIT=2.42861, Subset<n=30, d=4>: 10 13 23 27 
+StopWatch time: <ELAPSED>
+
+new subresult[4]=2.42861, Subset<n=30, d=4>: 10 13 23 27 
+
+new subresult[3]=1.95014, Subset<n=30, d=3>: 10 13 23 
+
+new MAXCRIT=2.9102, Subset<n=30, d=4>: 10 13 20 23 
+StopWatch time: <ELAPSED>
+
+new subresult[4]=2.9102, Subset<n=30, d=4>: 10 13 20 23 
+
+new subresult[3]=2.33031, Subset<n=30, d=3>: 13 20 23 
+
+new subresult[2]=1.86253, Subset<n=30, d=2>: 20 23 
+
+new subresult[3]=2.39155, Subset<n=30, d=3>: 3 20 23 
+
+new MAXCRIT=2.91043, Subset<n=30, d=4>: 0 3 20 23 
+StopWatch time: <ELAPSED>
+
+new subresult[4]=2.91043, Subset<n=30, d=4>: 0 3 20 23 
+
+new MAXCRIT=3.36339, Subset<n=30, d=5>: 0 3 13 20 23 
+StopWatch time: <ELAPSED>
+
+new subresult[5]=3.36339, Subset<n=30, d=5>: 0 3 13 20 23 
+
+new MAXCRIT=4.0183, Subset<n=30, d=6>: 0 3 10 13 20 23 
+StopWatch time: <ELAPSED>
+
+new subresult[6]=4.0183, Subset<n=30, d=6>: 0 3 10 13 20 23 
+
+new subresult[5]=3.43892, Subset<n=30, d=5>: 3 10 13 20 23 
+
+new MAXCRIT=4.31281, Subset<n=30, d=7>: 0 3 7 10 13 20 23 
+StopWatch time: <ELAPSED>
+
+new subresult[7]=4.31281, Subset<n=30, d=7>: 0 3 7 10 13 20 23 
+
+new MAXCRIT=4.49189, Subset<n=30, d=8>: 0 3 7 10 13 20 23 27 
+StopWatch time: <ELAPSED>
+
+new subresult[8]=4.49189, Subset<n=30, d=8>: 0 3 7 10 13 20 23 27 
+
+new MAXCRIT=4.67211, Subset<n=30, d=9>: 0 3 7 10 13 20 21 23 27 
+StopWatch time: <ELAPSED>
+
+new subresult[9]=4.67211, Subset<n=30, d=9>: 0 3 7 10 13 20 21 23 27 
+
+new MAXCRIT=4.85908, Subset<n=30, d=10>: 0 3 7 10 13 20 21 22 23 27 
+StopWatch time: <ELAPSED>
+
+new subresult[10]=4.85908, Subset<n=30, d=10>: 0 3 7 10 13 20 21 22 23 27 
+
+new MAXCRIT=5.04396, Subset<n=30, d=11>: 0 3 7 10 13 20 21 22 23 25 27 
+StopWatch time: <ELAPSED>
+
+new subresult[11]=5.04396, Subset<n=30, d=11>: 0 3 7 10 13 20 21 22 23 25 27 
+
+new MAXCRIT=5.22942, Subset<n=30, d=12>: 0 3 7 10 13 16 20 21 22 23 25 27 
+StopWatch time: <ELAPSED>
+
+new subresult[12]=5.22942, Subset<n=30, d=12>: 0 3 7 10 13 16 20 21 22 23 25 27 
+
+new MAXCRIT=5.40303, Subset<n=30, d=13>: 0 3 7 10 13 14 16 20 21 22 23 25 27 
+StopWatch time: <ELAPSED>
+
+new subresult[13]=5.40303, Subset<n=30, d=13>: 0 3 7 10 13 14 16 20 21 22 23 25 27 
+
+new MAXCRIT=5.58107, Subset<n=30, d=14>: 0 3 7 10 13 14 16 20 21 22 23 25 26 27 
+StopWatch time: <ELAPSED>
+
+new subresult[14]=5.58107, Subset<n=30, d=14>: 0 3 7 10 13 14 16 20 21 22 23 25 26 27 
+
+new subresult[13]=5.41576, Subset<n=30, d=13>: 0 3 7 10 13 14 16 20 22 23 25 26 27 
+
+new subresult[12]=5.24029, Subset<n=30, d=12>: 0 3 7 10 13 14 16 20 22 23 25 26 
+
+new subresult[11]=5.1224, Subset<n=30, d=11>: 0 3 10 13 14 16 20 22 23 25 26 
+
+new subresult[10]=4.94064, Subset<n=30, d=10>: 0 3 10 13 14 16 20 22 23 26 
+
+new subresult[9]=4.73673, Subset<n=30, d=9>: 0 3 10 13 14 16 20 23 26 
+
+new subresult[8]=4.50889, Subset<n=30, d=8>: 0 3 10 13 16 20 23 26 
+
+new subresult[9]=4.74104, Subset<n=30, d=9>: 0 3 6 10 13 16 20 23 26 
+
+new subresult[8]=4.59184, Subset<n=30, d=8>: 0 3 6 10 13 16 20 23 
+
+new subresult[9]=4.75962, Subset<n=30, d=9>: 0 3 6 10 13 16 20 22 23 
+
+new subresult[10]=4.98806, Subset<n=30, d=10>: 0 3 6 10 13 16 20 22 23 25 
+
+new subresult[11]=5.16233, Subset<n=30, d=11>: 0 3 6 10 13 14 16 20 22 23 25 
+
+new subresult[12]=5.34554, Subset<n=30, d=12>: 0 3 6 10 13 14 16 20 22 23 25 26 
+
+new subresult[13]=5.54121, Subset<n=30, d=13>: 0 2 3 6 10 13 14 16 20 22 23 25 26 
+
+new subresult[12]=5.3571, Subset<n=30, d=12>: 0 2 3 6 10 13 14 16 20 23 25 26 
+
+new MAXCRIT=5.69841, Subset<n=30, d=14>: 0 2 3 6 10 13 14 15 16 20 22 23 25 26 
+StopWatch time: <ELAPSED>
+
+new subresult[14]=5.69841, Subset<n=30, d=14>: 0 2 3 6 10 13 14 15 16 20 22 23 25 26 
+
+new MAXCRIT=5.89401, Subset<n=30, d=15>: 0 2 3 4 6 10 13 14 15 16 20 22 23 25 26 
+StopWatch time: <ELAPSED>
+
+new subresult[15]=5.89401, Subset<n=30, d=15>: 0 2 3 4 6 10 13 14 15 16 20 22 23 25 26 
+
+new subresult[14]=5.69927, Subset<n=30, d=14>: 0 2 3 4 6 10 13 14 15 16 20 23 25 26 
+
+new MAXCRIT=6.03466, Subset<n=30, d=16>: 0 2 3 4 6 10 13 14 15 16 20 21 22 23 25 26 
+StopWatch time: <ELAPSED>
+
+new subresult[16]=6.03466, Subset<n=30, d=16>: 0 2 3 4 6 10 13 14 15 16 20 21 22 23 25 26 
+
+new MAXCRIT=6.1715, Subset<n=30, d=17>: 0 2 3 4 6 10 12 13 14 15 16 20 21 22 23 25 26 
+StopWatch time: <ELAPSED>
+
+new subresult[17]=6.1715, Subset<n=30, d=17>: 0 2 3 4 6 10 12 13 14 15 16 20 21 22 23 25 26 
+
+new MAXCRIT=6.30788, Subset<n=30, d=18>: 0 2 3 4 6 10 12 13 14 15 16 17 20 21 22 23 25 26 
+StopWatch time: <ELAPSED>
+
+new subresult[18]=6.30788, Subset<n=30, d=18>: 0 2 3 4 6 10 12 13 14 15 16 17 20 21 22 23 25 26 
+
+new MAXCRIT=6.45384, Subset<n=30, d=19>: 0 2 3 4 6 10 12 13 14 15 16 17 19 20 21 22 23 25 26 
+StopWatch time: <ELAPSED>
+
+new subresult[19]=6.45384, Subset<n=30, d=19>: 0 2 3 4 6 10 12 13 14 15 16 17 19 20 21 22 23 25 26 
+
+new MAXCRIT=6.63742, Subset<n=30, d=20>: 0 2 3 4 6 10 12 13 14 15 16 17 19 20 21 22 23 25 26 29 
+StopWatch time: <ELAPSED>
+
+new subresult[20]=6.63742, Subset<n=30, d=20>: 0 2 3 4 6 10 12 13 14 15 16 17 19 20 21 22 23 25 26 29 
+
+new subresult[19]=6.48021, Subset<n=30, d=19>: 0 2 3 4 6 10 12 13 14 15 16 19 20 21 22 23 25 26 29 
+
+new subresult[18]=6.33626, Subset<n=30, d=18>: 0 2 3 4 6 10 12 13 14 15 16 19 20 22 23 25 26 29 
+
+new subresult[17]=6.1756, Subset<n=30, d=17>: 0 2 3 4 6 10 13 14 15 16 19 20 22 23 25 26 29 
+
+new subresult[19]=6.48602, Subset<n=30, d=19>: 0 2 3 4 5 6 10 12 13 14 15 16 19 20 22 23 25 26 29 
+
+new MAXCRIT=6.78484, Subset<n=30, d=21>: 0 2 3 4 5 6 10 12 13 14 15 16 17 19 20 21 22 23 25 26 29 
+StopWatch time: <ELAPSED>
+
+new subresult[21]=6.78484, Subset<n=30, d=21>: 0 2 3 4 5 6 10 12 13 14 15 16 17 19 20 21 22 23 25 26 29 
+
+new MAXCRIT=6.93586, Subset<n=30, d=22>: 0 2 3 4 5 6 10 12 13 14 15 16 17 19 20 21 22 23 25 26 27 29 
+StopWatch time: <ELAPSED>
+
+new subresult[22]=6.93586, Subset<n=30, d=22>: 0 2 3 4 5 6 10 12 13 14 15 16 17 19 20 21 22 23 25 26 27 29 
+
+new MAXCRIT=7.07259, Subset<n=30, d=23>: 0 2 3 4 5 6 7 10 12 13 14 15 16 17 19 20 21 22 23 25 26 27 29 
+StopWatch time: <ELAPSED>
+
+new subresult[23]=7.07259, Subset<n=30, d=23>: 0 2 3 4 5 6 7 10 12 13 14 15 16 17 19 20 21 22 23 25 26 27 29 
+
+new MAXCRIT=7.20643, Subset<n=30, d=24>: 0 2 3 4 5 6 7 10 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 29 
+StopWatch time: <ELAPSED>
+
+new subresult[24]=7.20643, Subset<n=30, d=24>: 0 2 3 4 5 6 7 10 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 29 
+
+new MAXCRIT=7.3242, Subset<n=30, d=25>: 0 2 3 4 5 6 7 10 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+StopWatch time: <ELAPSED>
+
+new subresult[25]=7.3242, Subset<n=30, d=25>: 0 2 3 4 5 6 7 10 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+
+new MAXCRIT=7.42429, Subset<n=30, d=26>: 0 2 3 4 5 6 7 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+StopWatch time: <ELAPSED>
+
+new subresult[26]=7.42429, Subset<n=30, d=26>: 0 2 3 4 5 6 7 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+
+new MAXCRIT=7.52294, Subset<n=30, d=27>: 0 1 2 3 4 5 6 7 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+StopWatch time: <ELAPSED>
+
+new subresult[27]=7.52294, Subset<n=30, d=27>: 0 1 2 3 4 5 6 7 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+
+new MAXCRIT=7.60582, Subset<n=30, d=28>: 0 1 2 3 4 5 6 7 8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+StopWatch time: <ELAPSED>
+
+new subresult[28]=7.60582, Subset<n=30, d=28>: 0 1 2 3 4 5 6 7 8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+
+new MAXCRIT=7.74379, Subset<n=30, d=29>: 0 1 2 3 4 5 6 7 8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+StopWatch time: <ELAPSED>
+
+new subresult[29]=7.74379, Subset<n=30, d=29>: 0 1 2 3 4 5 6 7 8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+
+new subresult[28]=7.64414, Subset<n=30, d=28>: 0 2 3 4 5 6 7 8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+
+new subresult[27]=7.53529, Subset<n=30, d=27>: 0 2 3 4 5 6 7 8 10 11 12 13 14 15 16 17 19 20 21 22 23 24 25 26 27 28 29 
+
+new MAXCRIT=7.80405, Subset<n=30, d=30>: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+StopWatch time: <ELAPSED>
+
+new subresult[30]=7.80405, Subset<n=30, d=30>: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+
+.......................................
+Search_SFFS() search finished. StopWatch time: <ELAPSED>
+Search result: 
+Subset<n=30, d=7>: 0 3 7 10 13 20 23 
+Criterion value: 4.31281
+
+
+(TRIAL B2) Search result: 
+Subset<n=30, d=7>: 0 3 7 10 13 20 23 Criterion value=4.31281
+
+TRIAL B3 ---------------------------------------------------------------------
+---------------------------------------
+Starting SFFS, delta=0  [Search_SFFS() with Sequential_Step_Straight()]
+with Criterion: Criterion_Normal_Bhattacharyya()
+with initial subset: Subset<n=30, d=0>: empty
+Target subset size set to: 7
+
+new MAXCRIT=0.866523, Subset<n=30, d=1>: 27 
+StopWatch time: <ELAPSED>
+
+new subresult[1]=0.866523, Subset<n=30, d=1>: 27 
+
+new MAXCRIT=1.55296, Subset<n=30, d=2>: 13 27 
+StopWatch time: <ELAPSED>
+
+new subresult[2]=1.55296, Subset<n=30, d=2>: 13 27 
+
+new MAXCRIT=1.87257, Subset<n=30, d=3>: 10 13 27 
+StopWatch time: <ELAPSED>
+
+new subresult[3]=1.87257, Subset<n=30, d=3>: 10 13 27 
+
+new MAXCRIT=2.47072, Subset<n=30, d=4>: 10 13 23 27 
+StopWatch time: <ELAPSED>
+
+new subresult[4]=2.47072, Subset<n=30, d=4>: 10 13 23 27 
+
+new subresult[3]=1.98202, Subset<n=30, d=3>: 10 13 23 
+
+new MAXCRIT=2.9331, Subset<n=30, d=4>: 10 13 20 23 
+StopWatch time: <ELAPSED>
+
+new subresult[4]=2.9331, Subset<n=30, d=4>: 10 13 20 23 
+
+new subresult[3]=2.34006, Subset<n=30, d=3>: 13 20 23 
+
+new subresult[2]=1.86721, Subset<n=30, d=2>: 20 23 
+
+new subresult[3]=2.40504, Subset<n=30, d=3>: 3 20 23 
+
+new MAXCRIT=2.93718, Subset<n=30, d=4>: 0 3 20 23 
+StopWatch time: <ELAPSED>
+
+new subresult[4]=2.93718, Subset<n=30, d=4>: 0 3 20 23 
+
+new MAXCRIT=3.39303, Subset<n=30, d=5>: 0 3 13 20 23 
+StopWatch time: <ELAPSED>
+
+new subresult[5]=3.39303, Subset<n=30, d=5>: 0 3 13 20 23 
+
+new MAXCRIT=4.05417, Subset<n=30, d=6>: 0 3 10 13 20 23 
+StopWatch time: <ELAPSED>
+
+new subresult[6]=4.05417, Subset<n=30, d=6>: 0 3 10 13 20 23 
+
+new subresult[5]=3.46782, Subset<n=30, d=5>: 3 10 13 20 23 
+
+new MAXCRIT=4.35738, Subset<n=30, d=7>: 0 3 7 10 13 20 23 
+StopWatch time: <ELAPSED>
+
+new subresult[7]=4.35738, Subset<n=30, d=7>: 0 3 7 10 13 20 23 
+
+new MAXCRIT=4.53163, Subset<n=30, d=8>: 0 3 7 10 13 20 23 27 
+StopWatch time: <ELAPSED>
+
+new subresult[8]=4.53163, Subset<n=30, d=8>: 0 3 7 10 13 20 23 27 
+
+new MAXCRIT=4.69646, Subset<n=30, d=9>: 0 3 7 10 13 20 22 23 27 
+StopWatch time: <ELAPSED>
+
+new subresult[9]=4.69646, Subset<n=30, d=9>: 0 3 7 10 13 20 22 23 27 
+
+new MAXCRIT=4.88211, Subset<n=30, d=10>: 0 3 7 10 13 20 22 23 25 27 
+StopWatch time: <ELAPSED>
+
+new subresult[10]=4.88211, Subset<n=30, d=10>: 0 3 7 10 13 20 22 23 25 27 
+
+new subresult[9]=4.70858, Subset<n=30, d=9>: 0 3 7 10 13 20 22 23 25 
+
+new MAXCRIT=4.89636, Subset<n=30, d=10>: 0 3 7 10 13 16 20 22 23 25 
+StopWatch time: <ELAPSED>
+
+new subresult[10]=4.89636, Subset<n=30, d=10>: 0 3 7 10 13 16 20 22 23 25 
+
+new MAXCRIT=5.08587, Subset<n=30, d=11>: 0 3 7 10 13 14 16 20 22 23 25 
+StopWatch time: <ELAPSED>
+
+new subresult[11]=5.08587, Subset<n=30, d=11>: 0 3 7 10 13 14 16 20 22 23 25 
+
+new subresult[10]=4.91281, Subset<n=30, d=10>: 0 3 10 13 14 16 20 22 23 25 
+
+new MAXCRIT=5.19978, Subset<n=30, d=11>: 0 3 6 10 13 14 16 20 22 23 25 
+StopWatch time: <ELAPSED>
+
+new subresult[11]=5.19978, Subset<n=30, d=11>: 0 3 6 10 13 14 16 20 22 23 25 
+
+new subresult[10]=5.00814, Subset<n=30, d=10>: 0 3 6 10 13 16 20 22 23 25 
+
+new subresult[9]=4.7859, Subset<n=30, d=9>: 0 3 6 10 13 16 20 22 23 
+
+new subresult[8]=4.62527, Subset<n=30, d=8>: 0 3 6 10 13 16 20 23 
+
+new MAXCRIT=5.38556, Subset<n=30, d=12>: 0 3 6 10 13 14 16 20 22 23 25 26 
+StopWatch time: <ELAPSED>
+
+new subresult[12]=5.38556, Subset<n=30, d=12>: 0 3 6 10 13 14 16 20 22 23 25 26 
+
+new subresult[11]=5.20404, Subset<n=30, d=11>: 0 3 6 10 13 14 16 20 22 23 26 
+
+new MAXCRIT=5.57956, Subset<n=30, d=13>: 0 2 3 6 10 13 14 16 20 22 23 25 26 
+StopWatch time: <ELAPSED>
+
+new subresult[13]=5.57956, Subset<n=30, d=13>: 0 2 3 6 10 13 14 16 20 22 23 25 26 
+
+new subresult[12]=5.40884, Subset<n=30, d=12>: 0 2 3 6 10 13 14 16 20 23 25 26 
+
+new MAXCRIT=5.73548, Subset<n=30, d=14>: 0 2 3 4 6 10 13 14 16 20 22 23 25 26 
+StopWatch time: <ELAPSED>
+
+new subresult[14]=5.73548, Subset<n=30, d=14>: 0 2 3 4 6 10 13 14 16 20 22 23 25 26 
+
+new MAXCRIT=5.92397, Subset<n=30, d=15>: 0 2 3 4 6 10 13 14 15 16 20 22 23 25 26 
+StopWatch time: <ELAPSED>
+
+new subresult[15]=5.92397, Subset<n=30, d=15>: 0 2 3 4 6 10 13 14 15 16 20 22 23 25 26 
+
+new subresult[14]=5.74565, Subset<n=30, d=14>: 0 2 3 4 6 10 13 14 15 16 20 23 25 26 
+
+new MAXCRIT=6.06989, Subset<n=30, d=16>: 0 2 3 4 6 10 13 14 15 16 18 20 22 23 25 26 
+StopWatch time: <ELAPSED>
+
+new subresult[16]=6.06989, Subset<n=30, d=16>: 0 2 3 4 6 10 13 14 15 16 18 20 22 23 25 26 
+
+new MAXCRIT=6.21796, Subset<n=30, d=17>: 0 2 3 4 5 6 10 13 14 15 16 18 20 22 23 25 26 
+StopWatch time: <ELAPSED>
+
+new subresult[17]=6.21796, Subset<n=30, d=17>: 0 2 3 4 5 6 10 13 14 15 16 18 20 22 23 25 26 
+
+new MAXCRIT=6.35788, Subset<n=30, d=18>: 0 2 3 4 5 6 10 13 14 15 16 18 20 22 23 25 26 27 
+StopWatch time: <ELAPSED>
+
+new subresult[18]=6.35788, Subset<n=30, d=18>: 0 2 3 4 5 6 10 13 14 15 16 18 20 22 23 25 26 27 
+
+new MAXCRIT=6.49259, Subset<n=30, d=19>: 0 2 3 4 5 6 10 12 13 14 15 16 18 20 22 23 25 26 27 
+StopWatch time: <ELAPSED>
+
+new subresult[19]=6.49259, Subset<n=30, d=19>: 0 2 3 4 5 6 10 12 13 14 15 16 18 20 22 23 25 26 27 
+
+new MAXCRIT=6.63022, Subset<n=30, d=20>: 0 2 3 4 5 6 10 12 13 14 15 16 18 20 21 22 23 25 26 27 
+StopWatch time: <ELAPSED>
+
+new subresult[20]=6.63022, Subset<n=30, d=20>: 0 2 3 4 5 6 10 12 13 14 15 16 18 20 21 22 23 25 26 27 
+
+new MAXCRIT=6.76768, Subset<n=30, d=21>: 0 2 3 4 5 6 10 12 13 14 15 16 18 19 20 21 22 23 25 26 27 
+StopWatch time: <ELAPSED>
+
+new subresult[21]=6.76768, Subset<n=30, d=21>: 0 2 3 4 5 6 10 12 13 14 15 16 18 19 20 21 22 23 25 26 27 
+
+new MAXCRIT=6.95861, Subset<n=30, d=22>: 0 2 3 4 5 6 10 12 13 14 15 16 18 19 20 21 22 23 25 26 27 29 
+StopWatch time: <ELAPSED>
+
+new subresult[22]=6.95861, Subset<n=30, d=22>: 0 2 3 4 5 6 10 12 13 14 15 16 18 19 20 21 22 23 25 26 27 29 
+
+new subresult[21]=6.81604, Subset<n=30, d=21>: 0 2 3 4 5 6 10 12 13 14 15 16 18 19 20 22 23 25 26 27 29 
+
+new subresult[20]=6.67013, Subset<n=30, d=20>: 0 2 3 4 5 6 10 12 13 14 15 16 18 19 20 22 23 25 26 29 
+
+new subresult[19]=6.52006, Subset<n=30, d=19>: 0 2 3 4 5 6 10 12 13 14 15 16 19 20 22 23 25 26 29 
+
+new subresult[18]=6.36845, Subset<n=30, d=18>: 0 2 3 4 6 10 12 13 14 15 16 19 20 22 23 25 26 29 
+
+new subresult[21]=6.82553, Subset<n=30, d=21>: 0 2 3 4 5 6 10 12 13 14 15 16 17 18 19 20 22 23 25 26 29 
+
+new MAXCRIT=6.98907, Subset<n=30, d=22>: 0 2 3 4 5 6 10 12 13 14 15 16 17 18 19 20 22 23 25 26 27 29 
+StopWatch time: <ELAPSED>
+
+new subresult[22]=6.98907, Subset<n=30, d=22>: 0 2 3 4 5 6 10 12 13 14 15 16 17 18 19 20 22 23 25 26 27 29 
+
+new subresult[21]=6.83146, Subset<n=30, d=21>: 0 2 3 4 5 6 10 12 13 14 15 16 17 19 20 22 23 25 26 27 29 
+
+new MAXCRIT=7.13611, Subset<n=30, d=23>: 0 2 3 4 5 6 10 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 29 
+StopWatch time: <ELAPSED>
+
+new subresult[23]=7.13611, Subset<n=30, d=23>: 0 2 3 4 5 6 10 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 29 
+
+new MAXCRIT=7.26199, Subset<n=30, d=24>: 0 2 3 4 5 6 7 10 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 29 
+StopWatch time: <ELAPSED>
+
+new subresult[24]=7.26199, Subset<n=30, d=24>: 0 2 3 4 5 6 7 10 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 29 
+
+new MAXCRIT=7.37747, Subset<n=30, d=25>: 0 2 3 4 5 6 7 10 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+StopWatch time: <ELAPSED>
+
+new subresult[25]=7.37747, Subset<n=30, d=25>: 0 2 3 4 5 6 7 10 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+
+new MAXCRIT=7.46709, Subset<n=30, d=26>: 0 2 3 4 5 6 7 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+StopWatch time: <ELAPSED>
+
+new subresult[26]=7.46709, Subset<n=30, d=26>: 0 2 3 4 5 6 7 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+
+new MAXCRIT=7.56189, Subset<n=30, d=27>: 0 1 2 3 4 5 6 7 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+StopWatch time: <ELAPSED>
+
+new subresult[27]=7.56189, Subset<n=30, d=27>: 0 1 2 3 4 5 6 7 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+
+new MAXCRIT=7.63637, Subset<n=30, d=28>: 0 1 2 3 4 5 6 7 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+StopWatch time: <ELAPSED>
+
+new subresult[28]=7.63637, Subset<n=30, d=28>: 0 1 2 3 4 5 6 7 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+
+new MAXCRIT=7.76639, Subset<n=30, d=29>: 0 1 2 3 4 5 6 7 8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+StopWatch time: <ELAPSED>
+
+new subresult[29]=7.76639, Subset<n=30, d=29>: 0 1 2 3 4 5 6 7 8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+
+new subresult[28]=7.6763, Subset<n=30, d=28>: 0 2 3 4 5 6 7 8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+
+new subresult[27]=7.57741, Subset<n=30, d=27>: 0 2 3 4 5 6 7 8 10 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+
+new MAXCRIT=7.8255, Subset<n=30, d=30>: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+StopWatch time: <ELAPSED>
+
+new subresult[30]=7.8255, Subset<n=30, d=30>: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+
+.......................................
+Search_SFFS() search finished. StopWatch time: <ELAPSED>
+Search result: 
+Subset<n=30, d=7>: 0 3 7 10 13 20 23 
+Criterion value: 4.35738
+
+
+(TRIAL B3) Search result: 
+Subset<n=30, d=7>: 0 3 7 10 13 20 23 Criterion value=4.35738
+
+TRIAL B4 ---------------------------------------------------------------------
+---------------------------------------
+Starting SFFS, delta=0  [Search_SFFS() with Sequential_Step_Straight()]
+with Criterion: Criterion_Normal_Bhattacharyya()
+with initial subset: Subset<n=30, d=0>: empty
+Target subset size set to: 7
+
+new MAXCRIT=0.840789, Subset<n=30, d=1>: 27 
+StopWatch time: <ELAPSED>
+
+new subresult[1]=0.840789, Subset<n=30, d=1>: 27 
+
+new MAXCRIT=1.52103, Subset<n=30, d=2>: 13 27 
+StopWatch time: <ELAPSED>
+
+new subresult[2]=1.52103, Subset<n=30, d=2>: 13 27 
+
+new MAXCRIT=1.83498, Subset<n=30, d=3>: 10 13 27 
+StopWatch time: <ELAPSED>
+
+new subresult[3]=1.83498, Subset<n=30, d=3>: 10 13 27 
+
+new MAXCRIT=2.44131, Subset<n=30, d=4>: 10 13 23 27 
+StopWatch time: <ELAPSED>
+
+new subresult[4]=2.44131, Subset<n=30, d=4>: 10 13 23 27 
+
+new subresult[3]=1.9591, Subset<n=30, d=3>: 10 13 23 
+
+new MAXCRIT=2.88804, Subset<n=30, d=4>: 10 13 20 23 
+StopWatch time: <ELAPSED>
+
+new subresult[4]=2.88804, Subset<n=30, d=4>: 10 13 20 23 
+
+new subresult[3]=2.30698, Subset<n=30, d=3>: 13 20 23 
+
+new subresult[2]=1.84511, Subset<n=30, d=2>: 20 23 
+
+new subresult[3]=2.3678, Subset<n=30, d=3>: 3 20 23 
+
+new MAXCRIT=2.89174, Subset<n=30, d=4>: 0 3 20 23 
+StopWatch time: <ELAPSED>
+
+new subresult[4]=2.89174, Subset<n=30, d=4>: 0 3 20 23 
+
+new MAXCRIT=3.32592, Subset<n=30, d=5>: 0 3 13 20 23 
+StopWatch time: <ELAPSED>
+
+new subresult[5]=3.32592, Subset<n=30, d=5>: 0 3 13 20 23 
+
+new MAXCRIT=3.99193, Subset<n=30, d=6>: 0 3 10 13 20 23 
+StopWatch time: <ELAPSED>
+
+new subresult[6]=3.99193, Subset<n=30, d=6>: 0 3 10 13 20 23 
+
+new subresult[5]=3.40047, Subset<n=30, d=5>: 3 10 13 20 23 
+
+new MAXCRIT=4.28669, Subset<n=30, d=7>: 0 3 7 10 13 20 23 
+StopWatch time: <ELAPSED>
+
+new subresult[7]=4.28669, Subset<n=30, d=7>: 0 3 7 10 13 20 23 
+
+new MAXCRIT=4.49481, Subset<n=30, d=8>: 0 3 7 10 13 20 21 23 
+StopWatch time: <ELAPSED>
+
+new subresult[8]=4.49481, Subset<n=30, d=8>: 0 3 7 10 13 20 21 23 
+
+new MAXCRIT=4.67858, Subset<n=30, d=9>: 0 3 7 10 13 20 21 23 27 
+StopWatch time: <ELAPSED>
+
+new subresult[9]=4.67858, Subset<n=30, d=9>: 0 3 7 10 13 20 21 23 27 
+
+new MAXCRIT=4.86558, Subset<n=30, d=10>: 0 3 7 10 13 20 21 22 23 27 
+StopWatch time: <ELAPSED>
+
+new subresult[10]=4.86558, Subset<n=30, d=10>: 0 3 7 10 13 20 21 22 23 27 
+
+new MAXCRIT=5.0538, Subset<n=30, d=11>: 0 3 7 10 13 20 21 22 23 25 27 
+StopWatch time: <ELAPSED>
+
+new subresult[11]=5.0538, Subset<n=30, d=11>: 0 3 7 10 13 20 21 22 23 25 27 
+
+new MAXCRIT=5.23332, Subset<n=30, d=12>: 0 3 7 10 13 16 20 21 22 23 25 27 
+StopWatch time: <ELAPSED>
+
+new subresult[12]=5.23332, Subset<n=30, d=12>: 0 3 7 10 13 16 20 21 22 23 25 27 
+
+new MAXCRIT=5.41346, Subset<n=30, d=13>: 0 3 6 7 10 13 16 20 21 22 23 25 27 
+StopWatch time: <ELAPSED>
+
+new subresult[13]=5.41346, Subset<n=30, d=13>: 0 3 6 7 10 13 16 20 21 22 23 25 27 
+
+new subresult[12]=5.30987, Subset<n=30, d=12>: 0 3 6 10 13 16 20 21 22 23 25 27 
+
+new subresult[11]=5.12769, Subset<n=30, d=11>: 0 3 6 10 13 16 20 21 22 23 25 
+
+new subresult[10]=4.95135, Subset<n=30, d=10>: 0 3 6 10 13 16 20 22 23 25 
+
+new subresult[9]=4.72286, Subset<n=30, d=9>: 0 3 6 10 13 16 20 22 23 
+
+new subresult[8]=4.56291, Subset<n=30, d=8>: 0 3 6 10 13 16 20 23 
+
+new subresult[9]=4.74267, Subset<n=30, d=9>: 0 3 6 10 13 16 20 21 23 
+
+new MAXCRIT=5.4787, Subset<n=30, d=13>: 0 3 6 10 13 14 16 20 21 22 23 25 27 
+StopWatch time: <ELAPSED>
+
+new subresult[13]=5.4787, Subset<n=30, d=13>: 0 3 6 10 13 14 16 20 21 22 23 25 27 
+
+new MAXCRIT=5.63953, Subset<n=30, d=14>: 0 2 3 6 10 13 14 16 20 21 22 23 25 27 
+StopWatch time: <ELAPSED>
+
+new subresult[14]=5.63953, Subset<n=30, d=14>: 0 2 3 6 10 13 14 16 20 21 22 23 25 27 
+
+new MAXCRIT=5.81492, Subset<n=30, d=15>: 0 2 3 6 10 13 14 16 20 21 22 23 25 26 27 
+StopWatch time: <ELAPSED>
+
+new subresult[15]=5.81492, Subset<n=30, d=15>: 0 2 3 6 10 13 14 16 20 21 22 23 25 26 27 
+
+new subresult[14]=5.65352, Subset<n=30, d=14>: 0 2 3 6 10 13 14 16 20 21 22 23 25 26 
+
+new subresult[13]=5.50389, Subset<n=30, d=13>: 0 2 3 6 10 13 14 16 20 22 23 25 26 
+
+new subresult[12]=5.32415, Subset<n=30, d=12>: 0 2 3 6 10 13 14 16 20 23 25 26 
+
+new subresult[14]=5.66035, Subset<n=30, d=14>: 0 2 3 4 6 10 13 14 16 20 22 23 25 26 
+
+new MAXCRIT=5.85047, Subset<n=30, d=15>: 0 2 3 4 6 10 13 14 15 16 20 22 23 25 26 
+StopWatch time: <ELAPSED>
+
+new subresult[15]=5.85047, Subset<n=30, d=15>: 0 2 3 4 6 10 13 14 15 16 20 22 23 25 26 
+
+new subresult[14]=5.66212, Subset<n=30, d=14>: 0 2 3 4 6 10 13 14 15 16 20 23 25 26 
+
+new MAXCRIT=6.01031, Subset<n=30, d=16>: 0 2 3 4 6 10 13 14 15 16 20 21 22 23 25 26 
+StopWatch time: <ELAPSED>
+
+new subresult[16]=6.01031, Subset<n=30, d=16>: 0 2 3 4 6 10 13 14 15 16 20 21 22 23 25 26 
+
+new MAXCRIT=6.15626, Subset<n=30, d=17>: 0 2 3 4 6 10 13 14 15 16 20 21 22 23 25 26 27 
+StopWatch time: <ELAPSED>
+
+new subresult[17]=6.15626, Subset<n=30, d=17>: 0 2 3 4 6 10 13 14 15 16 20 21 22 23 25 26 27 
+
+new MAXCRIT=6.30981, Subset<n=30, d=18>: 0 2 3 4 5 6 10 13 14 15 16 20 21 22 23 25 26 27 
+StopWatch time: <ELAPSED>
+
+new subresult[18]=6.30981, Subset<n=30, d=18>: 0 2 3 4 5 6 10 13 14 15 16 20 21 22 23 25 26 27 
+
+new MAXCRIT=6.45296, Subset<n=30, d=19>: 0 2 3 4 5 6 10 13 14 15 16 18 20 21 22 23 25 26 27 
+StopWatch time: <ELAPSED>
+
+new subresult[19]=6.45296, Subset<n=30, d=19>: 0 2 3 4 5 6 10 13 14 15 16 18 20 21 22 23 25 26 27 
+
+new MAXCRIT=6.58497, Subset<n=30, d=20>: 0 2 3 4 5 6 10 13 14 15 16 18 19 20 21 22 23 25 26 27 
+StopWatch time: <ELAPSED>
+
+new subresult[20]=6.58497, Subset<n=30, d=20>: 0 2 3 4 5 6 10 13 14 15 16 18 19 20 21 22 23 25 26 27 
+
+new MAXCRIT=6.77402, Subset<n=30, d=21>: 0 2 3 4 5 6 10 13 14 15 16 18 19 20 21 22 23 25 26 27 29 
+StopWatch time: <ELAPSED>
+
+new subresult[21]=6.77402, Subset<n=30, d=21>: 0 2 3 4 5 6 10 13 14 15 16 18 19 20 21 22 23 25 26 27 29 
+
+new subresult[20]=6.63411, Subset<n=30, d=20>: 0 2 3 4 5 6 10 13 14 15 16 19 20 21 22 23 25 26 27 29 
+
+new subresult[19]=6.46615, Subset<n=30, d=19>: 0 2 3 4 6 10 13 14 15 16 19 20 21 22 23 25 26 27 29 
+
+new subresult[18]=6.31689, Subset<n=30, d=18>: 0 2 3 4 6 10 13 14 15 16 19 20 21 22 23 25 26 29 
+
+new MAXCRIT=6.77506, Subset<n=30, d=21>: 0 2 3 4 5 6 10 13 14 15 16 17 19 20 21 22 23 25 26 27 29 
+StopWatch time: <ELAPSED>
+
+new subresult[21]=6.77506, Subset<n=30, d=21>: 0 2 3 4 5 6 10 13 14 15 16 17 19 20 21 22 23 25 26 27 29 
+
+new MAXCRIT=6.91365, Subset<n=30, d=22>: 0 2 3 4 5 6 10 13 14 15 16 17 18 19 20 21 22 23 25 26 27 29 
+StopWatch time: <ELAPSED>
+
+new subresult[22]=6.91365, Subset<n=30, d=22>: 0 2 3 4 5 6 10 13 14 15 16 17 18 19 20 21 22 23 25 26 27 29 
+
+new MAXCRIT=7.05229, Subset<n=30, d=23>: 0 2 3 4 5 6 10 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 29 
+StopWatch time: <ELAPSED>
+
+new subresult[23]=7.05229, Subset<n=30, d=23>: 0 2 3 4 5 6 10 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 29 
+
+new MAXCRIT=7.18909, Subset<n=30, d=24>: 0 2 3 4 5 6 7 10 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 29 
+StopWatch time: <ELAPSED>
+
+new subresult[24]=7.18909, Subset<n=30, d=24>: 0 2 3 4 5 6 7 10 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 29 
+
+new MAXCRIT=7.29652, Subset<n=30, d=25>: 0 2 3 4 5 6 7 10 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+StopWatch time: <ELAPSED>
+
+new subresult[25]=7.29652, Subset<n=30, d=25>: 0 2 3 4 5 6 7 10 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+
+new MAXCRIT=7.39117, Subset<n=30, d=26>: 0 2 3 4 5 6 7 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+StopWatch time: <ELAPSED>
+
+new subresult[26]=7.39117, Subset<n=30, d=26>: 0 2 3 4 5 6 7 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+
+new MAXCRIT=7.4757, Subset<n=30, d=27>: 0 1 2 3 4 5 6 7 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+StopWatch time: <ELAPSED>
+
+new subresult[27]=7.4757, Subset<n=30, d=27>: 0 1 2 3 4 5 6 7 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+
+new MAXCRIT=7.53582, Subset<n=30, d=28>: 0 1 2 3 4 5 6 7 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+StopWatch time: <ELAPSED>
+
+new subresult[28]=7.53582, Subset<n=30, d=28>: 0 1 2 3 4 5 6 7 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+
+new MAXCRIT=7.59639, Subset<n=30, d=29>: 0 1 2 3 4 5 6 7 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+StopWatch time: <ELAPSED>
+
+new subresult[29]=7.59639, Subset<n=30, d=29>: 0 1 2 3 4 5 6 7 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+
+new MAXCRIT=7.72361, Subset<n=30, d=30>: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+StopWatch time: <ELAPSED>
+
+new subresult[30]=7.72361, Subset<n=30, d=30>: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+
+new subresult[29]=7.66115, Subset<n=30, d=29>: 0 1 2 3 4 5 6 7 8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+
+new subresult[28]=7.58047, Subset<n=30, d=28>: 0 2 3 4 5 6 7 8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+
+new subresult[27]=7.48514, Subset<n=30, d=27>: 0 2 3 4 5 6 7 8 10 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+
+.......................................
+Search_SFFS() search finished. StopWatch time: <ELAPSED>
+Search result: 
+Subset<n=30, d=7>: 0 3 7 10 13 20 23 
+Criterion value: 4.28669
+
+
+(TRIAL B4) Search result: 
+Subset<n=30, d=7>: 0 3 7 10 13 20 23 Criterion value=4.28669
+
+TRIAL B5 ---------------------------------------------------------------------
+---------------------------------------
+Starting SFFS, delta=0  [Search_SFFS() with Sequential_Step_Straight()]
+with Criterion: Criterion_Normal_Bhattacharyya()
+with initial subset: Subset<n=30, d=0>: empty
+Target subset size set to: 7
+
+new MAXCRIT=0.869, Subset<n=30, d=1>: 27 
+StopWatch time: <ELAPSED>
+
+new subresult[1]=0.869, Subset<n=30, d=1>: 27 
+
+new MAXCRIT=1.57958, Subset<n=30, d=2>: 13 27 
+StopWatch time: <ELAPSED>
+
+new subresult[2]=1.57958, Subset<n=30, d=2>: 13 27 
+
+new MAXCRIT=1.89452, Subset<n=30, d=3>: 10 13 27 
+StopWatch time: <ELAPSED>
+
+new subresult[3]=1.89452, Subset<n=30, d=3>: 10 13 27 
+
+new MAXCRIT=2.51144, Subset<n=30, d=4>: 10 13 23 27 
+StopWatch time: <ELAPSED>
+
+new subresult[4]=2.51144, Subset<n=30, d=4>: 10 13 23 27 
+
+new subresult[3]=2.01881, Subset<n=30, d=3>: 10 13 23 
+
+new MAXCRIT=2.9745, Subset<n=30, d=4>: 10 13 20 23 
+StopWatch time: <ELAPSED>
+
+new subresult[4]=2.9745, Subset<n=30, d=4>: 10 13 20 23 
+
+new subresult[3]=2.37887, Subset<n=30, d=3>: 13 20 23 
+
+new subresult[2]=1.87367, Subset<n=30, d=2>: 20 23 
+
+new subresult[3]=2.40722, Subset<n=30, d=3>: 3 20 23 
+
+new MAXCRIT=3.42386, Subset<n=30, d=5>: 0 3 13 20 23 
+StopWatch time: <ELAPSED>
+
+new subresult[5]=3.42386, Subset<n=30, d=5>: 0 3 13 20 23 
+
+new MAXCRIT=4.09002, Subset<n=30, d=6>: 0 3 10 13 20 23 
+StopWatch time: <ELAPSED>
+
+new subresult[6]=4.09002, Subset<n=30, d=6>: 0 3 10 13 20 23 
+
+new subresult[5]=3.49874, Subset<n=30, d=5>: 3 10 13 20 23 
+
+new MAXCRIT=4.39633, Subset<n=30, d=7>: 0 3 7 10 13 20 23 
+StopWatch time: <ELAPSED>
+
+new subresult[7]=4.39633, Subset<n=30, d=7>: 0 3 7 10 13 20 23 
+
+new MAXCRIT=4.56883, Subset<n=30, d=8>: 0 3 7 10 13 20 23 27 
+StopWatch time: <ELAPSED>
+
+new subresult[8]=4.56883, Subset<n=30, d=8>: 0 3 7 10 13 20 23 27 
+
+new MAXCRIT=4.74513, Subset<n=30, d=9>: 0 3 7 10 13 20 22 23 27 
+StopWatch time: <ELAPSED>
+
+new subresult[9]=4.74513, Subset<n=30, d=9>: 0 3 7 10 13 20 22 23 27 
+
+new MAXCRIT=4.9282, Subset<n=30, d=10>: 0 3 7 10 13 20 22 23 25 27 
+StopWatch time: <ELAPSED>
+
+new subresult[10]=4.9282, Subset<n=30, d=10>: 0 3 7 10 13 20 22 23 25 27 
+
+new subresult[9]=4.75712, Subset<n=30, d=9>: 0 3 7 10 13 20 22 23 25 
+
+new MAXCRIT=4.93171, Subset<n=30, d=10>: 0 3 7 10 13 16 20 22 23 25 
+StopWatch time: <ELAPSED>
+
+new subresult[10]=4.93171, Subset<n=30, d=10>: 0 3 7 10 13 16 20 22 23 25 
+
+new MAXCRIT=5.11522, Subset<n=30, d=11>: 0 3 6 7 10 13 16 20 22 23 25 
+StopWatch time: <ELAPSED>
+
+new subresult[11]=5.11522, Subset<n=30, d=11>: 0 3 6 7 10 13 16 20 22 23 25 
+
+new subresult[10]=5.05039, Subset<n=30, d=10>: 0 3 6 10 13 16 20 22 23 25 
+
+new subresult[9]=4.82159, Subset<n=30, d=9>: 0 3 6 10 13 16 20 22 23 
+
+new subresult[8]=4.65735, Subset<n=30, d=8>: 0 3 6 10 13 16 20 23 
+
+new MAXCRIT=5.21748, Subset<n=30, d=11>: 0 3 6 10 13 14 16 20 22 23 25 
+StopWatch time: <ELAPSED>
+
+new subresult[11]=5.21748, Subset<n=30, d=11>: 0 3 6 10 13 14 16 20 22 23 25 
+
+new MAXCRIT=5.38751, Subset<n=30, d=12>: 0 2 3 6 10 13 14 16 20 22 23 25 
+StopWatch time: <ELAPSED>
+
+new subresult[12]=5.38751, Subset<n=30, d=12>: 0 2 3 6 10 13 14 16 20 22 23 25 
+
+new MAXCRIT=5.57697, Subset<n=30, d=13>: 0 2 3 6 10 13 14 16 20 22 23 25 26 
+StopWatch time: <ELAPSED>
+
+new subresult[13]=5.57697, Subset<n=30, d=13>: 0 2 3 6 10 13 14 16 20 22 23 25 26 
+
+new subresult[12]=5.38872, Subset<n=30, d=12>: 0 2 3 6 10 13 14 16 20 23 25 26 
+
+new MAXCRIT=5.7285, Subset<n=30, d=14>: 0 2 3 4 6 10 13 14 16 20 22 23 25 26 
+StopWatch time: <ELAPSED>
+
+new subresult[14]=5.7285, Subset<n=30, d=14>: 0 2 3 4 6 10 13 14 16 20 22 23 25 26 
+
+new MAXCRIT=5.91501, Subset<n=30, d=15>: 0 2 3 4 6 10 13 14 15 16 20 22 23 25 26 
+StopWatch time: <ELAPSED>
+
+new subresult[15]=5.91501, Subset<n=30, d=15>: 0 2 3 4 6 10 13 14 15 16 20 22 23 25 26 
+
+new MAXCRIT=6.0561, Subset<n=30, d=16>: 0 2 3 4 6 10 12 13 14 15 16 20 22 23 25 26 
+StopWatch time: <ELAPSED>
+
+new subresult[16]=6.0561, Subset<n=30, d=16>: 0 2 3 4 6 10 12 13 14 15 16 20 22 23 25 26 
+
+new MAXCRIT=6.19838, Subset<n=30, d=17>: 0 2 3 4 6 10 12 13 14 15 16 20 21 22 23 25 26 
+StopWatch time: <ELAPSED>
+
+new subresult[17]=6.19838, Subset<n=30, d=17>: 0 2 3 4 6 10 12 13 14 15 16 20 21 22 23 25 26 
+
+new MAXCRIT=6.34729, Subset<n=30, d=18>: 0 2 3 4 6 10 12 13 14 15 16 17 20 21 22 23 25 26 
+StopWatch time: <ELAPSED>
+
+new subresult[18]=6.34729, Subset<n=30, d=18>: 0 2 3 4 6 10 12 13 14 15 16 17 20 21 22 23 25 26 
+
+new MAXCRIT=6.4801, Subset<n=30, d=19>: 0 2 3 4 5 6 10 12 13 14 15 16 17 20 21 22 23 25 26 
+StopWatch time: <ELAPSED>
+
+new subresult[19]=6.4801, Subset<n=30, d=19>: 0 2 3 4 5 6 10 12 13 14 15 16 17 20 21 22 23 25 26 
+
+new MAXCRIT=6.62189, Subset<n=30, d=20>: 0 2 3 4 5 6 10 12 13 14 15 16 17 18 20 21 22 23 25 26 
+StopWatch time: <ELAPSED>
+
+new subresult[20]=6.62189, Subset<n=30, d=20>: 0 2 3 4 5 6 10 12 13 14 15 16 17 18 20 21 22 23 25 26 
+
+new MAXCRIT=6.756, Subset<n=30, d=21>: 0 2 3 4 5 6 10 12 13 14 15 16 17 18 20 21 22 23 25 26 27 
+StopWatch time: <ELAPSED>
+
+new subresult[21]=6.756, Subset<n=30, d=21>: 0 2 3 4 5 6 10 12 13 14 15 16 17 18 20 21 22 23 25 26 27 
+
+new subresult[20]=6.62546, Subset<n=30, d=20>: 0 2 3 4 5 6 10 12 13 14 15 16 18 20 21 22 23 25 26 27 
+
+new subresult[19]=6.48408, Subset<n=30, d=19>: 0 2 3 4 5 6 10 12 13 14 15 16 20 21 22 23 25 26 27 
+
+new MAXCRIT=6.89372, Subset<n=30, d=22>: 0 2 3 4 5 6 10 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 
+StopWatch time: <ELAPSED>
+
+new subresult[22]=6.89372, Subset<n=30, d=22>: 0 2 3 4 5 6 10 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 
+
+new MAXCRIT=7.05989, Subset<n=30, d=23>: 0 2 3 4 5 6 10 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 29 
+StopWatch time: <ELAPSED>
+
+new subresult[23]=7.05989, Subset<n=30, d=23>: 0 2 3 4 5 6 10 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 29 
+
+new subresult[22]=6.91558, Subset<n=30, d=22>: 0 2 3 4 5 6 10 12 13 14 15 16 17 19 20 21 22 23 25 26 27 29 
+
+new subresult[21]=6.7681, Subset<n=30, d=21>: 0 2 3 4 5 6 10 12 13 14 15 16 17 19 20 21 22 23 25 26 29 
+
+new MAXCRIT=7.1931, Subset<n=30, d=24>: 0 2 3 4 5 6 7 10 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 29 
+StopWatch time: <ELAPSED>
+
+new subresult[24]=7.1931, Subset<n=30, d=24>: 0 2 3 4 5 6 7 10 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 29 
+
+new MAXCRIT=7.31511, Subset<n=30, d=25>: 0 2 3 4 5 6 7 10 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+StopWatch time: <ELAPSED>
+
+new subresult[25]=7.31511, Subset<n=30, d=25>: 0 2 3 4 5 6 7 10 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+
+new MAXCRIT=7.41173, Subset<n=30, d=26>: 0 2 3 4 5 6 7 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+StopWatch time: <ELAPSED>
+
+new subresult[26]=7.41173, Subset<n=30, d=26>: 0 2 3 4 5 6 7 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+
+new MAXCRIT=7.51131, Subset<n=30, d=27>: 0 1 2 3 4 5 6 7 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+StopWatch time: <ELAPSED>
+
+new subresult[27]=7.51131, Subset<n=30, d=27>: 0 1 2 3 4 5 6 7 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+
+new MAXCRIT=7.57886, Subset<n=30, d=28>: 0 1 2 3 4 5 6 7 8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+StopWatch time: <ELAPSED>
+
+new subresult[28]=7.57886, Subset<n=30, d=28>: 0 1 2 3 4 5 6 7 8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+
+new MAXCRIT=7.71394, Subset<n=30, d=29>: 0 1 2 3 4 5 6 7 8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+StopWatch time: <ELAPSED>
+
+new subresult[29]=7.71394, Subset<n=30, d=29>: 0 1 2 3 4 5 6 7 8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+
+new subresult[28]=7.61724, Subset<n=30, d=28>: 0 2 3 4 5 6 7 8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+
+new MAXCRIT=7.77228, Subset<n=30, d=30>: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+StopWatch time: <ELAPSED>
+
+new subresult[30]=7.77228, Subset<n=30, d=30>: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+
+.......................................
+Search_SFFS() search finished. StopWatch time: <ELAPSED>
+Search result: 
+Subset<n=30, d=7>: 0 3 7 10 13 20 23 
+Criterion value: 4.39633
+
+
+(TRIAL B5) Search result: 
+Subset<n=30, d=7>: 0 3 7 10 13 20 23 Criterion value=4.39633
+
+TRIAL B6 ---------------------------------------------------------------------
+---------------------------------------
+Starting SFFS, delta=0  [Search_SFFS() with Sequential_Step_Straight()]
+with Criterion: Criterion_Normal_Bhattacharyya()
+with initial subset: Subset<n=30, d=0>: empty
+Target subset size set to: 7
+
+new MAXCRIT=0.888031, Subset<n=30, d=1>: 27 
+StopWatch time: <ELAPSED>
+
+new subresult[1]=0.888031, Subset<n=30, d=1>: 27 
+
+new MAXCRIT=1.52831, Subset<n=30, d=2>: 13 27 
+StopWatch time: <ELAPSED>
+
+new subresult[2]=1.52831, Subset<n=30, d=2>: 13 27 
+
+new MAXCRIT=1.81956, Subset<n=30, d=3>: 13 23 27 
+StopWatch time: <ELAPSED>
+
+new subresult[3]=1.81956, Subset<n=30, d=3>: 13 23 27 
+
+new MAXCRIT=2.63583, Subset<n=30, d=4>: 13 20 23 27 
+StopWatch time: <ELAPSED>
+
+new subresult[4]=2.63583, Subset<n=30, d=4>: 13 20 23 27 
+
+new subresult[3]=2.28972, Subset<n=30, d=3>: 13 20 23 
+
+new subresult[2]=1.84963, Subset<n=30, d=2>: 20 23 
+
+new subresult[3]=2.38715, Subset<n=30, d=3>: 3 20 23 
+
+new MAXCRIT=2.92458, Subset<n=30, d=4>: 0 3 20 23 
+StopWatch time: <ELAPSED>
+
+new subresult[4]=2.92458, Subset<n=30, d=4>: 0 3 20 23 
+
+new MAXCRIT=3.32827, Subset<n=30, d=5>: 0 3 13 20 23 
+StopWatch time: <ELAPSED>
+
+new subresult[5]=3.32827, Subset<n=30, d=5>: 0 3 13 20 23 
+
+new MAXCRIT=3.93333, Subset<n=30, d=6>: 0 3 10 13 20 23 
+StopWatch time: <ELAPSED>
+
+new subresult[6]=3.93333, Subset<n=30, d=6>: 0 3 10 13 20 23 
+
+new subresult[5]=3.34312, Subset<n=30, d=5>: 3 10 13 20 23 
+
+new MAXCRIT=4.24636, Subset<n=30, d=7>: 0 3 7 10 13 20 23 
+StopWatch time: <ELAPSED>
+
+new subresult[7]=4.24636, Subset<n=30, d=7>: 0 3 7 10 13 20 23 
+
+new MAXCRIT=4.4297, Subset<n=30, d=8>: 0 3 7 10 13 20 23 27 
+StopWatch time: <ELAPSED>
+
+new subresult[8]=4.4297, Subset<n=30, d=8>: 0 3 7 10 13 20 23 27 
+
+new MAXCRIT=4.61728, Subset<n=30, d=9>: 0 3 7 10 13 20 22 23 27 
+StopWatch time: <ELAPSED>
+
+new subresult[9]=4.61728, Subset<n=30, d=9>: 0 3 7 10 13 20 22 23 27 
+
+new MAXCRIT=4.79048, Subset<n=30, d=10>: 0 3 7 10 13 20 21 22 23 27 
+StopWatch time: <ELAPSED>
+
+new subresult[10]=4.79048, Subset<n=30, d=10>: 0 3 7 10 13 20 21 22 23 27 
+
+new MAXCRIT=4.96594, Subset<n=30, d=11>: 0 3 7 10 13 20 21 22 23 25 27 
+StopWatch time: <ELAPSED>
+
+new subresult[11]=4.96594, Subset<n=30, d=11>: 0 3 7 10 13 20 21 22 23 25 27 
+
+new MAXCRIT=5.15698, Subset<n=30, d=12>: 0 3 7 10 13 16 20 21 22 23 25 27 
+StopWatch time: <ELAPSED>
+
+new subresult[12]=5.15698, Subset<n=30, d=12>: 0 3 7 10 13 16 20 21 22 23 25 27 
+
+new subresult[11]=4.97775, Subset<n=30, d=11>: 0 3 7 10 13 16 20 22 23 25 27 
+
+new MAXCRIT=5.16987, Subset<n=30, d=12>: 0 3 6 7 10 13 16 20 22 23 25 27 
+StopWatch time: <ELAPSED>
+
+new subresult[12]=5.16987, Subset<n=30, d=12>: 0 3 6 7 10 13 16 20 22 23 25 27 
+
+new subresult[11]=5.06401, Subset<n=30, d=11>: 0 3 6 10 13 16 20 22 23 25 27 
+
+new subresult[10]=4.91939, Subset<n=30, d=10>: 0 3 6 10 13 16 20 22 23 25 
+
+new subresult[9]=4.71239, Subset<n=30, d=9>: 0 3 6 10 13 16 20 22 23 
+
+new subresult[8]=4.53556, Subset<n=30, d=8>: 0 3 6 10 13 16 20 23 
+
+new subresult[11]=5.10413, Subset<n=30, d=11>: 0 3 6 10 13 14 16 20 22 23 25 
+
+new MAXCRIT=5.29828, Subset<n=30, d=12>: 0 3 6 10 13 14 16 20 22 23 25 26 
+StopWatch time: <ELAPSED>
+
+new subresult[12]=5.29828, Subset<n=30, d=12>: 0 3 6 10 13 14 16 20 22 23 25 26 
+
+new subresult[11]=5.11919, Subset<n=30, d=11>: 0 3 6 10 13 14 16 20 22 23 26 
+
+new MAXCRIT=5.49352, Subset<n=30, d=13>: 0 2 3 6 10 13 14 16 20 22 23 25 26 
+StopWatch time: <ELAPSED>
+
+new subresult[13]=5.49352, Subset<n=30, d=13>: 0 2 3 6 10 13 14 16 20 22 23 25 26 
+
+new subresult[12]=5.30222, Subset<n=30, d=12>: 0 2 3 6 10 13 14 16 20 23 25 26 
+
+new MAXCRIT=5.63869, Subset<n=30, d=14>: 0 2 3 5 6 10 13 14 16 20 22 23 25 26 
+StopWatch time: <ELAPSED>
+
+new subresult[14]=5.63869, Subset<n=30, d=14>: 0 2 3 5 6 10 13 14 16 20 22 23 25 26 
+
+new MAXCRIT=5.80113, Subset<n=30, d=15>: 0 2 3 5 6 10 13 14 15 16 20 22 23 25 26 
+StopWatch time: <ELAPSED>
+
+new subresult[15]=5.80113, Subset<n=30, d=15>: 0 2 3 5 6 10 13 14 15 16 20 22 23 25 26 
+
+new MAXCRIT=5.97097, Subset<n=30, d=16>: 0 2 3 4 5 6 10 13 14 15 16 20 22 23 25 26 
+StopWatch time: <ELAPSED>
+
+new subresult[16]=5.97097, Subset<n=30, d=16>: 0 2 3 4 5 6 10 13 14 15 16 20 22 23 25 26 
+
+new subresult[15]=5.82482, Subset<n=30, d=15>: 0 2 3 4 6 10 13 14 15 16 20 22 23 25 26 
+
+new MAXCRIT=6.11974, Subset<n=30, d=17>: 0 2 3 4 5 6 10 13 14 15 16 20 22 23 25 26 27 
+StopWatch time: <ELAPSED>
+
+new subresult[17]=6.11974, Subset<n=30, d=17>: 0 2 3 4 5 6 10 13 14 15 16 20 22 23 25 26 27 
+
+new MAXCRIT=6.26665, Subset<n=30, d=18>: 0 2 3 4 5 6 10 13 14 15 16 18 20 22 23 25 26 27 
+StopWatch time: <ELAPSED>
+
+new subresult[18]=6.26665, Subset<n=30, d=18>: 0 2 3 4 5 6 10 13 14 15 16 18 20 22 23 25 26 27 
+
+new MAXCRIT=6.40696, Subset<n=30, d=19>: 0 2 3 4 5 6 10 12 13 14 15 16 18 20 22 23 25 26 27 
+StopWatch time: <ELAPSED>
+
+new subresult[19]=6.40696, Subset<n=30, d=19>: 0 2 3 4 5 6 10 12 13 14 15 16 18 20 22 23 25 26 27 
+
+new MAXCRIT=6.54814, Subset<n=30, d=20>: 0 2 3 4 5 6 10 12 13 14 15 16 18 20 21 22 23 25 26 27 
+StopWatch time: <ELAPSED>
+
+new subresult[20]=6.54814, Subset<n=30, d=20>: 0 2 3 4 5 6 10 12 13 14 15 16 18 20 21 22 23 25 26 27 
+
+new MAXCRIT=6.68928, Subset<n=30, d=21>: 0 2 3 4 5 6 10 12 13 14 15 16 18 19 20 21 22 23 25 26 27 
+StopWatch time: <ELAPSED>
+
+new subresult[21]=6.68928, Subset<n=30, d=21>: 0 2 3 4 5 6 10 12 13 14 15 16 18 19 20 21 22 23 25 26 27 
+
+new MAXCRIT=6.86783, Subset<n=30, d=22>: 0 2 3 4 5 6 10 12 13 14 15 16 18 19 20 21 22 23 25 26 27 29 
+StopWatch time: <ELAPSED>
+
+new subresult[22]=6.86783, Subset<n=30, d=22>: 0 2 3 4 5 6 10 12 13 14 15 16 18 19 20 21 22 23 25 26 27 29 
+
+new subresult[21]=6.72126, Subset<n=30, d=21>: 0 2 3 4 5 6 10 12 13 14 15 16 18 19 20 22 23 25 26 27 29 
+
+new subresult[20]=6.57565, Subset<n=30, d=20>: 0 2 3 4 5 6 10 12 13 14 15 16 19 20 22 23 25 26 27 29 
+
+new subresult[19]=6.42067, Subset<n=30, d=19>: 0 2 3 4 5 6 10 12 13 14 15 16 19 20 22 23 25 26 29 
+
+new subresult[20]=6.58037, Subset<n=30, d=20>: 0 2 3 4 5 6 10 12 13 14 15 16 17 19 20 22 23 25 26 29 
+
+new subresult[21]=6.75163, Subset<n=30, d=21>: 0 2 3 4 5 6 10 12 13 14 15 16 17 19 20 22 23 25 26 27 29 
+
+new MAXCRIT=6.90205, Subset<n=30, d=22>: 0 2 3 4 5 6 10 12 13 14 15 16 17 19 20 21 22 23 25 26 27 29 
+StopWatch time: <ELAPSED>
+
+new subresult[22]=6.90205, Subset<n=30, d=22>: 0 2 3 4 5 6 10 12 13 14 15 16 17 19 20 21 22 23 25 26 27 29 
+
+new MAXCRIT=7.04944, Subset<n=30, d=23>: 0 2 3 4 5 6 10 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 29 
+StopWatch time: <ELAPSED>
+
+new subresult[23]=7.04944, Subset<n=30, d=23>: 0 2 3 4 5 6 10 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 29 
+
+new MAXCRIT=7.19357, Subset<n=30, d=24>: 0 2 3 4 5 6 7 10 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 29 
+StopWatch time: <ELAPSED>
+
+new subresult[24]=7.19357, Subset<n=30, d=24>: 0 2 3 4 5 6 7 10 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 29 
+
+new MAXCRIT=7.30693, Subset<n=30, d=25>: 0 2 3 4 5 6 7 10 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+StopWatch time: <ELAPSED>
+
+new subresult[25]=7.30693, Subset<n=30, d=25>: 0 2 3 4 5 6 7 10 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+
+new MAXCRIT=7.40177, Subset<n=30, d=26>: 0 2 3 4 5 6 7 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+StopWatch time: <ELAPSED>
+
+new subresult[26]=7.40177, Subset<n=30, d=26>: 0 2 3 4 5 6 7 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+
+new MAXCRIT=7.4988, Subset<n=30, d=27>: 0 1 2 3 4 5 6 7 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+StopWatch time: <ELAPSED>
+
+new subresult[27]=7.4988, Subset<n=30, d=27>: 0 1 2 3 4 5 6 7 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+
+new MAXCRIT=7.56747, Subset<n=30, d=28>: 0 1 2 3 4 5 6 7 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+StopWatch time: <ELAPSED>
+
+new subresult[28]=7.56747, Subset<n=30, d=28>: 0 1 2 3 4 5 6 7 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+
+new MAXCRIT=7.69992, Subset<n=30, d=29>: 0 1 2 3 4 5 6 7 8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+StopWatch time: <ELAPSED>
+
+new subresult[29]=7.69992, Subset<n=30, d=29>: 0 1 2 3 4 5 6 7 8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+
+new subresult[28]=7.60957, Subset<n=30, d=28>: 0 2 3 4 5 6 7 8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+
+new subresult[27]=7.50911, Subset<n=30, d=27>: 0 2 3 4 5 6 7 8 10 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+
+new MAXCRIT=7.7627, Subset<n=30, d=30>: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+StopWatch time: <ELAPSED>
+
+new subresult[30]=7.7627, Subset<n=30, d=30>: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+
+.......................................
+Search_SFFS() search finished. StopWatch time: <ELAPSED>
+Search result: 
+Subset<n=30, d=7>: 0 3 7 10 13 20 23 
+Criterion value: 4.24636
+
+
+(TRIAL B6) Search result: 
+Subset<n=30, d=7>: 0 3 7 10 13 20 23 Criterion value=4.24636
+
+TRIAL B7 ---------------------------------------------------------------------
+---------------------------------------
+Starting SFFS, delta=0  [Search_SFFS() with Sequential_Step_Straight()]
+with Criterion: Criterion_Normal_Bhattacharyya()
+with initial subset: Subset<n=30, d=0>: empty
+Target subset size set to: 7
+
+new MAXCRIT=0.870068, Subset<n=30, d=1>: 27 
+StopWatch time: <ELAPSED>
+
+new subresult[1]=0.870068, Subset<n=30, d=1>: 27 
+
+new MAXCRIT=1.47772, Subset<n=30, d=2>: 13 27 
+StopWatch time: <ELAPSED>
+
+new subresult[2]=1.47772, Subset<n=30, d=2>: 13 27 
+
+new MAXCRIT=1.79435, Subset<n=30, d=3>: 10 13 27 
+StopWatch time: <ELAPSED>
+
+new subresult[3]=1.79435, Subset<n=30, d=3>: 10 13 27 
+
+new MAXCRIT=2.34663, Subset<n=30, d=4>: 10 13 23 27 
+StopWatch time: <ELAPSED>
+
+new subresult[4]=2.34663, Subset<n=30, d=4>: 10 13 23 27 
+
+new subresult[3]=1.8486, Subset<n=30, d=3>: 10 13 23 
+
+new MAXCRIT=2.74825, Subset<n=30, d=4>: 10 13 20 23 
+StopWatch time: <ELAPSED>
+
+new subresult[4]=2.74825, Subset<n=30, d=4>: 10 13 20 23 
+
+new subresult[3]=2.20014, Subset<n=30, d=3>: 13 20 23 
+
+new subresult[2]=1.83244, Subset<n=30, d=2>: 20 23 
+
+new subresult[3]=2.3192, Subset<n=30, d=3>: 3 20 23 
+
+new MAXCRIT=2.81754, Subset<n=30, d=4>: 0 3 20 23 
+StopWatch time: <ELAPSED>
+
+new subresult[4]=2.81754, Subset<n=30, d=4>: 0 3 20 23 
+
+new MAXCRIT=3.20303, Subset<n=30, d=5>: 0 3 13 20 23 
+StopWatch time: <ELAPSED>
+
+new subresult[5]=3.20303, Subset<n=30, d=5>: 0 3 13 20 23 
+
+new MAXCRIT=3.80686, Subset<n=30, d=6>: 0 3 10 13 20 23 
+StopWatch time: <ELAPSED>
+
+new subresult[6]=3.80686, Subset<n=30, d=6>: 0 3 10 13 20 23 
+
+new subresult[5]=3.26006, Subset<n=30, d=5>: 3 10 13 20 23 
+
+new MAXCRIT=4.1026, Subset<n=30, d=7>: 0 3 10 13 20 23 27 
+StopWatch time: <ELAPSED>
+
+new subresult[7]=4.1026, Subset<n=30, d=7>: 0 3 10 13 20 23 27 
+
+new MAXCRIT=4.28458, Subset<n=30, d=8>: 0 3 10 13 20 22 23 27 
+StopWatch time: <ELAPSED>
+
+new subresult[8]=4.28458, Subset<n=30, d=8>: 0 3 10 13 20 22 23 27 
+
+new MAXCRIT=4.47363, Subset<n=30, d=9>: 0 3 10 13 20 22 23 25 27 
+StopWatch time: <ELAPSED>
+
+new subresult[9]=4.47363, Subset<n=30, d=9>: 0 3 10 13 20 22 23 25 27 
+
+new subresult[8]=4.30291, Subset<n=30, d=8>: 0 3 10 13 20 22 23 25 
+
+new MAXCRIT=4.49637, Subset<n=30, d=9>: 0 2 3 10 13 20 22 23 25 
+StopWatch time: <ELAPSED>
+
+new subresult[9]=4.49637, Subset<n=30, d=9>: 0 2 3 10 13 20 22 23 25 
+
+new subresult[8]=4.30339, Subset<n=30, d=8>: 0 2 3 10 13 20 23 25 
+
+new MAXCRIT=4.66341, Subset<n=30, d=10>: 0 2 3 10 13 20 22 23 25 27 
+StopWatch time: <ELAPSED>
+
+new subresult[10]=4.66341, Subset<n=30, d=10>: 0 2 3 10 13 20 22 23 25 27 
+
+new MAXCRIT=4.8188, Subset<n=30, d=11>: 0 2 3 10 13 20 21 22 23 25 27 
+StopWatch time: <ELAPSED>
+
+new subresult[11]=4.8188, Subset<n=30, d=11>: 0 2 3 10 13 20 21 22 23 25 27 
+
+new MAXCRIT=4.97407, Subset<n=30, d=12>: 0 2 3 7 10 13 20 21 22 23 25 27 
+StopWatch time: <ELAPSED>
+
+new subresult[12]=4.97407, Subset<n=30, d=12>: 0 2 3 7 10 13 20 21 22 23 25 27 
+
+new MAXCRIT=5.12427, Subset<n=30, d=13>: 0 2 3 5 7 10 13 20 21 22 23 25 27 
+StopWatch time: <ELAPSED>
+
+new subresult[13]=5.12427, Subset<n=30, d=13>: 0 2 3 5 7 10 13 20 21 22 23 25 27 
+
+new subresult[12]=4.99246, Subset<n=30, d=12>: 0 2 3 5 7 10 13 20 22 23 25 27 
+
+new MAXCRIT=5.13781, Subset<n=30, d=13>: 0 2 3 5 7 10 13 16 20 22 23 25 27 
+StopWatch time: <ELAPSED>
+
+new subresult[13]=5.13781, Subset<n=30, d=13>: 0 2 3 5 7 10 13 16 20 22 23 25 27 
+
+new MAXCRIT=5.31832, Subset<n=30, d=14>: 0 2 3 5 7 10 13 14 16 20 22 23 25 27 
+StopWatch time: <ELAPSED>
+
+new subresult[14]=5.31832, Subset<n=30, d=14>: 0 2 3 5 7 10 13 14 16 20 22 23 25 27 
+
+new MAXCRIT=5.49082, Subset<n=30, d=15>: 0 2 3 5 7 10 13 14 16 20 22 23 25 26 27 
+StopWatch time: <ELAPSED>
+
+new subresult[15]=5.49082, Subset<n=30, d=15>: 0 2 3 5 7 10 13 14 16 20 22 23 25 26 27 
+
+new subresult[14]=5.3438, Subset<n=30, d=14>: 0 2 3 7 10 13 14 16 20 22 23 25 26 27 
+
+new subresult[13]=5.19322, Subset<n=30, d=13>: 0 2 3 10 13 14 16 20 22 23 25 26 27 
+
+new subresult[12]=5.08018, Subset<n=30, d=12>: 0 2 3 10 13 14 16 20 22 23 25 26 
+
+new subresult[11]=4.88477, Subset<n=30, d=11>: 0 2 3 10 13 14 16 20 23 25 26 
+
+new subresult[10]=4.67758, Subset<n=30, d=10>: 0 2 3 10 13 14 16 20 23 26 
+
+new subresult[9]=4.50654, Subset<n=30, d=9>: 0 3 10 13 14 16 20 23 26 
+
+new subresult[10]=4.72687, Subset<n=30, d=10>: 0 3 6 10 13 14 16 20 23 26 
+
+new subresult[9]=4.52323, Subset<n=30, d=9>: 0 3 6 10 13 16 20 23 26 
+
+new subresult[8]=4.33117, Subset<n=30, d=8>: 0 3 6 10 13 16 20 23 
+
+new subresult[11]=4.91461, Subset<n=30, d=11>: 0 3 6 10 13 14 16 20 22 23 26 
+
+new subresult[12]=5.09674, Subset<n=30, d=12>: 0 3 6 10 13 14 16 20 22 23 25 26 
+
+new subresult[13]=5.29005, Subset<n=30, d=13>: 0 2 3 6 10 13 14 16 20 22 23 25 26 
+
+new subresult[12]=5.10389, Subset<n=30, d=12>: 0 2 3 6 10 13 14 16 20 23 25 26 
+
+new subresult[14]=5.46344, Subset<n=30, d=14>: 0 2 3 6 10 12 13 14 16 20 22 23 25 26 
+
+new MAXCRIT=5.62244, Subset<n=30, d=15>: 0 2 3 4 6 10 12 13 14 16 20 22 23 25 26 
+StopWatch time: <ELAPSED>
+
+new subresult[15]=5.62244, Subset<n=30, d=15>: 0 2 3 4 6 10 12 13 14 16 20 22 23 25 26 
+
+new MAXCRIT=5.7762, Subset<n=30, d=16>: 0 2 3 4 5 6 10 12 13 14 16 20 22 23 25 26 
+StopWatch time: <ELAPSED>
+
+new subresult[16]=5.7762, Subset<n=30, d=16>: 0 2 3 4 5 6 10 12 13 14 16 20 22 23 25 26 
+
+new MAXCRIT=5.9283, Subset<n=30, d=17>: 0 2 3 4 5 6 10 12 13 14 16 18 20 22 23 25 26 
+StopWatch time: <ELAPSED>
+
+new subresult[17]=5.9283, Subset<n=30, d=17>: 0 2 3 4 5 6 10 12 13 14 16 18 20 22 23 25 26 
+
+new MAXCRIT=6.0636, Subset<n=30, d=18>: 0 2 3 4 5 6 10 12 13 14 15 16 18 20 22 23 25 26 
+StopWatch time: <ELAPSED>
+
+new subresult[18]=6.0636, Subset<n=30, d=18>: 0 2 3 4 5 6 10 12 13 14 15 16 18 20 22 23 25 26 
+
+new MAXCRIT=6.20439, Subset<n=30, d=19>: 0 2 3 4 5 6 10 12 13 14 15 16 17 18 20 22 23 25 26 
+StopWatch time: <ELAPSED>
+
+new subresult[19]=6.20439, Subset<n=30, d=19>: 0 2 3 4 5 6 10 12 13 14 15 16 17 18 20 22 23 25 26 
+
+new MAXCRIT=6.33894, Subset<n=30, d=20>: 0 2 3 4 5 6 10 12 13 14 15 16 17 18 20 22 23 25 26 27 
+StopWatch time: <ELAPSED>
+
+new subresult[20]=6.33894, Subset<n=30, d=20>: 0 2 3 4 5 6 10 12 13 14 15 16 17 18 20 22 23 25 26 27 
+
+new MAXCRIT=6.47138, Subset<n=30, d=21>: 0 2 3 4 5 6 10 12 13 14 15 16 17 18 20 21 22 23 25 26 27 
+StopWatch time: <ELAPSED>
+
+new subresult[21]=6.47138, Subset<n=30, d=21>: 0 2 3 4 5 6 10 12 13 14 15 16 17 18 20 21 22 23 25 26 27 
+
+new MAXCRIT=6.59805, Subset<n=30, d=22>: 0 2 3 4 5 6 7 10 12 13 14 15 16 17 18 20 21 22 23 25 26 27 
+StopWatch time: <ELAPSED>
+
+new subresult[22]=6.59805, Subset<n=30, d=22>: 0 2 3 4 5 6 7 10 12 13 14 15 16 17 18 20 21 22 23 25 26 27 
+
+new MAXCRIT=6.72145, Subset<n=30, d=23>: 0 2 3 4 5 6 7 10 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 
+StopWatch time: <ELAPSED>
+
+new subresult[23]=6.72145, Subset<n=30, d=23>: 0 2 3 4 5 6 7 10 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 
+
+new MAXCRIT=6.90913, Subset<n=30, d=24>: 0 2 3 4 5 6 7 10 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 29 
+StopWatch time: <ELAPSED>
+
+new subresult[24]=6.90913, Subset<n=30, d=24>: 0 2 3 4 5 6 7 10 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 29 
+
+new subresult[23]=6.77522, Subset<n=30, d=23>: 0 2 3 4 5 6 10 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 29 
+
+new subresult[22]=6.63756, Subset<n=30, d=22>: 0 2 3 4 5 6 10 12 13 14 15 16 17 18 19 20 22 23 25 26 27 29 
+
+new subresult[21]=6.48275, Subset<n=30, d=21>: 0 2 3 4 5 6 10 12 13 14 15 16 17 19 20 22 23 25 26 27 29 
+
+new MAXCRIT=7.0257, Subset<n=30, d=25>: 0 2 3 4 5 6 7 10 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+StopWatch time: <ELAPSED>
+
+new subresult[25]=7.0257, Subset<n=30, d=25>: 0 2 3 4 5 6 7 10 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+
+new MAXCRIT=7.10825, Subset<n=30, d=26>: 0 2 3 4 5 6 7 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+StopWatch time: <ELAPSED>
+
+new subresult[26]=7.10825, Subset<n=30, d=26>: 0 2 3 4 5 6 7 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+
+new MAXCRIT=7.20488, Subset<n=30, d=27>: 0 1 2 3 4 5 6 7 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+StopWatch time: <ELAPSED>
+
+new subresult[27]=7.20488, Subset<n=30, d=27>: 0 1 2 3 4 5 6 7 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+
+new MAXCRIT=7.27144, Subset<n=30, d=28>: 0 1 2 3 4 5 6 7 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+StopWatch time: <ELAPSED>
+
+new subresult[28]=7.27144, Subset<n=30, d=28>: 0 1 2 3 4 5 6 7 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+
+new MAXCRIT=7.41554, Subset<n=30, d=29>: 0 1 2 3 4 5 6 7 8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+StopWatch time: <ELAPSED>
+
+new subresult[29]=7.41554, Subset<n=30, d=29>: 0 1 2 3 4 5 6 7 8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+
+new subresult[28]=7.32538, Subset<n=30, d=28>: 0 2 3 4 5 6 7 8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+
+new subresult[27]=7.24093, Subset<n=30, d=27>: 0 2 3 4 5 6 7 8 10 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+
+new MAXCRIT=7.47565, Subset<n=30, d=30>: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+StopWatch time: <ELAPSED>
+
+new subresult[30]=7.47565, Subset<n=30, d=30>: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+
+.......................................
+Search_SFFS() search finished. StopWatch time: <ELAPSED>
+Search result: 
+Subset<n=30, d=7>: 0 3 10 13 20 23 27 
+Criterion value: 4.1026
+
+
+(TRIAL B7) Search result: 
+Subset<n=30, d=7>: 0 3 10 13 20 23 27 Criterion value=4.1026
+
+TRIAL B8 ---------------------------------------------------------------------
+---------------------------------------
+Starting SFFS, delta=0  [Search_SFFS() with Sequential_Step_Straight()]
+with Criterion: Criterion_Normal_Bhattacharyya()
+with initial subset: Subset<n=30, d=0>: empty
+Target subset size set to: 7
+
+new MAXCRIT=0.883147, Subset<n=30, d=1>: 27 
+StopWatch time: <ELAPSED>
+
+new subresult[1]=0.883147, Subset<n=30, d=1>: 27 
+
+new MAXCRIT=1.56758, Subset<n=30, d=2>: 13 27 
+StopWatch time: <ELAPSED>
+
+new subresult[2]=1.56758, Subset<n=30, d=2>: 13 27 
+
+new MAXCRIT=1.89311, Subset<n=30, d=3>: 10 13 27 
+StopWatch time: <ELAPSED>
+
+new subresult[3]=1.89311, Subset<n=30, d=3>: 10 13 27 
+
+new MAXCRIT=2.49506, Subset<n=30, d=4>: 10 13 23 27 
+StopWatch time: <ELAPSED>
+
+new subresult[4]=2.49506, Subset<n=30, d=4>: 10 13 23 27 
+
+new subresult[3]=2.00872, Subset<n=30, d=3>: 10 13 23 
+
+new MAXCRIT=2.94183, Subset<n=30, d=4>: 10 13 20 23 
+StopWatch time: <ELAPSED>
+
+new subresult[4]=2.94183, Subset<n=30, d=4>: 10 13 20 23 
+
+new subresult[3]=2.35093, Subset<n=30, d=3>: 13 20 23 
+
+new subresult[2]=1.87851, Subset<n=30, d=2>: 20 23 
+
+new subresult[3]=2.40869, Subset<n=30, d=3>: 3 20 23 
+
+new MAXCRIT=3.38938, Subset<n=30, d=5>: 0 3 13 20 23 
+StopWatch time: <ELAPSED>
+
+new subresult[5]=3.38938, Subset<n=30, d=5>: 0 3 13 20 23 
+
+new MAXCRIT=4.0469, Subset<n=30, d=6>: 0 3 10 13 20 23 
+StopWatch time: <ELAPSED>
+
+new subresult[6]=4.0469, Subset<n=30, d=6>: 0 3 10 13 20 23 
+
+new subresult[5]=3.46635, Subset<n=30, d=5>: 3 10 13 20 23 
+
+new MAXCRIT=4.37206, Subset<n=30, d=7>: 0 3 7 10 13 20 23 
+StopWatch time: <ELAPSED>
+
+new subresult[7]=4.37206, Subset<n=30, d=7>: 0 3 7 10 13 20 23 
+
+new MAXCRIT=4.53675, Subset<n=30, d=8>: 0 3 7 10 13 20 23 27 
+StopWatch time: <ELAPSED>
+
+new subresult[8]=4.53675, Subset<n=30, d=8>: 0 3 7 10 13 20 23 27 
+
+new MAXCRIT=4.7158, Subset<n=30, d=9>: 0 3 7 10 13 20 22 23 27 
+StopWatch time: <ELAPSED>
+
+new subresult[9]=4.7158, Subset<n=30, d=9>: 0 3 7 10 13 20 22 23 27 
+
+new MAXCRIT=4.90438, Subset<n=30, d=10>: 0 3 7 10 13 20 22 23 25 27 
+StopWatch time: <ELAPSED>
+
+new subresult[10]=4.90438, Subset<n=30, d=10>: 0 3 7 10 13 20 22 23 25 27 
+
+new subresult[9]=4.74112, Subset<n=30, d=9>: 0 3 7 10 13 20 22 23 25 
+
+new subresult[8]=4.54671, Subset<n=30, d=8>: 0 3 10 13 20 22 23 25 
+
+new subresult[9]=4.74484, Subset<n=30, d=9>: 0 2 3 10 13 20 22 23 25 
+
+new MAXCRIT=4.9185, Subset<n=30, d=10>: 0 2 3 10 13 16 20 22 23 25 
+StopWatch time: <ELAPSED>
+
+new subresult[10]=4.9185, Subset<n=30, d=10>: 0 2 3 10 13 16 20 22 23 25 
+
+new MAXCRIT=5.20097, Subset<n=30, d=11>: 0 2 3 6 10 13 16 20 22 23 25 
+StopWatch time: <ELAPSED>
+
+new subresult[11]=5.20097, Subset<n=30, d=11>: 0 2 3 6 10 13 16 20 22 23 25 
+
+new subresult[10]=5.03785, Subset<n=30, d=10>: 0 3 6 10 13 16 20 22 23 25 
+
+new subresult[9]=4.81766, Subset<n=30, d=9>: 0 3 6 10 13 16 20 22 23 
+
+new subresult[8]=4.64105, Subset<n=30, d=8>: 0 3 6 10 13 16 20 23 
+
+new MAXCRIT=5.20632, Subset<n=30, d=11>: 0 3 6 10 13 14 16 20 22 23 25 
+StopWatch time: <ELAPSED>
+
+new subresult[11]=5.20632, Subset<n=30, d=11>: 0 3 6 10 13 14 16 20 22 23 25 
+
+new MAXCRIT=5.38291, Subset<n=30, d=12>: 0 3 6 10 13 14 16 20 22 23 25 26 
+StopWatch time: <ELAPSED>
+
+new subresult[12]=5.38291, Subset<n=30, d=12>: 0 3 6 10 13 14 16 20 22 23 25 26 
+
+new MAXCRIT=5.57669, Subset<n=30, d=13>: 0 2 3 6 10 13 14 16 20 22 23 25 26 
+StopWatch time: <ELAPSED>
+
+new subresult[13]=5.57669, Subset<n=30, d=13>: 0 2 3 6 10 13 14 16 20 22 23 25 26 
+
+new subresult[12]=5.38572, Subset<n=30, d=12>: 0 2 3 6 10 13 14 16 20 23 25 26 
+
+new MAXCRIT=5.7362, Subset<n=30, d=14>: 0 2 3 6 10 13 14 16 18 20 22 23 25 26 
+StopWatch time: <ELAPSED>
+
+new subresult[14]=5.7362, Subset<n=30, d=14>: 0 2 3 6 10 13 14 16 18 20 22 23 25 26 
+
+new MAXCRIT=5.89764, Subset<n=30, d=15>: 0 2 3 4 6 10 13 14 16 18 20 22 23 25 26 
+StopWatch time: <ELAPSED>
+
+new subresult[15]=5.89764, Subset<n=30, d=15>: 0 2 3 4 6 10 13 14 16 18 20 22 23 25 26 
+
+new MAXCRIT=6.07919, Subset<n=30, d=16>: 0 2 3 4 6 10 13 14 15 16 18 20 22 23 25 26 
+StopWatch time: <ELAPSED>
+
+new subresult[16]=6.07919, Subset<n=30, d=16>: 0 2 3 4 6 10 13 14 15 16 18 20 22 23 25 26 
+
+new subresult[15]=5.92595, Subset<n=30, d=15>: 0 2 3 4 6 10 13 14 15 16 20 22 23 25 26 
+
+new MAXCRIT=6.22952, Subset<n=30, d=17>: 0 2 3 4 5 6 10 13 14 15 16 18 20 22 23 25 26 
+StopWatch time: <ELAPSED>
+
+new subresult[17]=6.22952, Subset<n=30, d=17>: 0 2 3 4 5 6 10 13 14 15 16 18 20 22 23 25 26 
+
+new MAXCRIT=6.37028, Subset<n=30, d=18>: 0 2 3 4 5 6 10 12 13 14 15 16 18 20 22 23 25 26 
+StopWatch time: <ELAPSED>
+
+new subresult[18]=6.37028, Subset<n=30, d=18>: 0 2 3 4 5 6 10 12 13 14 15 16 18 20 22 23 25 26 
+
+new MAXCRIT=6.50182, Subset<n=30, d=19>: 0 2 3 4 5 6 10 12 13 14 15 16 18 20 22 23 24 25 26 
+StopWatch time: <ELAPSED>
+
+new subresult[19]=6.50182, Subset<n=30, d=19>: 0 2 3 4 5 6 10 12 13 14 15 16 18 20 22 23 24 25 26 
+
+new MAXCRIT=6.62806, Subset<n=30, d=20>: 0 2 3 4 5 6 10 12 13 14 15 16 17 18 20 22 23 24 25 26 
+StopWatch time: <ELAPSED>
+
+new subresult[20]=6.62806, Subset<n=30, d=20>: 0 2 3 4 5 6 10 12 13 14 15 16 17 18 20 22 23 24 25 26 
+
+new MAXCRIT=6.76763, Subset<n=30, d=21>: 0 2 3 4 5 6 10 12 13 14 15 16 17 18 19 20 22 23 24 25 26 
+StopWatch time: <ELAPSED>
+
+new subresult[21]=6.76763, Subset<n=30, d=21>: 0 2 3 4 5 6 10 12 13 14 15 16 17 18 19 20 22 23 24 25 26 
+
+new subresult[20]=6.63178, Subset<n=30, d=20>: 0 2 3 4 5 6 10 12 13 14 15 16 17 18 19 20 22 23 25 26 
+
+new MAXCRIT=6.83083, Subset<n=30, d=21>: 0 2 3 4 5 6 10 12 13 14 15 16 17 18 19 20 22 23 25 26 29 
+StopWatch time: <ELAPSED>
+
+new subresult[21]=6.83083, Subset<n=30, d=21>: 0 2 3 4 5 6 10 12 13 14 15 16 17 18 19 20 22 23 25 26 29 
+
+new subresult[20]=6.67906, Subset<n=30, d=20>: 0 2 3 4 5 6 10 12 13 14 15 16 18 19 20 22 23 25 26 29 
+
+new subresult[19]=6.5219, Subset<n=30, d=19>: 0 2 3 4 5 6 10 12 13 14 15 16 19 20 22 23 25 26 29 
+
+new MAXCRIT=6.97715, Subset<n=30, d=22>: 0 2 3 4 5 6 10 12 13 14 15 16 17 18 19 20 21 22 23 25 26 29 
+StopWatch time: <ELAPSED>
+
+new subresult[22]=6.97715, Subset<n=30, d=22>: 0 2 3 4 5 6 10 12 13 14 15 16 17 18 19 20 21 22 23 25 26 29 
+
+new MAXCRIT=7.12514, Subset<n=30, d=23>: 0 2 3 4 5 6 10 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 29 
+StopWatch time: <ELAPSED>
+
+new subresult[23]=7.12514, Subset<n=30, d=23>: 0 2 3 4 5 6 10 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 29 
+
+new MAXCRIT=7.26293, Subset<n=30, d=24>: 0 2 3 4 5 6 7 10 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 29 
+StopWatch time: <ELAPSED>
+
+new subresult[24]=7.26293, Subset<n=30, d=24>: 0 2 3 4 5 6 7 10 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 29 
+
+new MAXCRIT=7.38581, Subset<n=30, d=25>: 0 2 3 4 5 6 7 10 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+StopWatch time: <ELAPSED>
+
+new subresult[25]=7.38581, Subset<n=30, d=25>: 0 2 3 4 5 6 7 10 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+
+new MAXCRIT=7.47706, Subset<n=30, d=26>: 0 2 3 4 5 6 7 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+StopWatch time: <ELAPSED>
+
+new subresult[26]=7.47706, Subset<n=30, d=26>: 0 2 3 4 5 6 7 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+
+new MAXCRIT=7.58057, Subset<n=30, d=27>: 0 1 2 3 4 5 6 7 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+StopWatch time: <ELAPSED>
+
+new subresult[27]=7.58057, Subset<n=30, d=27>: 0 1 2 3 4 5 6 7 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+
+new MAXCRIT=7.65236, Subset<n=30, d=28>: 0 1 2 3 4 5 6 7 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+StopWatch time: <ELAPSED>
+
+new subresult[28]=7.65236, Subset<n=30, d=28>: 0 1 2 3 4 5 6 7 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+
+new MAXCRIT=7.77451, Subset<n=30, d=29>: 0 1 2 3 4 5 6 7 8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+StopWatch time: <ELAPSED>
+
+new subresult[29]=7.77451, Subset<n=30, d=29>: 0 1 2 3 4 5 6 7 8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+
+new subresult[28]=7.67274, Subset<n=30, d=28>: 0 2 3 4 5 6 7 8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+
+new MAXCRIT=7.83559, Subset<n=30, d=30>: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+StopWatch time: <ELAPSED>
+
+new subresult[30]=7.83559, Subset<n=30, d=30>: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+
+.......................................
+Search_SFFS() search finished. StopWatch time: <ELAPSED>
+Search result: 
+Subset<n=30, d=7>: 0 3 7 10 13 20 23 
+Criterion value: 4.37206
+
+
+(TRIAL B8) Search result: 
+Subset<n=30, d=7>: 0 3 7 10 13 20 23 Criterion value=4.37206
+
+TRIAL B9 ---------------------------------------------------------------------
+---------------------------------------
+Starting SFFS, delta=0  [Search_SFFS() with Sequential_Step_Straight()]
+with Criterion: Criterion_Normal_Bhattacharyya()
+with initial subset: Subset<n=30, d=0>: empty
+Target subset size set to: 7
+
+new MAXCRIT=0.904723, Subset<n=30, d=1>: 27 
+StopWatch time: <ELAPSED>
+
+new subresult[1]=0.904723, Subset<n=30, d=1>: 27 
+
+new MAXCRIT=1.5916, Subset<n=30, d=2>: 13 27 
+StopWatch time: <ELAPSED>
+
+new subresult[2]=1.5916, Subset<n=30, d=2>: 13 27 
+
+new MAXCRIT=1.92162, Subset<n=30, d=3>: 10 13 27 
+StopWatch time: <ELAPSED>
+
+new subresult[3]=1.92162, Subset<n=30, d=3>: 10 13 27 
+
+new MAXCRIT=2.53762, Subset<n=30, d=4>: 10 13 23 27 
+StopWatch time: <ELAPSED>
+
+new subresult[4]=2.53762, Subset<n=30, d=4>: 10 13 23 27 
+
+new subresult[3]=2.01128, Subset<n=30, d=3>: 10 13 23 
+
+new MAXCRIT=2.96044, Subset<n=30, d=4>: 10 13 20 23 
+StopWatch time: <ELAPSED>
+
+new subresult[4]=2.96044, Subset<n=30, d=4>: 10 13 20 23 
+
+new subresult[3]=2.36221, Subset<n=30, d=3>: 13 20 23 
+
+new subresult[2]=1.8819, Subset<n=30, d=2>: 20 23 
+
+new subresult[3]=2.42925, Subset<n=30, d=3>: 3 20 23 
+
+new MAXCRIT=2.96049, Subset<n=30, d=4>: 0 3 20 23 
+StopWatch time: <ELAPSED>
+
+new subresult[4]=2.96049, Subset<n=30, d=4>: 0 3 20 23 
+
+new MAXCRIT=3.42248, Subset<n=30, d=5>: 0 3 13 20 23 
+StopWatch time: <ELAPSED>
+
+new subresult[5]=3.42248, Subset<n=30, d=5>: 0 3 13 20 23 
+
+new MAXCRIT=4.07906, Subset<n=30, d=6>: 0 3 10 13 20 23 
+StopWatch time: <ELAPSED>
+
+new subresult[6]=4.07906, Subset<n=30, d=6>: 0 3 10 13 20 23 
+
+new subresult[5]=3.50212, Subset<n=30, d=5>: 3 10 13 20 23 
+
+new MAXCRIT=4.40992, Subset<n=30, d=7>: 0 3 10 13 20 23 27 
+StopWatch time: <ELAPSED>
+
+new subresult[7]=4.40992, Subset<n=30, d=7>: 0 3 10 13 20 23 27 
+
+new MAXCRIT=4.6185, Subset<n=30, d=8>: 0 2 3 10 13 20 23 27 
+StopWatch time: <ELAPSED>
+
+new subresult[8]=4.6185, Subset<n=30, d=8>: 0 2 3 10 13 20 23 27 
+
+new MAXCRIT=4.81688, Subset<n=30, d=9>: 0 2 3 10 13 20 23 25 27 
+StopWatch time: <ELAPSED>
+
+new subresult[9]=4.81688, Subset<n=30, d=9>: 0 2 3 10 13 20 23 25 27 
+
+new subresult[8]=4.64359, Subset<n=30, d=8>: 0 2 3 10 13 20 23 25 
+
+new MAXCRIT=4.842, Subset<n=30, d=9>: 0 2 3 10 13 20 22 23 25 
+StopWatch time: <ELAPSED>
+
+new subresult[9]=4.842, Subset<n=30, d=9>: 0 2 3 10 13 20 22 23 25 
+
+new MAXCRIT=5.02483, Subset<n=30, d=10>: 0 2 3 10 13 16 20 22 23 25 
+StopWatch time: <ELAPSED>
+
+new subresult[10]=5.02483, Subset<n=30, d=10>: 0 2 3 10 13 16 20 22 23 25 
+
+new MAXCRIT=5.32813, Subset<n=30, d=11>: 0 2 3 6 10 13 16 20 22 23 25 
+StopWatch time: <ELAPSED>
+
+new subresult[11]=5.32813, Subset<n=30, d=11>: 0 2 3 6 10 13 16 20 22 23 25 
+
+new subresult[10]=5.14049, Subset<n=30, d=10>: 0 3 6 10 13 16 20 22 23 25 
+
+new subresult[9]=4.90059, Subset<n=30, d=9>: 0 3 6 10 13 16 20 22 23 
+
+new subresult[8]=4.72457, Subset<n=30, d=8>: 0 3 6 10 13 16 20 23 
+
+new MAXCRIT=5.50614, Subset<n=30, d=12>: 0 2 3 6 10 13 14 16 20 22 23 25 
+StopWatch time: <ELAPSED>
+
+new subresult[12]=5.50614, Subset<n=30, d=12>: 0 2 3 6 10 13 14 16 20 22 23 25 
+
+new MAXCRIT=5.71309, Subset<n=30, d=13>: 0 2 3 6 10 13 14 16 20 22 23 25 26 
+StopWatch time: <ELAPSED>
+
+new subresult[13]=5.71309, Subset<n=30, d=13>: 0 2 3 6 10 13 14 16 20 22 23 25 26 
+
+new subresult[12]=5.52178, Subset<n=30, d=12>: 0 2 3 6 10 13 14 16 20 23 25 26 
+
+new MAXCRIT=5.8683, Subset<n=30, d=14>: 0 2 3 6 10 13 14 15 16 20 22 23 25 26 
+StopWatch time: <ELAPSED>
+
+new subresult[14]=5.8683, Subset<n=30, d=14>: 0 2 3 6 10 13 14 15 16 20 22 23 25 26 
+
+new MAXCRIT=6.06103, Subset<n=30, d=15>: 0 2 3 4 6 10 13 14 15 16 20 22 23 25 26 
+StopWatch time: <ELAPSED>
+
+new subresult[15]=6.06103, Subset<n=30, d=15>: 0 2 3 4 6 10 13 14 15 16 20 22 23 25 26 
+
+new MAXCRIT=6.20016, Subset<n=30, d=16>: 0 2 3 4 5 6 10 13 14 15 16 20 22 23 25 26 
+StopWatch time: <ELAPSED>
+
+new subresult[16]=6.20016, Subset<n=30, d=16>: 0 2 3 4 5 6 10 13 14 15 16 20 22 23 25 26 
+
+new MAXCRIT=6.34668, Subset<n=30, d=17>: 0 2 3 4 5 6 10 13 14 15 16 18 20 22 23 25 26 
+StopWatch time: <ELAPSED>
+
+new subresult[17]=6.34668, Subset<n=30, d=17>: 0 2 3 4 5 6 10 13 14 15 16 18 20 22 23 25 26 
+
+new MAXCRIT=6.48763, Subset<n=30, d=18>: 0 2 3 4 5 6 10 13 14 15 16 18 20 22 23 25 26 27 
+StopWatch time: <ELAPSED>
+
+new subresult[18]=6.48763, Subset<n=30, d=18>: 0 2 3 4 5 6 10 13 14 15 16 18 20 22 23 25 26 27 
+
+new MAXCRIT=6.62515, Subset<n=30, d=19>: 0 2 3 4 5 6 10 13 14 15 16 18 20 21 22 23 25 26 27 
+StopWatch time: <ELAPSED>
+
+new subresult[19]=6.62515, Subset<n=30, d=19>: 0 2 3 4 5 6 10 13 14 15 16 18 20 21 22 23 25 26 27 
+
+new MAXCRIT=6.76072, Subset<n=30, d=20>: 0 2 3 4 5 6 10 12 13 14 15 16 18 20 21 22 23 25 26 27 
+StopWatch time: <ELAPSED>
+
+new subresult[20]=6.76072, Subset<n=30, d=20>: 0 2 3 4 5 6 10 12 13 14 15 16 18 20 21 22 23 25 26 27 
+
+new MAXCRIT=6.89567, Subset<n=30, d=21>: 0 2 3 4 5 6 10 12 13 14 15 16 18 19 20 21 22 23 25 26 27 
+StopWatch time: <ELAPSED>
+
+new subresult[21]=6.89567, Subset<n=30, d=21>: 0 2 3 4 5 6 10 12 13 14 15 16 18 19 20 21 22 23 25 26 27 
+
+new MAXCRIT=7.08626, Subset<n=30, d=22>: 0 2 3 4 5 6 10 12 13 14 15 16 18 19 20 21 22 23 25 26 27 29 
+StopWatch time: <ELAPSED>
+
+new subresult[22]=7.08626, Subset<n=30, d=22>: 0 2 3 4 5 6 10 12 13 14 15 16 18 19 20 21 22 23 25 26 27 29 
+
+new subresult[21]=6.94197, Subset<n=30, d=21>: 0 2 3 4 5 6 10 12 13 14 15 16 18 19 20 22 23 25 26 27 29 
+
+new subresult[20]=6.79933, Subset<n=30, d=20>: 0 2 3 4 5 6 10 12 13 14 15 16 18 19 20 22 23 25 26 29 
+
+new subresult[19]=6.6563, Subset<n=30, d=19>: 0 2 3 4 5 6 10 12 13 14 15 16 19 20 22 23 25 26 29 
+
+new subresult[18]=6.50385, Subset<n=30, d=18>: 0 2 3 4 6 10 12 13 14 15 16 19 20 22 23 25 26 29 
+
+new subresult[20]=6.8101, Subset<n=30, d=20>: 0 2 3 4 5 6 10 12 13 14 15 16 17 19 20 22 23 25 26 29 
+
+new subresult[21]=6.95757, Subset<n=30, d=21>: 0 2 3 4 5 6 10 12 13 14 15 16 17 18 19 20 22 23 25 26 29 
+
+new MAXCRIT=7.0993, Subset<n=30, d=22>: 0 2 3 4 5 6 10 12 13 14 15 16 17 18 19 20 21 22 23 25 26 29 
+StopWatch time: <ELAPSED>
+
+new subresult[22]=7.0993, Subset<n=30, d=22>: 0 2 3 4 5 6 10 12 13 14 15 16 17 18 19 20 21 22 23 25 26 29 
+
+new MAXCRIT=7.24661, Subset<n=30, d=23>: 0 2 3 4 5 6 10 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 29 
+StopWatch time: <ELAPSED>
+
+new subresult[23]=7.24661, Subset<n=30, d=23>: 0 2 3 4 5 6 10 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 29 
+
+new MAXCRIT=7.38967, Subset<n=30, d=24>: 0 2 3 4 5 6 7 10 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 29 
+StopWatch time: <ELAPSED>
+
+new subresult[24]=7.38967, Subset<n=30, d=24>: 0 2 3 4 5 6 7 10 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 29 
+
+new MAXCRIT=7.50779, Subset<n=30, d=25>: 0 2 3 4 5 6 7 10 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+StopWatch time: <ELAPSED>
+
+new subresult[25]=7.50779, Subset<n=30, d=25>: 0 2 3 4 5 6 7 10 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+
+new MAXCRIT=7.58822, Subset<n=30, d=26>: 0 2 3 4 5 6 7 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+StopWatch time: <ELAPSED>
+
+new subresult[26]=7.58822, Subset<n=30, d=26>: 0 2 3 4 5 6 7 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+
+new MAXCRIT=7.68674, Subset<n=30, d=27>: 0 1 2 3 4 5 6 7 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+StopWatch time: <ELAPSED>
+
+new subresult[27]=7.68674, Subset<n=30, d=27>: 0 1 2 3 4 5 6 7 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+
+new MAXCRIT=7.75742, Subset<n=30, d=28>: 0 1 2 3 4 5 6 7 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+StopWatch time: <ELAPSED>
+
+new subresult[28]=7.75742, Subset<n=30, d=28>: 0 1 2 3 4 5 6 7 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+
+new MAXCRIT=7.89297, Subset<n=30, d=29>: 0 1 2 3 4 5 6 7 8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+StopWatch time: <ELAPSED>
+
+new subresult[29]=7.89297, Subset<n=30, d=29>: 0 1 2 3 4 5 6 7 8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+
+new subresult[28]=7.79846, Subset<n=30, d=28>: 0 2 3 4 5 6 7 8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+
+new subresult[27]=7.71062, Subset<n=30, d=27>: 0 2 3 4 5 6 7 8 10 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+
+new subresult[26]=7.58997, Subset<n=30, d=26>: 0 2 3 4 5 6 7 8 10 12 13 14 15 16 17 19 20 21 22 23 24 25 26 27 28 29 
+
+new MAXCRIT=7.96243, Subset<n=30, d=30>: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+StopWatch time: <ELAPSED>
+
+new subresult[30]=7.96243, Subset<n=30, d=30>: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+
+.......................................
+Search_SFFS() search finished. StopWatch time: <ELAPSED>
+Search result: 
+Subset<n=30, d=7>: 0 3 10 13 20 23 27 
+Criterion value: 4.40992
+
+
+(TRIAL B9) Search result: 
+Subset<n=30, d=7>: 0 3 10 13 20 23 27 Criterion value=4.40992
+
+TRIAL B10 ---------------------------------------------------------------------
+---------------------------------------
+Starting SFFS, delta=0  [Search_SFFS() with Sequential_Step_Straight()]
+with Criterion: Criterion_Normal_Bhattacharyya()
+with initial subset: Subset<n=30, d=0>: empty
+Target subset size set to: 7
+
+new MAXCRIT=0.85757, Subset<n=30, d=1>: 27 
+StopWatch time: <ELAPSED>
+
+new subresult[1]=0.85757, Subset<n=30, d=1>: 27 
+
+new MAXCRIT=1.54382, Subset<n=30, d=2>: 13 27 
+StopWatch time: <ELAPSED>
+
+new subresult[2]=1.54382, Subset<n=30, d=2>: 13 27 
+
+new MAXCRIT=1.86654, Subset<n=30, d=3>: 10 13 27 
+StopWatch time: <ELAPSED>
+
+new subresult[3]=1.86654, Subset<n=30, d=3>: 10 13 27 
+
+new MAXCRIT=2.45743, Subset<n=30, d=4>: 10 13 23 27 
+StopWatch time: <ELAPSED>
+
+new subresult[4]=2.45743, Subset<n=30, d=4>: 10 13 23 27 
+
+new subresult[3]=1.97759, Subset<n=30, d=3>: 10 13 23 
+
+new MAXCRIT=2.92191, Subset<n=30, d=4>: 10 13 20 23 
+StopWatch time: <ELAPSED>
+
+new subresult[4]=2.92191, Subset<n=30, d=4>: 10 13 20 23 
+
+new subresult[3]=2.33743, Subset<n=30, d=3>: 13 20 23 
+
+new subresult[2]=1.86021, Subset<n=30, d=2>: 20 23 
+
+new subresult[3]=2.39657, Subset<n=30, d=3>: 3 20 23 
+
+new MAXCRIT=2.9288, Subset<n=30, d=4>: 0 3 20 23 
+StopWatch time: <ELAPSED>
+
+new subresult[4]=2.9288, Subset<n=30, d=4>: 0 3 20 23 
+
+new MAXCRIT=3.38687, Subset<n=30, d=5>: 0 3 13 20 23 
+StopWatch time: <ELAPSED>
+
+new subresult[5]=3.38687, Subset<n=30, d=5>: 0 3 13 20 23 
+
+new MAXCRIT=4.04464, Subset<n=30, d=6>: 0 3 10 13 20 23 
+StopWatch time: <ELAPSED>
+
+new subresult[6]=4.04464, Subset<n=30, d=6>: 0 3 10 13 20 23 
+
+new subresult[5]=3.45567, Subset<n=30, d=5>: 3 10 13 20 23 
+
+new MAXCRIT=4.34334, Subset<n=30, d=7>: 0 3 7 10 13 20 23 
+StopWatch time: <ELAPSED>
+
+new subresult[7]=4.34334, Subset<n=30, d=7>: 0 3 7 10 13 20 23 
+
+new MAXCRIT=4.51509, Subset<n=30, d=8>: 0 3 7 10 13 20 23 27 
+StopWatch time: <ELAPSED>
+
+new subresult[8]=4.51509, Subset<n=30, d=8>: 0 3 7 10 13 20 23 27 
+
+new MAXCRIT=4.6972, Subset<n=30, d=9>: 0 3 7 10 13 20 22 23 27 
+StopWatch time: <ELAPSED>
+
+new subresult[9]=4.6972, Subset<n=30, d=9>: 0 3 7 10 13 20 22 23 27 
+
+new subresult[8]=4.5221, Subset<n=30, d=8>: 0 3 10 13 20 22 23 27 
+
+new MAXCRIT=4.71057, Subset<n=30, d=9>: 0 3 10 13 20 22 23 25 27 
+StopWatch time: <ELAPSED>
+
+new subresult[9]=4.71057, Subset<n=30, d=9>: 0 3 10 13 20 22 23 25 27 
+
+new subresult[8]=4.5377, Subset<n=30, d=8>: 0 3 10 13 20 22 23 25 
+
+new MAXCRIT=4.72558, Subset<n=30, d=9>: 0 2 3 10 13 20 22 23 25 
+StopWatch time: <ELAPSED>
+
+new subresult[9]=4.72558, Subset<n=30, d=9>: 0 2 3 10 13 20 22 23 25 
+
+new MAXCRIT=4.91804, Subset<n=30, d=10>: 0 2 3 10 13 16 20 22 23 25 
+StopWatch time: <ELAPSED>
+
+new subresult[10]=4.91804, Subset<n=30, d=10>: 0 2 3 10 13 16 20 22 23 25 
+
+new MAXCRIT=5.20329, Subset<n=30, d=11>: 0 2 3 6 10 13 16 20 22 23 25 
+StopWatch time: <ELAPSED>
+
+new subresult[11]=5.20329, Subset<n=30, d=11>: 0 2 3 6 10 13 16 20 22 23 25 
+
+new subresult[10]=5.03879, Subset<n=30, d=10>: 0 3 6 10 13 16 20 22 23 25 
+
+new subresult[9]=4.80815, Subset<n=30, d=9>: 0 3 6 10 13 16 20 22 23 
+
+new subresult[8]=4.63349, Subset<n=30, d=8>: 0 3 6 10 13 16 20 23 
+
+new MAXCRIT=5.21113, Subset<n=30, d=11>: 0 3 6 10 13 14 16 20 22 23 25 
+StopWatch time: <ELAPSED>
+
+new subresult[11]=5.21113, Subset<n=30, d=11>: 0 3 6 10 13 14 16 20 22 23 25 
+
+new MAXCRIT=5.40374, Subset<n=30, d=12>: 0 3 6 10 13 14 16 20 22 23 25 26 
+StopWatch time: <ELAPSED>
+
+new subresult[12]=5.40374, Subset<n=30, d=12>: 0 3 6 10 13 14 16 20 22 23 25 26 
+
+new subresult[11]=5.21418, Subset<n=30, d=11>: 0 3 6 10 13 14 16 20 22 23 26 
+
+new MAXCRIT=5.62276, Subset<n=30, d=13>: 0 3 6 10 13 14 15 16 20 22 23 25 26 
+StopWatch time: <ELAPSED>
+
+new subresult[13]=5.62276, Subset<n=30, d=13>: 0 3 6 10 13 14 15 16 20 22 23 25 26 
+
+new MAXCRIT=5.81243, Subset<n=30, d=14>: 0 2 3 6 10 13 14 15 16 20 22 23 25 26 
+StopWatch time: <ELAPSED>
+
+new subresult[14]=5.81243, Subset<n=30, d=14>: 0 2 3 6 10 13 14 15 16 20 22 23 25 26 
+
+new subresult[13]=5.62652, Subset<n=30, d=13>: 0 2 3 6 10 13 14 15 16 20 23 25 26 
+
+new subresult[12]=5.41123, Subset<n=30, d=12>: 0 2 3 6 10 13 14 16 20 23 25 26 
+
+new MAXCRIT=5.81416, Subset<n=30, d=14>: 0 2 3 4 6 10 13 14 15 16 20 23 25 26 
+StopWatch time: <ELAPSED>
+
+new subresult[14]=5.81416, Subset<n=30, d=14>: 0 2 3 4 6 10 13 14 15 16 20 23 25 26 
+
+new MAXCRIT=6.00798, Subset<n=30, d=15>: 0 2 3 4 6 10 13 14 15 16 20 22 23 25 26 
+StopWatch time: <ELAPSED>
+
+new subresult[15]=6.00798, Subset<n=30, d=15>: 0 2 3 4 6 10 13 14 15 16 20 22 23 25 26 
+
+new MAXCRIT=6.15133, Subset<n=30, d=16>: 0 2 3 4 6 10 13 14 15 16 18 20 22 23 25 26 
+StopWatch time: <ELAPSED>
+
+new subresult[16]=6.15133, Subset<n=30, d=16>: 0 2 3 4 6 10 13 14 15 16 18 20 22 23 25 26 
+
+new MAXCRIT=6.2922, Subset<n=30, d=17>: 0 2 3 4 5 6 10 13 14 15 16 18 20 22 23 25 26 
+StopWatch time: <ELAPSED>
+
+new subresult[17]=6.2922, Subset<n=30, d=17>: 0 2 3 4 5 6 10 13 14 15 16 18 20 22 23 25 26 
+
+new MAXCRIT=6.42802, Subset<n=30, d=18>: 0 2 3 4 5 6 10 13 14 15 16 18 20 22 23 25 26 27 
+StopWatch time: <ELAPSED>
+
+new subresult[18]=6.42802, Subset<n=30, d=18>: 0 2 3 4 5 6 10 13 14 15 16 18 20 22 23 25 26 27 
+
+new MAXCRIT=6.56485, Subset<n=30, d=19>: 0 2 3 4 5 6 10 12 13 14 15 16 18 20 22 23 25 26 27 
+StopWatch time: <ELAPSED>
+
+new subresult[19]=6.56485, Subset<n=30, d=19>: 0 2 3 4 5 6 10 12 13 14 15 16 18 20 22 23 25 26 27 
+
+new MAXCRIT=6.69671, Subset<n=30, d=20>: 0 2 3 4 5 6 10 12 13 14 15 16 18 19 20 22 23 25 26 27 
+StopWatch time: <ELAPSED>
+
+new subresult[20]=6.69671, Subset<n=30, d=20>: 0 2 3 4 5 6 10 12 13 14 15 16 18 19 20 22 23 25 26 27 
+
+new MAXCRIT=6.88583, Subset<n=30, d=21>: 0 2 3 4 5 6 10 12 13 14 15 16 18 19 20 22 23 25 26 27 29 
+StopWatch time: <ELAPSED>
+
+new subresult[21]=6.88583, Subset<n=30, d=21>: 0 2 3 4 5 6 10 12 13 14 15 16 18 19 20 22 23 25 26 27 29 
+
+new subresult[20]=6.74112, Subset<n=30, d=20>: 0 2 3 4 5 6 10 12 13 14 15 16 18 19 20 22 23 25 26 29 
+
+new subresult[19]=6.59263, Subset<n=30, d=19>: 0 2 3 4 5 6 10 13 14 15 16 18 19 20 22 23 25 26 29 
+
+new subresult[18]=6.43954, Subset<n=30, d=18>: 0 2 3 4 6 10 13 14 15 16 18 19 20 22 23 25 26 29 
+
+new subresult[17]=6.29583, Subset<n=30, d=17>: 0 2 3 4 6 10 13 14 15 16 19 20 22 23 25 26 29 
+
+new subresult[18]=6.4504, Subset<n=30, d=18>: 0 2 3 4 6 10 12 13 14 15 16 19 20 22 23 25 26 29 
+
+new MAXCRIT=6.89591, Subset<n=30, d=21>: 0 2 3 4 5 6 10 12 13 14 15 16 17 18 19 20 22 23 25 26 29 
+StopWatch time: <ELAPSED>
+
+new subresult[21]=6.89591, Subset<n=30, d=21>: 0 2 3 4 5 6 10 12 13 14 15 16 17 18 19 20 22 23 25 26 29 
+
+new subresult[20]=6.74743, Subset<n=30, d=20>: 0 2 3 4 5 6 10 13 14 15 16 17 18 19 20 22 23 25 26 29 
+
+new MAXCRIT=7.03816, Subset<n=30, d=22>: 0 2 3 4 5 6 10 12 13 14 15 16 17 18 19 20 22 23 25 26 27 29 
+StopWatch time: <ELAPSED>
+
+new subresult[22]=7.03816, Subset<n=30, d=22>: 0 2 3 4 5 6 10 12 13 14 15 16 17 18 19 20 22 23 25 26 27 29 
+
+new MAXCRIT=7.17354, Subset<n=30, d=23>: 0 2 3 4 5 6 10 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 29 
+StopWatch time: <ELAPSED>
+
+new subresult[23]=7.17354, Subset<n=30, d=23>: 0 2 3 4 5 6 10 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 29 
+
+new MAXCRIT=7.29883, Subset<n=30, d=24>: 0 2 3 4 5 6 7 10 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 29 
+StopWatch time: <ELAPSED>
+
+new subresult[24]=7.29883, Subset<n=30, d=24>: 0 2 3 4 5 6 7 10 12 13 14 15 16 17 18 19 20 21 22 23 25 26 27 29 
+
+new MAXCRIT=7.42078, Subset<n=30, d=25>: 0 2 3 4 5 6 7 10 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+StopWatch time: <ELAPSED>
+
+new subresult[25]=7.42078, Subset<n=30, d=25>: 0 2 3 4 5 6 7 10 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+
+new MAXCRIT=7.51314, Subset<n=30, d=26>: 0 2 3 4 5 6 7 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+StopWatch time: <ELAPSED>
+
+new subresult[26]=7.51314, Subset<n=30, d=26>: 0 2 3 4 5 6 7 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+
+new MAXCRIT=7.60912, Subset<n=30, d=27>: 0 1 2 3 4 5 6 7 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+StopWatch time: <ELAPSED>
+
+new subresult[27]=7.60912, Subset<n=30, d=27>: 0 1 2 3 4 5 6 7 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+
+new MAXCRIT=7.68762, Subset<n=30, d=28>: 0 1 2 3 4 5 6 7 8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+StopWatch time: <ELAPSED>
+
+new subresult[28]=7.68762, Subset<n=30, d=28>: 0 1 2 3 4 5 6 7 8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 29 
+
+new MAXCRIT=7.82375, Subset<n=30, d=29>: 0 1 2 3 4 5 6 7 8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+StopWatch time: <ELAPSED>
+
+new subresult[29]=7.82375, Subset<n=30, d=29>: 0 1 2 3 4 5 6 7 8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+
+new subresult[28]=7.73227, Subset<n=30, d=28>: 0 2 3 4 5 6 7 8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+
+new subresult[27]=7.63189, Subset<n=30, d=27>: 0 2 3 4 5 6 7 8 10 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+
+new MAXCRIT=7.89105, Subset<n=30, d=30>: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+StopWatch time: <ELAPSED>
+
+new subresult[30]=7.89105, Subset<n=30, d=30>: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+
+.......................................
+Search_SFFS() search finished. StopWatch time: <ELAPSED>
+Search result: 
+Subset<n=30, d=7>: 0 3 7 10 13 20 23 
+Criterion value: 4.34334
+
+
+(TRIAL B10) Search result: 
+Subset<n=30, d=7>: 0 3 7 10 13 20 23 Criterion value=4.34334
+
+---------------------------------------------------------------------
+Scenario A resulting criterion values' mean: 0.943519, std. dev.: 0.0030146
+Scenario A subset sizes' mean: 4.9, std. dev.: 1.3
+
+Scenario A stability_ATI()=0.463563
+Scenario A stability_CW()=0.612245
+Scenario A stability_ANHI(30)=0.873333
+
+Scenario B resulting criterion values' mean: 4.3058, std. dev.: 0.0885479
+Scenario B subset sizes' mean: 7, std. dev.: 0
+
+Scenario B stability_ATI()=0.911111
+Scenario B stability_CW()=0.949206
+Scenario B stability_ANHI(30)=0.976296
+
+Evaluating similarity between scenario A and scenario B:
+similarity measure IATI()=0.10749
+similarity measure ICW()=0.243396
+similarity measure IANHI(30)=0.680667

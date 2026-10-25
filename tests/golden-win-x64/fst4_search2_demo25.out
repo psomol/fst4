@@ -1,0 +1,9 @@
+{
+  "version": "4.2.0",
+  "invocation": {"data": "data/optdigits_64.trn", "format": "trn", "splitter": "5050", "splitter2": "cv", "splitter2_cv_folds": 3, "validate": "same", "scaler": "void", "criterion": "wrapper-svm", "svm_kernel": "sigmoid", "svm_optimize": "pre", "search2": "bif", "search2_d": 20, "search": "dos", "target_d": 0, "dos_delta": 3, "threads": 4, "seed": 1, "top_k": 5, "stable_output": true},
+  "data": {"file": "data/optdigits_64.trn", "format": "trn", "classes": 10, "features": 64, "samples": 5620, "class_sizes": [554, 571, 557, 572, 568, 558, 558, 566, 554, 562]},
+  "result": {"features": [4, 5, 10, 13, 18, 19, 20, 21, 22, 26, 27, 35, 37, 38, 42, 43, 44, 45, 46, 51, 53, 54, 58, 59, 61], "size": 25, "value": 0.972578108813},
+  "per_split": [0.969989281886, 0.970085470085, 0.977659574468],
+  "validation": [{"classifier": "svm", "accuracy": 0.955531839203}],
+  "top_k": [{"value": 0.972578108813, "size": 25, "features": [4, 5, 10, 13, 18, 19, 20, 21, 22, 26, 27, 35, 37, 38, 42, 43, 44, 45, 46, 51, 53, 54, 58, 59, 61]}, {"value": 0.972578108813, "size": 26, "features": [0, 4, 5, 10, 13, 18, 19, 20, 21, 22, 26, 27, 35, 37, 38, 42, 43, 44, 45, 46, 51, 53, 54, 58, 59, 61]}, {"value": 0.972578108813, "size": 26, "features": [4, 5, 7, 10, 13, 18, 19, 20, 21, 22, 26, 27, 35, 37, 38, 42, 43, 44, 45, 46, 51, 53, 54, 58, 59, 61]}, {"value": 0.972578108813, "size": 26, "features": [4, 5, 8, 10, 13, 18, 19, 20, 21, 22, 26, 27, 35, 37, 38, 42, 43, 44, 45, 46, 51, 53, 54, 58, 59, 61]}, {"value": 0.972578108813, "size": 27, "features": [0, 4, 5, 7, 10, 13, 18, 19, 20, 21, 22, 26, 27, 35, 37, 38, 42, 43, 44, 45, 46, 51, 53, 54, 58, 59, 61]}]
+}

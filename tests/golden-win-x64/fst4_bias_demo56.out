@@ -1,0 +1,10 @@
+{
+  "version": "4.2.0",
+  "invocation": {"data": "data/sonar_60.trn", "format": "trn", "splitter": "5050", "splitter2": "cv", "splitter2_cv_folds": 3, "validate": "same", "scaler": "void", "criterion": "wrapper-knn", "knn_k": 3, "knn_distance": "L2", "search": "dos", "target_d": 0, "dos_delta": 1, "threads": 1, "seed": 1, "top_k": 5, "stable_output": true},
+  "data": {"file": "data/sonar_60.trn", "format": "trn", "classes": 2, "features": 60, "samples": 208, "class_sizes": [97, 111]},
+  "result": {"features": [14, 22, 47], "size": 3, "value": 0.767507002801},
+  "per_split": [0.794117647059, 0.794117647059, 0.714285714286],
+  "validation": [{"classifier": "knn", "accuracy": 0.504761904762}],
+  "bias": 0.130475378557,
+  "top_k": [{"value": 0.767507002801, "size": 3, "features": [14, 22, 47]}, {"value": 0.767507002801, "size": 4, "features": [14, 22, 47, 49]}, {"value": 0.73837535014, "size": 2, "features": [14, 22]}, {"value": 0.690196078431, "size": 1, "features": [14]}]
+}

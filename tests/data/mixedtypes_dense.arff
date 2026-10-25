@@ -1,0 +1,34 @@
+% Regression fixture for the ARFF loader's handling of unsupported attribute
+% types. Exercises, in DENSE row form:
+%   - a STRING column (historically aborted the whole load)
+%   - a DATE column (unknown type; same graceful-skip contract)
+%   - quoted values containing COMMAS inside a skipped column, which must not
+%     split the row's column count (the quote-aware dense tokenizer)
+%   - skipped columns in first, middle and last-before-class positions, so the
+%     loaded feature indices (0..3) are NOT the file column numbers
+% Loaded features are f0..f3 = file columns 2,4,5,7 -> feature indices 0,1,2,3.
+% Class is linearly separable on f0 alone; f1 is pure noise, f2/f3 weakly informative.
+@RELATION mixedtypes_dense
+
+@ATTRIBUTE docid STRING
+@ATTRIBUTE f0 NUMERIC
+@ATTRIBUTE stamp DATE "yyyy-MM-dd"
+@ATTRIBUTE f1 NUMERIC
+@ATTRIBUTE f2 REAL
+@ATTRIBUTE note STRING
+@ATTRIBUTE f3 INTEGER
+@ATTRIBUTE class {alpha,beta}
+
+@DATA
+'doc, 1',1.00,2020-01-01,5.20,0.30,'note, with comma',2,alpha
+"doc, 2",1.10,2020-01-02,4.90,0.40,"another, note",2,alpha
+doc3,0.90,2020-01-03,5.00,0.20,plain,3,alpha
+doc4,1.20,2020-01-04,5.10,0.50,plain,2,alpha
+'doc, 5',1.05,2020-01-05,4.95,0.35,'x, y, z',3,alpha
+doc6,0.95,2020-01-06,5.05,0.25,plain,2,alpha
+'doc, 7',3.00,2020-01-07,1.20,0.35,'note, seven',5,beta
+"doc, 8",3.10,2020-01-08,0.90,0.25,"eight, note",5,beta
+doc9,2.90,2020-01-09,1.10,0.45,plain,6,beta
+doc10,3.20,2020-01-10,1.00,0.30,plain,5,beta
+'doc, 11',3.05,2020-01-11,1.05,0.40,'p, q',6,beta
+doc12,2.95,2020-01-12,0.95,0.20,plain,5,beta

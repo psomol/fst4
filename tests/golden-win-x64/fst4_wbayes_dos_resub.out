@@ -1,0 +1,10 @@
+
+fst4 (FST4 4.2.0) results:
+data: file=data/wdbc_30.trn format=trn classes=2 features=30 samples=569
+result: size=8 value=0.977152899824 features=[1 4 8 15 18 21 22 24] (0-based)
+best 5 tracked subsets:
+  1. value=0.977152899824 size=8 features=[1 4 8 15 18 21 22 24]
+  2. value=0.977152899824 size=9 features=[4 8 9 14 17 18 21 22 24]
+  3. value=0.97539543058 size=5 features=[1 8 21 22 24]
+  4. value=0.97539543058 size=6 features=[1 8 15 21 22 24]
+  5. value=0.97539543058 size=7 features=[1 8 15 18 21 22 24]

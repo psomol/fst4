@@ -1,0 +1,9 @@
+{
+  "version": "4.2.0",
+  "invocation": {"data": "data/wdbc_30.trn", "format": "trn", "splitter": "5050", "splitter2": "cv", "splitter2_cv_folds": 3, "validate": "same", "wrapper_metric": "f1", "f1_positive": 0, "scaler": "void", "criterion": "wrapper-bayes", "search": "sfs", "target_d": 3, "threads": 1, "seed": 1, "top_k": 5, "stable_output": true},
+  "data": {"file": "data/wdbc_30.trn", "format": "trn", "classes": 2, "features": 30, "samples": 569, "class_sizes": [357, 212]},
+  "result": {"features": [3, 22, 24], "size": 3, "value": 0.975338753388},
+  "per_split": [1, 0.966666666667, 0.959349593496],
+  "validation": [{"classifier": "bayes", "accuracy": 0.929824561404, "metric": "f1", "metric_value": 0.943502824859}],
+  "top_k": [{"value": 0.975338753388, "size": 3, "features": [3, 22, 24]}, {"value": 0.964364111905, "size": 2, "features": [3, 22]}, {"value": 0.935046769823, "size": 1, "features": [22]}]
+}

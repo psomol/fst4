@@ -1,0 +1,9 @@
+{
+  "version": "4.2.0",
+  "invocation": {"data": "data/waveform_40.arff", "format": "arff", "splitter": "5050", "splitter2": "cv", "splitter2_cv_folds": 3, "validate": "same", "scaler": "void", "criterion": "wrapper-svm", "svm_kernel": "rbf", "svm_optimize": "pre", "search": "sfs", "target_d": 0, "threads": 2, "seed": 1, "top_k": 5, "stable_output": true},
+  "data": {"file": "data/waveform_40.arff", "format": "arff", "classes": 3, "features": 40, "samples": 5000, "class_sizes": [1692, 1653, 1655]},
+  "result": {"features": [0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 21, 22, 23, 25, 26, 28, 29, 32, 33, 36, 37, 38], "size": 29, "value": 0.871152176744},
+  "per_split": [0.873798076923, 0.875150060024, 0.864508393285],
+  "validation": [{"classifier": "svm", "accuracy": 0.866053578569}],
+  "top_k": [{"value": 0.871152176744, "size": 29, "features": [0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 21, 22, 23, 25, 26, 28, 29, 32, 33, 36, 37, 38]}, {"value": 0.869952177514, "size": 31, "features": [0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 21, 22, 23, 25, 26, 28, 29, 30, 32, 33, 36, 37, 38, 39]}, {"value": 0.869951697705, "size": 30, "features": [0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 21, 22, 23, 25, 26, 28, 29, 32, 33, 36, 37, 38, 39]}, {"value": 0.869951696552, "size": 23, "features": [0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 21, 22, 23, 26, 29, 36]}, {"value": 0.869950255974, "size": 24, "features": [0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 21, 22, 23, 26, 29, 36, 38]}]
+}

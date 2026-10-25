@@ -1,0 +1,7 @@
+{
+  "version": "4.2.0",
+  "invocation": {"data": "tests/quoted.arff", "format": "arff", "splitter": "resub", "scaler": "void", "criterion": "wrapper-knn", "knn_k": 1, "knn_distance": "L2", "search": "sfs", "target_d": 1, "threads": 1, "seed": 1, "top_k": 5, "stable_output": true},
+  "data": {"file": "tests/quoted.arff", "format": "arff", "classes": 2, "features": 3, "samples": 8, "class_sizes": [4, 4]},
+  "result": {"features": [0], "size": 1, "value": 1},
+  "top_k": [{"value": 1, "size": 1, "features": [0]}]
+}

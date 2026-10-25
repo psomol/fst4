@@ -1,0 +1,9 @@
+{
+  "version": "4.2.0",
+  "invocation": {"data": "data/wdbc_30.trn", "format": "trn", "splitter": "5050", "splitter2": "cv", "splitter2_cv_folds": 3, "validate": "same", "scaler": "void", "criterion": "wrapper-rbfsvm", "rbfsvm_c": 1, "rbfsvm_gamma": 0, "rbfsvm_loss": "l1", "search": "sfs", "target_d": 4, "threads": 1, "seed": 1, "top_k": 5, "stable_output": true},
+  "data": {"file": "data/wdbc_30.trn", "format": "trn", "classes": 2, "features": 30, "samples": 569, "class_sizes": [357, 212]},
+  "result": {"features": [4, 7, 21, 23], "size": 4, "value": 0.971705082742},
+  "per_split": [0.978723404255, 0.946808510638, 0.989583333333],
+  "validation": [{"classifier": "rbfsvm", "accuracy": 0.954385964912}],
+  "top_k": [{"value": 0.971705082742, "size": 4, "features": [4, 7, 21, 23]}, {"value": 0.964612884161, "size": 3, "features": [7, 21, 23]}, {"value": 0.940011820331, "size": 2, "features": [7, 21]}, {"value": 0.912012411348, "size": 1, "features": [7]}]
+}

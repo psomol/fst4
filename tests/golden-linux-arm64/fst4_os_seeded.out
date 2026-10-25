@@ -1,0 +1,7 @@
+{
+  "version": "4.2.0",
+  "invocation": {"data": "data/wdbc_30.trn", "format": "trn", "splitter": "5050", "scaler": "void", "criterion": "gmahalanobis", "search": "os", "target_d": 7, "os_delta": 3, "threads": 1, "seed": 1, "top_k": 5, "stable_output": true},
+  "data": {"file": "data/wdbc_30.trn", "format": "trn", "classes": 2, "features": 30, "samples": 569, "class_sizes": [357, 212]},
+  "result": {"features": [10, 16, 20, 21, 23, 26, 27], "size": 7, "value": 12.2677552488},
+  "top_k": [{"value": 13.1883840558, "size": 10, "features": [5, 9, 10, 16, 20, 21, 23, 24, 26, 27]}, {"value": 13.0306639455, "size": 9, "features": [5, 9, 10, 16, 20, 21, 23, 26, 27]}, {"value": 12.8596624987, "size": 9, "features": [5, 10, 16, 20, 21, 23, 24, 26, 27]}, {"value": 12.766086178, "size": 9, "features": [5, 10, 16, 20, 21, 23, 26, 27, 28]}, {"value": 12.5403220955, "size": 8, "features": [10, 16, 20, 21, 23, 24, 26, 27]}]
+}

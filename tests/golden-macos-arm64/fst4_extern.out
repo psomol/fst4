@@ -1,0 +1,9 @@
+{
+  "version": "4.2.0",
+  "invocation": {"data": "data/wdbc_30.trn", "format": "trn", "splitter": "5050", "splitter2": "cv", "splitter2_cv_folds": 3, "validate": "same", "scaler": "void", "criterion": "wrapper-extern", "extern_cmd": "awk -f tests/extern_centroid.awk", "search": "sfs", "target_d": 3, "threads": 1, "seed": 1, "top_k": 5, "stable_output": true},
+  "data": {"file": "data/wdbc_30.trn", "format": "trn", "classes": 2, "features": 30, "samples": 569, "class_sizes": [357, 212]},
+  "result": {"features": [14, 16, 27], "size": 3, "value": 0.912012411348},
+  "per_split": [0.882978723404, 0.946808510638, 0.90625],
+  "validation": [{"classifier": "extern", "accuracy": 0.894736842105}],
+  "top_k": [{"value": 0.912012411348, "size": 2, "features": [16, 27]}, {"value": 0.912012411348, "size": 3, "features": [14, 16, 27]}, {"value": 0.908466312057, "size": 1, "features": [27]}]
+}

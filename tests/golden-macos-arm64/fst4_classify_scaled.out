@@ -1,0 +1,18 @@
+kind,rank,value,size,features
+result,0,0.936842105263,5,3 5 20 22 26
+top_k,1,0.940350877193,3,3 5 22
+top_k,2,0.936842105263,2,3 22
+top_k,3,0.936842105263,5,3 5 20 22 26
+top_k,4,0.933333333333,4,3 5 20 22
+top_k,5,0.912280701754,1,22
+validation,1,0.936842105263,,knn
+classified,1,0,,
+classified,2,0,,
+classified,3,0,,
+classified,4,0,,
+classified,5,0,,
+classified,6,1,,
+classified,7,1,,
+classified,8,1,,
+classified,9,1,,
+classified,10,1,,

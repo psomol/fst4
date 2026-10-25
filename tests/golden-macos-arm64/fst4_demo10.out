@@ -1,0 +1,7 @@
+{
+  "version": "4.2.0",
+  "invocation": {"data": "data/wdbc_30.trn", "format": "trn", "splitter": "5050", "scaler": "void", "criterion": "gmahalanobis", "search": "sfs", "target_d": 7, "threads": 1, "seed": 1, "top_k": 5, "stable_output": true},
+  "data": {"file": "data/wdbc_30.trn", "format": "trn", "classes": 2, "features": 30, "samples": 569, "class_sizes": [357, 212]},
+  "result": {"features": [3, 10, 16, 20, 21, 26, 27], "size": 7, "value": 12.104507579},
+  "top_k": [{"value": 12.104507579, "size": 7, "features": [3, 10, 16, 20, 21, 26, 27]}, {"value": 11.8078631324, "size": 6, "features": [3, 10, 16, 20, 21, 27]}, {"value": 11.2760959346, "size": 5, "features": [3, 10, 20, 21, 27]}, {"value": 10.8167342615, "size": 4, "features": [3, 20, 21, 27]}, {"value": 10.3119104955, "size": 3, "features": [20, 21, 27]}]
+}

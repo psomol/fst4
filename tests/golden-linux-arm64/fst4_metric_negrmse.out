@@ -1,0 +1,9 @@
+{
+  "version": "4.2.0",
+  "invocation": {"data": "data/wdbc_30.trn", "format": "trn", "splitter": "5050", "splitter2": "cv", "splitter2_cv_folds": 3, "validate": "same", "wrapper_metric": "neg-rmse", "scaler": "void", "criterion": "wrapper-ridge", "ridge_lambda": 0.01, "search": "sfs", "target_d": 3, "threads": 1, "seed": 1, "top_k": 5, "stable_output": true},
+  "data": {"file": "data/wdbc_30.trn", "format": "trn", "classes": 2, "features": 30, "samples": 569, "class_sizes": [357, 212]},
+  "result": {"features": [20, 21, 27], "size": 3, "value": -0.264485726696},
+  "per_split": [-0.260652516689, -0.275344581134, -0.257460082265],
+  "validation": [{"classifier": "ridge", "accuracy": 0.940350877193, "metric": "neg-rmse", "metric_value": -0.263745544832}],
+  "top_k": [{"value": -0.264485726696, "size": 3, "features": [20, 21, 27]}, {"value": -0.276768745084, "size": 2, "features": [20, 27]}, {"value": -0.298177794534, "size": 1, "features": [27]}]
+}

@@ -1,0 +1,8 @@
+{
+  "version": "4.2.0",
+  "invocation": {"data": "tests/data/csv_semicolon.csv", "format": "csv", "csv_missing_to": -999, "splitter": "5050", "validate": "knn", "scaler": "void", "missing_value": -999, "criterion": "gmahalanobis", "search": "sfs", "target_d": 2, "threads": 1, "seed": 1, "top_k": 5, "stable_output": true},
+  "data": {"file": "tests/data/csv_semicolon.csv", "format": "csv", "classes": 2, "features": 4, "samples": 21, "class_sizes": [11, 10]},
+  "result": {"features": [2, 3], "size": 2, "value": 433.332260192},
+  "validation": [{"classifier": "knn", "accuracy": 0.909090909091}],
+  "top_k": [{"value": 433.332260192, "size": 2, "features": [2, 3]}, {"value": 155.172408678, "size": 1, "features": [3]}]
+}

@@ -1,0 +1,7 @@
+{
+  "version": "4.2.0",
+  "invocation": {"data": "data/wdbc_30.trn", "format": "trn", "splitter": "5050", "scaler": "void", "criterion": "wrapper-knn", "knn_k": 3, "knn_distance": "L2", "search": "sffs", "target_d": 8, "evaluator": "sampled", "step_cap": 8, "step_explore": 0.2, "step_tau": 0, "step_decay": 100, "step_sampler": "softmax", "step_stats": "zcontrast", "step_cap_backward": 4, "warmup_probes": 100, "warmup_card": 5, "threads": 4, "seed": 1, "top_k": 5, "stable_output": true},
+  "data": {"file": "data/wdbc_30.trn", "format": "trn", "classes": 2, "features": 30, "samples": 569, "class_sizes": [357, 212]},
+  "result": {"features": [1, 2, 9, 11, 13, 22, 25, 28], "size": 8, "value": 0.950877192982},
+  "top_k": [{"value": 0.950877192982, "size": 4, "features": [1, 2, 13, 22]}, {"value": 0.950877192982, "size": 5, "features": [1, 2, 11, 13, 22]}, {"value": 0.950877192982, "size": 5, "features": [1, 2, 13, 17, 22]}, {"value": 0.950877192982, "size": 5, "features": [0, 1, 2, 13, 22]}, {"value": 0.950877192982, "size": 6, "features": [1, 2, 11, 13, 22, 25]}]
+}

@@ -1,0 +1,27 @@
+Opening file: data/wdbc_30.trn
+Features: 30
+Classes: 2
+  Class 0 size: 357
+  Class 1 size: 212
+Splitting depth: 1
+Reading data to memory...done.
+
+Scaling data (per-feature, over all classes) using Data_Scaler_void()...done.
+
+fst4 (FST4 4.2.0) feature selection setup:
+Data_Accessor_Splitting() splitters: Data_Splitter_5050() 
+Data_Accessor_Splitting_Mem(file=data/wdbc_30.trn)
+Data_Accessor_Splitting_MemTRN()
+SFS  [Search_SFS() with Sequential_Step_Straight() with Result_Tracker_Dupless(limit=5, margin=0) size 0]
+Criterion_Normal_GMahalanobis()
+
+
+fst4 (FST4 4.2.0) results:
+data: file=data/wdbc_30.trn format=trn classes=2 features=30 samples=569
+result: size=7 value=12.104507579 features=[3 10 16 20 21 26 27] (0-based)
+best 5 tracked subsets:
+  1. value=12.104507579 size=7 features=[3 10 16 20 21 26 27]
+  2. value=11.8078631324 size=6 features=[3 10 16 20 21 27]
+  3. value=11.2760959346 size=5 features=[3 10 20 21 27]
+  4. value=10.8167342615 size=4 features=[3 20 21 27]
+  5. value=10.3119104955 size=3 features=[20 21 27]

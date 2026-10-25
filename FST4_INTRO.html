@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FST4 — Feature Selection Toolbox</title>
+<meta name="description" content="FST4: a standalone C++ library and command-line tool for feature selection — an introductory tour.">
+<style>
+  :root {
+    color-scheme: light;
+    --page: #f9f9f7;
+    --surface: #fcfcfb;
+    --ink: #0b0b0b;
+    --ink-2: #52514e;
+    --muted: #898781;
+    --grid: #e1e0d9;
+    --axis: #c3c2b7;
+    --border: rgba(11,11,11,0.10);
+    --s1: #2a78d6;  /* blue   — criterion / primary series */
+    --s2: #1baf7a;  /* aqua   — splits / secondary series */
+    --s3: #eda100;  /* yellow — trackers / tertiary series */
+    --s5: #4a3aa7;  /* violet — search */
+    --s6: #e34948;  /* red — caveats only */
+    --tint-info: rgba(42,120,214,0.07);
+    --tint-warn: rgba(227,73,72,0.07);
+    --code-bg: #16181c;
+    --code-ink: #e8e6df;
+    --code-flag: #86b6ef;
+    --code-cmt: #8f8d85;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      color-scheme: dark;
+      --page: #0d0d0d;
+      --surface: #1a1a19;
+      --ink: #ffffff;
+      --ink-2: #c3c2b7;
+      --muted: #898781;
+      --grid: #2c2c2a;
+      --axis: #383835;
+      --border: rgba(255,255,255,0.12);
+      --s1: #3987e5;
+      --s2: #199e70;
+      --s3: #c98500;
+      --s5: #9085e9;
+      --s6: #e66767;
+      --tint-info: rgba(57,135,229,0.12);
+      --tint-warn: rgba(230,103,103,0.12);
+      --code-bg: #131417;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--page);
+    color: var(--ink);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    line-height: 1.55;
+    font-size: 16px;
+  }
+  .wrap { max-width: 940px; margin: 0 auto; padding: 0 20px; }
+
+  /* ---------- hero ---------- */
+  header.hero {
+    background: linear-gradient(160deg, #101318 0%, #1a1d24 55%, #16222c 100%);
+    color: #f4f3ee;
+    padding: 56px 0 40px;
+  }
+  .hero .eyebrow {
+    font-size: .8rem; letter-spacing: .14em; text-transform: uppercase;
+    color: #9ec5f4; margin: 0 0 14px;
+  }
+  .hero h1 {
+    font-size: clamp(2.3rem, 5vw, 3.3rem);
+    line-height: 1.08; margin: 0 0 10px; font-weight: 750;
+  }
+  .hero h1 .ver { font-weight: 350; color: #9ec5f4; }
+  .hero p.tag {
+    font-size: clamp(1.05rem, 2.2vw, 1.3rem);
+    color: #cfd5dd; max-width: 42em; margin: 0 0 24px;
+  }
+  .badges { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 26px; padding: 0; list-style: none; }
+  .badges li {
+    font-size: .8rem; padding: 5px 11px; border-radius: 999px;
+    border: 1px solid rgba(158,197,244,.35); color: #cfe0f5; white-space: nowrap;
+  }
+  /* ---------- nav ---------- */
+  nav.toc {
+    position: sticky; top: 0; z-index: 10;
+    background: color-mix(in srgb, var(--page) 88%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+  nav.toc .wrap { display: flex; gap: 4px; overflow-x: auto; padding-top: 8px; padding-bottom: 8px; }
+  nav.toc a {
+    color: var(--ink-2); text-decoration: none; font-size: .82rem;
+    padding: 4px 10px; border-radius: 999px; white-space: nowrap;
+  }
+  nav.toc a:hover { background: var(--tint-info); color: var(--ink); }
+
+  /* ---------- sections ---------- */
+  section { padding: 44px 0 10px; }
+  section > .wrap > .kicker {
+    font-size: .78rem; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--s1); font-weight: 650; margin: 0 0 6px;
+  }
+  h2 { font-size: 1.65rem; line-height: 1.2; margin: 0 0 14px; font-weight: 700; }
+  h3 { font-size: 1.12rem; margin: 26px 0 8px; font-weight: 680; }
+  p, li { color: var(--ink-2); max-width: 72ch; }
+  p strong, li strong { color: var(--ink); }
+  a { color: var(--s1); }
+  code {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: .88em;
+    background: color-mix(in srgb, var(--ink) 6%, transparent);
+    padding: .08em .35em; border-radius: 4px;
+  }
+  /* ---------- code cards ---------- */
+  pre.cmd {
+    background: var(--code-bg); color: var(--code-ink);
+    border-radius: 10px; padding: 14px 18px; overflow-x: auto;
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: .84rem; line-height: 1.55;
+    border: 1px solid var(--border);
+  }
+  pre.cmd .f { color: var(--code-flag); }
+  pre.cmd .c { color: var(--code-cmt); font-style: italic; }
+  pre.cmd code { background: none; padding: 0; font-size: inherit; }
+
+  /* ---------- cards / callouts / tables ---------- */
+  .cards3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin: 18px 0; }
+  .card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 14px 16px;
+  }
+  .card h4 { margin: 0 0 6px; font-size: .95rem; color: var(--ink); }
+  .card p { margin: 0; font-size: .88rem; }
+  .callout {
+    border-left: 3px solid var(--s1); background: var(--tint-info);
+    border-radius: 0 10px 10px 0; padding: 12px 16px; margin: 20px 0;
+  }
+  .callout.warn { border-left-color: var(--s6); background: var(--tint-warn); }
+  .callout p { margin: 6px 0; font-size: .92rem; }
+  .callout p:first-child { margin-top: 0; }
+  .callout .t { font-weight: 700; color: var(--ink); font-size: .85rem; letter-spacing: .04em; text-transform: uppercase; }
+  table.spec {
+    border-collapse: collapse; width: 100%; margin: 14px 0 22px;
+    font-size: .88rem; background: var(--surface);
+    border: 1px solid var(--border); border-radius: 10px; overflow: hidden;
+  }
+  .tblwrap { overflow-x: auto; }
+  table.spec th, table.spec td { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--grid); vertical-align: top; }
+  table.spec th { color: var(--ink); font-weight: 650; font-size: .82rem; background: color-mix(in srgb, var(--ink) 3%, var(--surface)); }
+  table.spec td { color: var(--ink-2); }
+  table.spec tr:last-child td { border-bottom: none; }
+  table.spec code { white-space: nowrap; }
+
+  /* ---------- figures ---------- */
+  figure.viz {
+    margin: 24px 0; background: var(--surface);
+    border: 1px solid var(--border); border-radius: 12px;
+    padding: 16px 16px 10px;
+  }
+  figure.viz svg { width: 100%; height: auto; display: block; }
+  figure.viz figcaption { color: var(--ink-2); font-size: .84rem; margin-top: 10px; max-width: none; }
+  .legend { display: flex; flex-wrap: wrap; gap: 16px; font-size: .8rem; color: var(--ink-2); margin: 0 0 8px; }
+  .legend .sw { display: inline-block; width: 18px; height: 3px; border-radius: 2px; vertical-align: middle; margin-right: 6px; }
+  svg text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
+  svg .tick  { fill: var(--muted); font-size: 11px; }
+  svg .lbl   { fill: var(--ink-2); font-size: 12px; }
+  svg .lblb  { fill: var(--ink); font-size: 12.5px; font-weight: 650; }
+  svg .schem { fill: var(--muted); font-size: 11px; font-style: italic; }
+  svg .gridl { stroke: var(--grid); stroke-width: 1; }
+  svg .axisl { stroke: var(--axis); stroke-width: 1.25; }
+  svg .curve { fill: none; stroke-width: 2.25; stroke-linecap: round; }
+  svg .node  { fill: var(--surface); stroke: var(--axis); stroke-width: 1.25; rx: 8; }
+  svg .mono  { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 11px; }
+
+  footer {
+    margin-top: 56px; padding: 28px 0 40px;
+    border-top: 1px solid var(--border);
+    color: var(--muted); font-size: .84rem;
+  }
+  footer p { color: var(--muted); }
+  @media print {
+    nav.toc { display: none; }
+    figure.viz, pre.cmd, .card, .callout { break-inside: avoid; }
+    header.hero { background: #16181c; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">ÚTIA — Institute of Information Theory and Automation, Czech Academy of Sciences</p>
+    <h1>FST4 <span class="ver">· Feature Selection Toolbox 4.2</span></h1>
+    <p class="tag">Find the features that matter — reproducibly, on any platform, at any dimensionality.
+    A standalone C++ library and a single-binary command-line tool for choosing, out of everything you measured,
+    the subset your model should actually use.</p>
+    <ul class="badges">
+      <li>header-only C++17 · zero mandatory dependencies</li>
+      <li>15 search algorithms × 18 criteria × 8 metrics</li>
+      <li>bit-identical results at any <code>--threads</code></li>
+      <li>same <code>--seed</code> ⇒ same result on every OS</li>
+      <li>plug in your own criterion — any language</li>
+    </ul>
+<pre class="cmd"><code>./fst4 <span class="f">--data</span> data/wdbc_30.trn \
+       <span class="f">--criterion</span> wrapper-knn <span class="f">--knn-k</span> 3 \
+       <span class="f">--splitter</span> 5050 <span class="f">--splitter2</span> cv \
+       <span class="f">--search</span> sffs \
+       <span class="f">--validate</span> same</code></pre>
+    <p class="tag" style="font-size:.95rem; margin-top:14px;">One command, four decisions: <em>what to optimize</em>
+    (3-NN accuracy), <em>how to estimate it honestly</em> (inner cross-validation on one half, the other half
+    walled off), <em>how to explore</em> (floating search), and <em>the final honesty check</em> (the untouched
+    holdout). Load a dataset, run the search on the selection half, and report the chosen subset with its holdout
+    validation — the complete textbook protocol.</p>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="wrap">
+    <a href="#why">Why</a>
+    <a href="#axes">Four axes</a>
+    <a href="#optimize">What to optimize</a>
+    <a href="#search">Search</a>
+    <a href="#extreme">Extreme dimensionality</a>
+    <a href="#byoc">Your own criterion</a>
+    <a href="#honest">Honest estimation</a>
+    <a href="#repro">Reproducibility</a>
+    <a href="#tooling">Pipelines</a>
+    <a href="#tour">Runnable tour</a>
+    <a href="#start">Getting started</a>
+    <a href="#scope">Scope &amp; licensing</a>
+  </div>
+</nav>
+
+<!-- ======================================================================= -->
+<section id="why">
+  <div class="wrap">
+    <p class="kicker">01 · The problem</p>
+    <h2>Why select features at all</h2>
+    <p>Most datasets measure far more variables than the signal needs. Feature selection picks the subset worth
+    keeping — and unlike projection methods (PCA and friends), the selected variables remain the <em>original,
+    interpretable measurements</em>. Nothing is mixed, rotated, or renamed. Three reasons to care, in decreasing
+    order of frequency:</p>
+    <div class="cards3">
+      <div class="card"><h4>Generalization</h4>
+        <p>With limited samples, models fit noise in irrelevant variables. Removing them is regularization
+        you can inspect — and explain.</p></div>
+      <div class="card"><h4>Cost</h4>
+        <p>Features can be expensive to acquire: sensors, lab tests, compute. A model that needs 10 of 500
+        inputs is a different product from one that needs all 500.</p></div>
+      <div class="card"><h4>Insight</h4>
+        <p><em>Which</em> variables carry the signal is often the actual research question. The subset is
+        the answer, not a preprocessing step.</p></div>
+    </div>
+    <p>The catch: subsets live in a space of 2<sup>D</sup> candidates, every candidate must be <em>scored</em>,
+    and every score is only an <em>estimate</em> made from finite data. Feature selection is therefore three
+    problems wearing one coat — a search problem, a scoring problem, and a statistical-honesty problem.
+    FST4 treats all three as first-class.</p>
+  </div>
+</section>
+
+<!-- ======================================================================= -->
+<section id="axes">
+  <div class="wrap">
+    <p class="kicker">02 · The design</p>
+    <h2>One idea, four axes</h2>
+    <p>FST4 is built around one organizing idea: feature selection is a <strong>search</strong> over subsets,
+    scored by a <strong>criterion</strong>, estimated on <strong>data splits</strong>, with results collected by
+    <strong>trackers</strong>. The four axes compose freely — any search runs any criterion on any splitting
+    protocol — and the command line mirrors them one flag each.</p>
+
+    <figure class="viz">
+      <svg viewBox="0 0 880 302" role="img" aria-label="FST4 pipeline: data, scaling, splitting feed a selection loop of search and criterion, whose results flow to trackers, validation and report.">
+        <defs>
+          <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--axis)"/>
+          </marker>
+        </defs>
+        <!-- stage nodes -->
+        <rect class="node" x="8"   y="44" width="104" height="64" rx="9"/>
+        <text class="lblb" x="60" y="68" text-anchor="middle">DATA</text>
+        <text class="tick" x="60" y="86" text-anchor="middle">TRN · ARFF · CSV</text>
+        <line x1="112" y1="76" x2="132" y2="76" class="axisl" marker-end="url(#arr)"/>
+
+        <rect class="node" x="134" y="44" width="106" height="64" rx="9"/>
+        <text class="lblb" x="187" y="68" text-anchor="middle">SCALING</text>
+        <text class="tick" x="187" y="86" text-anchor="middle">void · to01 · white</text>
+        <line x1="240" y1="76" x2="260" y2="76" class="axisl" marker-end="url(#arr)"/>
+
+        <rect class="node" x="262" y="44" width="116" height="64" rx="9" style="stroke: var(--s2); stroke-width:1.75;"/>
+        <text class="lblb" x="320" y="64" text-anchor="middle">SPLITTING</text>
+        <text class="tick" x="320" y="81" text-anchor="middle">cv · 5050 · holdout…</text>
+        <text class="tick" x="320" y="96" text-anchor="middle">nests: --splitter2</text>
+        <line x1="378" y1="76" x2="398" y2="76" class="axisl" marker-end="url(#arr)"/>
+
+        <!-- selection loop -->
+        <rect x="400" y="10" width="232" height="176" rx="12" fill="none" stroke="var(--axis)" stroke-dasharray="5 4"/>
+        <text class="tick" x="516" y="28" text-anchor="middle" style="letter-spacing:.08em;">SELECTION LOOP</text>
+        <rect class="node" x="420" y="40" width="192" height="46" rx="9" style="stroke: var(--s5); stroke-width:1.75;"/>
+        <text class="lblb" x="516" y="59" text-anchor="middle">SEARCH</text>
+        <text class="tick" x="516" y="76" text-anchor="middle">sffs · bb-fast · montecarlo…</text>
+        <rect class="node" x="420" y="126" width="192" height="46" rx="9" style="stroke: var(--s1); stroke-width:1.75;"/>
+        <text class="lblb" x="516" y="145" text-anchor="middle">CRITERION</text>
+        <text class="tick" x="516" y="162" text-anchor="middle">wrapper-knn · bhattacharyya…</text>
+        <path d="M 452 86 C 444 100, 444 112, 452 126" fill="none" class="axisl" marker-end="url(#arr)"/>
+        <path d="M 580 126 C 588 112, 588 100, 580 86" fill="none" class="axisl" marker-end="url(#arr)"/>
+        <text class="tick" x="440" y="110" text-anchor="end">subset</text>
+        <text class="tick" x="592" y="110" text-anchor="start">value</text>
+        <text class="tick" x="516" y="200" text-anchor="middle">--evaluator · --threads N (results identical)</text>
+
+        <line x1="632" y1="76" x2="650" y2="76" class="axisl" marker-end="url(#arr)"/>
+
+        <rect class="node" x="652" y="26" width="118" height="52" rx="9" style="stroke: var(--s3); stroke-width:1.75;"/>
+        <text class="lblb" x="711" y="47" text-anchor="middle">TRACKERS</text>
+        <text class="tick" x="711" y="64" text-anchor="middle">best-k · stability…</text>
+        <line x1="711" y1="78" x2="711" y2="96" class="axisl" marker-end="url(#arr)"/>
+        <rect class="node" x="652" y="98" width="118" height="52" rx="9"/>
+        <text class="lblb" x="711" y="117" text-anchor="middle">VALIDATION</text>
+        <text class="tick" x="711" y="134" text-anchor="middle">&amp; REPORT</text>
+
+        <!-- axis chips -->
+        <g>
+          <circle cx="18" cy="242" r="5" fill="var(--s1)"/>
+          <text class="lblb" x="30" y="246">criterion</text><text class="lbl" x="96" y="246">— what to optimize</text>
+          <circle cx="18" cy="272" r="5" fill="var(--s5)"/>
+          <text class="lblb" x="30" y="276">search</text><text class="lbl" x="82" y="276">— how to explore 2ᴰ subsets</text>
+          <circle cx="472" cy="242" r="5" fill="var(--s2)"/>
+          <text class="lblb" x="484" y="246">splits</text><text class="lbl" x="528" y="246">— how estimates stay honest</text>
+          <circle cx="472" cy="272" r="5" fill="var(--s3)"/>
+          <text class="lblb" x="484" y="276">trackers</text><text class="lbl" x="546" y="276">— what happens to the results</text>
+        </g>
+      </svg>
+      <figcaption><strong>The composition.</strong> Every FST4 run is one path through this diagram; each box is a
+      flag with interchangeable values. The selection loop never touches the outer holdout — that is reserved for
+      <code>--validate</code>.</figcaption>
+    </figure>
+
+    <p>Everything runs from one binary with no mandatory external dependencies. <code>./fst4 --list</code> prints
+    the full component registry with validity notes; every misuse produces an actionable error, not a silent
+    fallback. The same components are equally usable as a C++ template library — the CLI is a thin composition
+    layer over public seams.</p>
+  </div>
+</section>
+
+<!-- ======================================================================= -->
+<section id="optimize">
+  <div class="wrap">
+    <p class="kicker">03 · The choice that matters most</p>
+    <h2>What you optimize beats how you search</h2>
+    <p>Newcomers to feature selection agonize over search algorithms. The evidence says: agonize over the
+    <strong>criterion</strong> instead. Search algorithms differ in how hard they push the objective;
+    criteria differ in <em>what is being pushed</em>. A perfect search of the wrong objective returns a
+    confidently wrong subset.</p>
+    <p>FST4 makes this concrete. Take one dataset, one search (floating), one classifier (3-NN) — and change
+    only the optimized metric from plain accuracy to balanced accuracy. The two runs select <em>almost disjoint
+    subsets</em>: cross-scenario similarity IATI ≈ 0.14 on the diagnostic data of
+    <code>demos/demo14.cfg</code>. Same everything, different question, different answer. Choose the question
+    first.</p>
+
+    <h3>Filters: fast, classifier-free, hard to fool</h3>
+    <p>Filter criteria score subsets from data statistics alone — no classifier is trained, evaluations cost
+    microseconds, and there is no classifier to overfit. All five are cardinality-monotonic, which is exactly
+    what the optimal searches of section 05 need:</p>
+    <div class="tblwrap">
+    <table class="spec">
+      <tr><th>criterion</th><th>model</th><th>notes</th></tr>
+      <tr><td><code>bhattacharyya</code></td><td>Gaussian</td><td>two-class; the recommended default filter</td></tr>
+      <tr><td><code>divergence</code></td><td>Gaussian</td><td>two-class; can breach monotonicity numerically on some data — prefer Bhattacharyya</td></tr>
+      <tr><td><code>gmahalanobis</code></td><td>Gaussian</td><td>two-class generalized Mahalanobis distance</td></tr>
+      <tr><td><code>multinom-bhattacharyya</code></td><td>multinomial</td><td>count/text data, any class count</td></tr>
+      <tr><td><code>multinom-mi</code></td><td>multinomial</td><td>mutual information for count/text data</td></tr>
+    </table>
+    </div>
+
+    <h3>Wrappers: optimize the model you will deploy</h3>
+    <p>Wrapper criteria train and test an actual predictor on every candidate subset — slower, but they measure
+    the thing you ultimately ship. FST4 carries a full model zoo, implemented from scratch in the library and
+    deterministic by design:</p>
+    <div class="tblwrap">
+    <table class="spec">
+      <tr><th>criterion</th><th>model</th><th>notes</th></tr>
+      <tr><td><code>wrapper-knn</code></td><td>k-nearest neighbours</td><td><code>--knn-k</code>, L1/L2/Lp distances</td></tr>
+      <tr><td><code>wrapper-bayes</code></td><td>Gaussian Bayes</td><td>per-class covariances, any class count</td></tr>
+      <tr><td><code>wrapper-lda</code></td><td>linear discriminant</td><td>pooled covariance, closed form, parameterless</td></tr>
+      <tr><td><code>wrapper-logreg</code></td><td>multinomial logistic regression</td><td>deterministic Newton training, RNG-free</td></tr>
+      <tr><td><code>wrapper-linsvm</code></td><td>linear SVM</td><td>dual coordinate descent, RNG-free, one-vs-rest</td></tr>
+      <tr><td><code>wrapper-rbfsvm</code></td><td>RBF-kernel SVM</td><td>native, deterministic; built-in C/γ tuning (<code>--rbfsvm-optimize</code>)</td></tr>
+      <tr><td><code>wrapper-svm</code></td><td>kernel SVM (poly/sigmoid too)</td><td>via the optional LibSVM drop-in</td></tr>
+      <tr><td><code>wrapper-rf</code></td><td>Random Forest</td><td>CART/Gini + bagging; deterministic by construction</td></tr>
+      <tr><td><code>wrapper-multinom</code></td><td>multinomial naive Bayes</td><td>count/text data</td></tr>
+      <tr><td><code>wrapper-regressor</code></td><td>weighted-neighbours regression</td><td>regression pipeline</td></tr>
+      <tr><td><code>wrapper-ridge</code></td><td>ridge regression</td><td>closed form; criterion defaults to R²</td></tr>
+      <tr><td><code>wrapper-extern</code></td><td><strong>your own model</strong></td><td>any language, persistent-process protocol — section 06</td></tr>
+    </table>
+    </div>
+
+    <h3>Metrics: ask the question you actually care about</h3>
+    <p>Every wrapper optimizes plain accuracy by default, but imbalanced problems deserve better.
+    <code>--wrapper-metric</code> switches the optimized quantity to <code>balanced-accuracy</code>,
+    <code>f1</code>, <code>f1-macro</code>, or exact-rank <code>auc</code> (binary exact; multiclass as
+    one-vs-rest macro AUC) for classification, and <code>r2</code>, <code>neg-rmse</code>, <code>neg-mae</code>
+    for regression. <code>--class-weights 1,5</code> injects asymmetric error costs — a missed positive can cost
+    five times a false alarm, and selection will pick features accordingly.</p>
+
+    <figure class="viz">
+      <div class="legend">
+        <span><span class="sw" style="background:var(--s1)"></span>criterion on selection data (train axis)</span>
+        <span><span class="sw" style="background:var(--s2)"></span>accuracy on untouched holdout (validated axis)</span>
+      </div>
+      <svg viewBox="0 0 880 330" role="img" aria-label="Schematic: criterion value keeps rising with subset size while holdout accuracy peaks at an intermediate size and then declines; the gap between the curves is overfitting.">
+        <line class="gridl" x1="56" y1="26"  x2="856" y2="26"/>
+        <line class="gridl" x1="56" y1="90"  x2="856" y2="90"/>
+        <line class="gridl" x1="56" y1="154" x2="856" y2="154"/>
+        <line class="gridl" x1="56" y1="218" x2="856" y2="218"/>
+        <line class="axisl" x1="56" y1="284" x2="856" y2="284"/>
+        <line class="axisl" x1="56" y1="26"  x2="56"  y2="284"/>
+        <text class="schem" x="856" y="16" text-anchor="end">schematic</text>
+
+        <path class="curve" style="stroke:var(--s1)" d="M 56 262 C 180 130, 300 92, 440 78 S 700 60, 856 56"/>
+        <path class="curve" style="stroke:var(--s2)" d="M 56 272 C 150 196, 260 122, 356 112 C 470 116, 620 156, 856 208"/>
+
+        <line x1="356" y1="112" x2="356" y2="284" stroke="var(--muted)" stroke-dasharray="4 4"/>
+        <text class="lblb" x="356" y="302" text-anchor="middle">d★</text>
+        <text class="lbl" x="374" y="302">— the size actually worth deploying</text>
+
+        <line x1="800" y1="66" x2="800" y2="198" stroke="var(--muted)" marker-start="url(#arr)" marker-end="url(#arr)"/>
+        <text class="lbl" x="788" y="128" text-anchor="end">optimism gap</text>
+        <text class="lbl" x="788" y="144" text-anchor="end">= overfitting</text>
+
+        <line x1="600" y1="52" x2="618" y2="52" stroke="var(--s1)" stroke-width="3"/>
+        <text class="lbl" x="624" y="56">criterion keeps climbing…</text>
+        <line x1="470" y1="176" x2="488" y2="176" stroke="var(--s2)" stroke-width="3"/>
+        <text class="lbl" x="494" y="180">…while true performance has already turned</text>
+
+        <text class="lbl" x="456" y="322" text-anchor="middle">subset size d →</text>
+        <text class="lbl" transform="rotate(-90 16 155)" x="16" y="155" text-anchor="middle">score (normalized) →</text>
+      </svg>
+      <figcaption><strong>Why the criterion is not the truth.</strong> Every criterion value is an estimate from
+      finite data; pushed hard enough it rewards subsets that exploit the particular sample. FST4 prints this
+      exact curve for any single-search run — the best-per-size criterion value, with holdout re-validation of
+      each subset when <code>--validate</code> is given — via <code>--report detailed</code>, so you see where
+      your own d★ sits instead of guessing.</figcaption>
+    </figure>
+
+    <div class="callout">
+      <p class="t">Honest guidance — filter or wrapper?</p>
+      <p>Filters are orders of magnitude faster and immune to classifier overfitting, but they optimize a proxy.
+      Wrappers optimize deployed performance — and can <em>over</em>-optimize it when samples are few and
+      features many. When samples are scarce, prefer filters or regularized criteria, and distrust any criterion
+      value not confirmed on a holdout. The nested-split protocol and <code>--validate</code> exist exactly for
+      this.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================================= -->
+<section id="search">
+  <div class="wrap">
+    <p class="kicker">04 · Exploring 2ᴰ subsets</p>
+    <h2>Search: why “good enough” almost always is</h2>
+    <p>With the criterion chosen, the search question has a surprisingly crisp answer.</p>
+    <h3>When to demand the optimum</h3>
+    <p>If your criterion is <strong>monotonic</strong> — a subset never scores above its supersets, true for all
+    five built-in filters — and the dimensionality is moderate, FST4's four <strong>Branch &amp; Bound</strong>
+    variants (<code>bb-basic</code>, <code>bb-improved</code>, <code>bb-fast</code>, <code>bb-bbpp</code>)
+    return the <em>provably optimal</em> subset of a given size at a fraction of exhaustive cost, and
+    <code>exhaustive</code> search settles anything smaller. Where optimal search is affordable, it ends the
+    discussion:</p>
+<pre class="cmd"><code>./fst4 <span class="f">--data</span> data/wdbc_30.trn <span class="f">--criterion</span> bhattacharyya \
+       <span class="f">--search</span> bb-fast <span class="f">--target-d</span> 7 <span class="f">--validate</span> knn</code></pre>
+    <p>FST4 is honest about the fine print: supply a criterion that does not declare monotonicity and Branch
+    &amp; Bound warns you that its optimality guarantee is off. Wrappers are not monotonic — for them,
+    “optimal” search is exhaustive search, and exhaustive search is 2ᴰ.</p>
+
+    <h3>Why suboptimal is usually the right trade</h3>
+    <p>Two reasons, one practical and one statistical. Practically, cost explodes: the last one or two percent
+    of criterion value can cost orders of magnitude more evaluations. Statistically — and this is the part
+    that is easy to miss — the criterion is an <em>estimate</em>. Optimizing an estimate beyond its own noise
+    floor buys false precision: the “optimal” subset of the sample is not the optimal subset of the problem.
+    Past a point, extra search effort optimizes noise.</p>
+
+    <figure class="viz">
+      <svg viewBox="0 0 880 306" role="img" aria-label="Schematic: search methods placed by evaluation cost versus achieved criterion value; sequential and floating searches come close to the guaranteed optimum at a small fraction of Branch and Bound or exhaustive cost.">
+        <line class="axisl" x1="56" y1="250" x2="856" y2="250"/>
+        <line class="axisl" x1="56" y1="26"  x2="56"  y2="250"/>
+        <text class="schem" x="856" y="16" text-anchor="end">schematic</text>
+
+        <line x1="56" y1="64" x2="856" y2="64" stroke="var(--muted)" stroke-dasharray="5 4"/>
+        <text class="lbl" x="62" y="54">guaranteed optimum — monotonic criteria, fixed d</text>
+
+        <g fill="var(--s1)">
+          <circle cx="130" cy="218" r="6"/>
+          <circle cx="300" cy="176" r="6"/>
+          <circle cx="330" cy="128" r="6"/>
+          <circle cx="410" cy="96"  r="6"/>
+          <circle cx="470" cy="112" r="6"/>
+          <circle cx="640" cy="64"  r="6" stroke="var(--surface)" stroke-width="2"/>
+          <circle cx="820" cy="64"  r="6" stroke="var(--surface)" stroke-width="2"/>
+        </g>
+        <text class="lblb" x="130" y="240" text-anchor="middle">bif</text>
+        <text class="tick" x="130" y="204" text-anchor="middle">interaction-blind</text>
+        <text class="lblb" x="300" y="198" text-anchor="middle">montecarlo</text>
+        <text class="lblb" x="330" y="118" text-anchor="middle">sfs</text>
+        <text class="lblb" x="394" y="101" text-anchor="end">sffs</text>
+        <text class="lblb" x="482" y="134" text-anchor="middle">os · dos</text>
+        <text class="lblb" x="640" y="46"  text-anchor="middle">bb-*</text>
+        <text class="lblb" x="820" y="46"  text-anchor="middle">exhaustive</text>
+
+        <line x1="410" y1="90" x2="410" y2="70" stroke="var(--muted)" stroke-dasharray="3 3"/>
+        <text class="lbl" x="424" y="80">the last 1–2% costs orders of magnitude more</text>
+
+        <text class="tick" x="130" y="268" text-anchor="middle">10²</text>
+        <text class="tick" x="300" y="268" text-anchor="middle">10³</text>
+        <text class="tick" x="470" y="268" text-anchor="middle">10⁴</text>
+        <text class="tick" x="640" y="268" text-anchor="middle">10⁵</text>
+        <text class="tick" x="820" y="268" text-anchor="middle">10⁶⁺</text>
+        <text class="lbl" x="456" y="294" text-anchor="middle">criterion evaluations (log, schematic) →</text>
+        <text class="lbl" transform="rotate(-90 16 138)" x="16" y="138" text-anchor="middle">criterion value achieved (train axis) →</text>
+      </svg>
+      <figcaption><strong>The trade-off at a glance.</strong> Sequential searches see feature interactions and
+      land within a whisker of the optimum for a tiny fraction of its cost. Positions are illustrative; the
+      pattern is what a decade of benchmarks keeps reproducing.</figcaption>
+    </figure>
+
+    <h3>The workhorse: floating search</h3>
+    <p>Greedy forward selection (<code>sfs</code>) is cheap but suffers from nesting — an early pick can never be
+    reconsidered. <strong>Floating search</strong> (<code>sffs</code>, backward <code>sbfs</code>) fixes exactly
+    that: after every forward step it backtracks as long as removing a feature <em>improves</em> the criterion.
+    The result is near-optimal subsets at polynomial cost, plus the entire best-subset-per-size curve in one run
+    — no target size needs to be fixed in advance. If you do know the target size, the oscillating searches
+    (<code>os</code>, <code>dos</code>) refine around it; <code>sfrs</code>/<code>sbrs</code> retreat more
+    aggressively; <code>montecarlo</code> samples subsets at random — a baseline, and the probe generator for
+    DAF ranking below.</p>
+    <p>Searches also compose with <strong>step evaluators</strong>: <code>--evaluator hybrid</code> pre-sorts
+    each step's candidates with a cheap filter so the expensive wrapper only sees the promising ones;
+    <code>--evaluator ensemble</code> lets several classifiers vote; and <code>--threads N</code> fans candidate
+    evaluations out to a thread pool — with results, by design, identical to sequential execution.</p>
+  </div>
+</section>
+
+<!-- ======================================================================= -->
+<section id="extreme">
+  <div class="wrap">
+    <p class="kicker">05 · The big gun</p>
+    <h2>Stochastic sequential search at 10⁴ features</h2>
+    <p>At D ≈ 10 000, classic sequential search dies of arithmetic: every floating-search step sweeps all D
+    candidates, so a single step costs thousands of criterion evaluations — with a wrapper criterion, that is
+    the end of the story. The usual retreat is to give up on search altogether and rank features individually.
+    FST4 offers a stronger option.</p>
+    <p>The <strong>budgeted stochastic sequential search</strong> (<code>--evaluator sampled</code>) replaces
+    each step's full sweep with a fixed-size, adaptively informed sample: online per-feature statistics —
+    collected free of charge from every criterion evaluation the search already pays for — feed a softmax
+    proposal distribution (with a guaranteed exploration floor) that nominates <code>--step-cap</code>
+    candidates per forward step and <code>--step-cap-backward</code> per backward step. Step cost is set by the
+    budget, <em>not by D</em>. A frontier bound (<code>--sffs-delta</code>) keeps the floating expansion near
+    the target size instead of wandering toward full dimensionality. The method and its evaluation are
+    described in Somol and Grim, <em>Stochastic Sequential Search in Very-High-Dimensional Feature
+    Selection</em>, <a href="https://arxiv.org/abs/2608.01502">arXiv:2608.01502</a> (2026).</p>
+<pre class="cmd"><code><span class="c"># 10,105-feature text data, target d=500, 8 threads — minutes, not days:</span>
+./fst4 <span class="f">--config</span> demos/demo37t.cfg
+<span class="c"># the campaign protocol behind it, spelled out:</span>
+./fst4 <span class="f">--data</span> data/reuters_apte.arff <span class="f">--criterion</span> multinom-bhattacharyya \
+       <span class="f">--search</span> sffs <span class="f">--target-d</span> 500 <span class="f">--sffs-delta</span> 20 \
+       <span class="f">--evaluator</span> sampled <span class="f">--step-cap</span> 100 <span class="f">--step-cap-backward</span> 50 \
+       <span class="f">--threads</span> 8 <span class="f">--validate</span> multinom</code></pre>
+    <p>Two shipped protocols mark the scale: 5 000-feature handwriting data searched to d = 300
+    (<code>demos/demo36.cfg</code>), and 10 105-feature text categorization searched to d = 500 in minutes on
+    8 threads (<code>demos/demo37t.cfg</code>) — threaded runs bit-identical to sequential at the same
+    <code>--seed</code>, for any thread count.</p>
+
+    <h3>The duality: stochastic search vs. DAF ranking</h3>
+    <p>FST4's other high-dimensional instrument is <strong>DAF</strong> (Dependency-Aware Feature ranking):
+    run <code>montecarlo</code> probes with the <code>feature-stats</code> tracker, and every feature is ranked
+    by its average contribution across thousands of random subsets (<code>--daf-rank</code>, pairwise statistics
+    via <code>--daf-pairs</code>). Unlike per-feature ranking, DAF sees features <em>in company</em>, yet it
+    stays blunt enough to be extremely robust. The two methods form a genuine duality:</p>
+    <div class="cards3">
+      <div class="card"><h4>Budgeted stochastic search</h4>
+        <p><strong>The stronger optimizer.</strong> Actively constructs a subset; with budget it decisively
+        out-scores rankings on the criterion. The choice when you can validate and want the best subset the
+        data can support.</p></div>
+      <div class="card"><h4>DAF ranking</h4>
+        <p><strong>The robust one.</strong> Averages over thousands of probes; stable across data resamples and
+        seeds, hard to overfit, cheap. The safer default when samples are scarce relative to dimensionality.</p></div>
+    </div>
+
+    <figure class="viz">
+      <div class="legend">
+        <span><span class="sw" style="background:var(--s1)"></span>budgeted stochastic SFFS (<code>--evaluator sampled</code>)</span>
+        <span><span class="sw" style="background:var(--s2)"></span>DAF ranking (<code>montecarlo</code> + <code>feature-stats</code>)</span>
+        <span><span class="sw" style="background:var(--s3)"></span>BIF (individual ranking)</span>
+      </div>
+      <svg viewBox="0 0 880 320" role="img" aria-label="Schematic: with growing evaluation budget, DAF ranking rises quickly to a robust plateau while budgeted stochastic floating search starts lower but crosses above it, achieving higher criterion values.">
+        <line class="axisl" x1="56" y1="274" x2="856" y2="274"/>
+        <line class="axisl" x1="56" y1="26"  x2="56"  y2="274"/>
+        <text class="schem" x="856" y="16" text-anchor="end">schematic</text>
+
+        <line x1="100" y1="238" x2="160" y2="238" class="curve" style="stroke:var(--s3)"/>
+        <text class="lbl" x="170" y="242">BIF — one ranking pass, interaction-blind</text>
+
+        <path class="curve" style="stroke:var(--s2)" d="M 100 258 C 200 168, 300 142, 430 134 S 680 126, 856 124"/>
+        <line x1="560" y1="152" x2="578" y2="152" stroke="var(--s2)" stroke-width="3"/>
+        <text class="lbl" x="584" y="156">DAF — fast rise, robust plateau</text>
+
+        <path class="curve" style="stroke:var(--s1)" d="M 180 292 C 320 252, 430 176, 560 112 S 740 74, 856 66"/>
+        <line x1="650" y1="50" x2="668" y2="50" stroke="var(--s1)" stroke-width="3"/>
+        <text class="lbl" x="674" y="54">stochastic SFFS — keeps climbing</text>
+
+        <line x1="540" y1="120" x2="540" y2="274" stroke="var(--muted)" stroke-dasharray="4 4"/>
+        <text class="lbl" x="540" y="296" text-anchor="middle">given budget, the search pulls ahead — on the criterion (train) axis</text>
+
+        <text class="lbl" x="456" y="316" text-anchor="middle">criterion-evaluation budget (log, schematic) →</text>
+        <text class="lbl" transform="rotate(-90 16 150)" x="16" y="150" text-anchor="middle">criterion value (train axis) →</text>
+      </svg>
+      <figcaption><strong>Two regimes, one honest caveat.</strong> The y-axis is the <em>optimized criterion</em>,
+      estimated on selection data. When samples are scarce relative to dimensionality, the strongest optimizer of
+      an estimate can overfit it — the holdout, not the criterion, has the last word. Run both, compare on
+      <code>--validate</code>, and let DAF's robustness arbitrate ties. FST4 makes the comparison a one-liner
+      (<code>--compare-config</code>, section 07).</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ======================================================================= -->
+<section id="byoc">
+  <div class="wrap">
+    <p class="kicker">06 · Open the loop</p>
+    <h2>Bring your own criterion — any language</h2>
+    <p>Everything so far used FST4's built-in models. But the most consequential capability is the generic one:
+    <strong>FST4 will optimize a criterion it has never heard of.</strong> Your model, your metric, your cost
+    function — in Python, R, awk, or a compiled binary — plugs into every search, splitter, tracker and thread
+    of the toolbox through a persistent-process line protocol on stdin/stdout. Three escalating layers:</p>
+
+    <figure class="viz">
+      <svg viewBox="0 0 880 404" role="img" aria-label="Three protocol layers between fst4 and an external tool: wrapper-extern exchanges training and test rows for predicted labels; extern-value sends data once and then index-only VALUE queries answered by one number; with extern-no-data only index sets are exchanged, making FST4 a generic subset optimizer.">
+        <defs>
+          <marker id="arrR" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--s1)"/>
+          </marker>
+          <marker id="arrL" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--s2)"/>
+          </marker>
+        </defs>
+        <rect class="node" x="24" y="24" width="122" height="352" rx="10"/>
+        <text class="lblb" x="85" y="48" text-anchor="middle">fst4</text>
+        <text class="tick" x="85" y="66" text-anchor="middle">any search ·</text>
+        <text class="tick" x="85" y="81" text-anchor="middle">any splitter ·</text>
+        <text class="tick" x="85" y="96" text-anchor="middle">any tracker</text>
+        <rect class="node" x="734" y="24" width="122" height="352" rx="10"/>
+        <text class="lblb" x="795" y="48" text-anchor="middle">your tool</text>
+        <text class="tick" x="795" y="66" text-anchor="middle">Python · R · awk ·</text>
+        <text class="tick" x="795" y="81" text-anchor="middle">anything with</text>
+        <text class="tick" x="795" y="96" text-anchor="middle">stdin/stdout</text>
+
+        <text class="lblb" x="160" y="46">1 · wrapper-extern — your classifier inside the loop</text>
+        <line x1="156" y1="70"  x2="726" y2="70"  stroke="var(--s1)" stroke-width="1.75" marker-end="url(#arrR)"/>
+        <text class="mono" fill="var(--ink-2)" x="440" y="63" text-anchor="middle">TRAIN rows … / TEST rows …  →</text>
+        <line x1="726" y1="100" x2="156" y2="100" stroke="var(--s2)" stroke-width="1.75" marker-end="url(#arrL)"/>
+        <text class="mono" fill="var(--ink-2)" x="440" y="93" text-anchor="middle">←  predicted labels</text>
+        <line class="gridl" x1="156" y1="126" x2="726" y2="126"/>
+
+        <text class="lblb" x="160" y="152">2 · extern-value — your criterion inside the loop</text>
+        <line x1="156" y1="176" x2="726" y2="176" stroke="var(--s1)" stroke-width="1.75" marker-end="url(#arrR)"/>
+        <text class="mono" fill="var(--ink-2)" x="440" y="169" text-anchor="middle">DATA — training part, once per split  →</text>
+        <line x1="156" y1="204" x2="726" y2="204" stroke="var(--s1)" stroke-width="1.75" marker-end="url(#arrR)"/>
+        <text class="mono" fill="var(--ink-2)" x="440" y="197" text-anchor="middle">VALUE d f₁ … f_d — per evaluation, indices only  →</text>
+        <line x1="726" y1="232" x2="156" y2="232" stroke="var(--s2)" stroke-width="1.75" marker-end="url(#arrL)"/>
+        <text class="mono" fill="var(--ink-2)" x="440" y="225" text-anchor="middle">←  the criterion value (one number)</text>
+        <text class="tick" x="440" y="252" text-anchor="middle">your tool holds sufficient statistics — answers in O(d), caching and cost-aware measures possible</text>
+        <line class="gridl" x1="156" y1="268" x2="726" y2="268"/>
+
+        <text class="lblb" x="160" y="294">3 · extern-value --extern-no-data — pure set-function optimization</text>
+        <line x1="156" y1="318" x2="726" y2="318" stroke="var(--s1)" stroke-width="1.75" marker-end="url(#arrR)"/>
+        <text class="mono" fill="var(--ink-2)" x="440" y="311" text-anchor="middle">VALUE d f₁ … f_d — no data at all  →</text>
+        <line x1="726" y1="344" x2="156" y2="344" stroke="var(--s2)" stroke-width="1.75" marker-end="url(#arrL)"/>
+        <text class="mono" fill="var(--ink-2)" x="440" y="337" text-anchor="middle">←  f(S)</text>
+        <text class="tick" x="440" y="366" text-anchor="middle">FST4 as a generic subset optimizer over an abstract feature universe</text>
+      </svg>
+      <figcaption><strong>The escalation.</strong> Layer 1 swaps the classifier; layer 2 swaps the whole
+      criterion while FST4 still manages data splits for you (the DATA block is re-sent per split, so honest
+      estimation survives the bridge); layer 3 drops data entirely — any set function can be searched, floated,
+      tracked, and Branch-&amp;-Bounded.</figcaption>
+    </figure>
+
+<pre class="cmd"><code><span class="c"># your classifier in the loop (reference tool: a nearest-centroid model in awk):</span>
+./fst4 <span class="f">--data</span> data/wdbc_30.trn <span class="f">--criterion</span> wrapper-extern \
+       <span class="f">--extern-cmd</span> "awk -f tests/extern_centroid.awk" \
+       <span class="f">--splitter</span> 5050 <span class="f">--splitter2</span> cv <span class="f">--search</span> sfs <span class="f">--target-d</span> 3 <span class="f">--validate</span> same
+
+<span class="c"># your criterion in the loop — and, asserted monotonic, under PROVABLY OPTIMAL search:</span>
+./fst4 <span class="f">--data</span> data/wdbc_30.trn <span class="f">--criterion</span> extern-value \
+       <span class="f">--extern-cmd</span> "awk -f tests/extern_value_meandiff.awk" \
+       <span class="f">--extern-monotonic</span> <span class="f">--search</span> bb-improved <span class="f">--target-d</span> 3</code></pre>
+
+    <p>That second command deserves a double take: <code>--extern-monotonic</code> asserts that your criterion
+    is cardinality-monotonic, which admits the Branch &amp; Bound family — <em>guaranteed-optimal subsets of a
+    criterion FST4 cannot even inspect</em>. The guarantee then rests entirely on your assertion; without the
+    flag, the optimal searches refuse and tell you why. Reference implementations of all three protocol layers
+    ship in <code>tests/</code> as one-page awk scripts — the protocol is small enough to implement over
+    coffee.</p>
+
+    <div class="callout warn">
+      <p class="t">Loud caveats — by design</p>
+      <p><code>--extern-cmd</code> is user-supplied code execution through the shell: run only commands you
+      trust. FST4's reproducibility guarantees end at the protocol boundary — beyond it, determinism belongs to
+      your tool. The label-only classifier protocol cannot provide scores, so AUC is unavailable there
+      (confusion-based metrics work).</p>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================================= -->
+<section id="honest">
+  <div class="wrap">
+    <p class="kicker">07 · Trust, but verify</p>
+    <h2>Machinery for honest answers</h2>
+    <p>Feature selection is uniquely exposed to self-deception: the same data that chooses the subset praises
+    it. FST4's estimation machinery is built to keep the praise and the choice apart.</p>
+    <h3>Splits that nest</h3>
+    <p>The splitter axis (<code>5050</code>, <code>cv</code>, <code>holdout</code>, <code>resub</code>,
+    <code>leave1out</code>, <code>randrand</code>/<code>randfix</code>) defines the estimation protocol, and
+    splitters <strong>nest</strong>: with <code>--splitter 5050 --splitter2 cv</code>, the criterion runs on
+    inner cross-validation folds of the outer training half while the outer holdout stays untouched for
+    <code>--validate</code> — selection never sees the data it is judged on. Scaling
+    (<code>--scaler to01|white</code>) normalizes from training-part statistics only when you ask for it with
+    <code>--scaler-fit train</code>; the default fits the transform on the whole dataset before splitting, the
+    FST3 convention.
+    <code>--validate knn,bayes,lda</code> then reports holdout performance under classifiers that took no part
+    in selection — the cheapest honesty check there is.</p>
+    <h3>Trackers: results as evidence, not trophies</h3>
+    <p>Trackers observe every evaluated subset. The default keeps the best-k distinct subsets;
+    <code>regularizer</code> prefers a smaller or cheaper subset within a criterion margin of the best — a
+    direct antidote to overfitting-by-greed; <code>stabileval</code> measures <strong>selection stability</strong>
+    across repeated splits (<code>--repeat-over-splits</code>): if ten resamples of your data select ten
+    disjoint subsets, no single run should be trusted, and now you know. <code>--compare-config</code> runs a
+    second scenario and quantifies the similarity of two whole selection <em>processes</em> (IATI/ICW/IANHI) —
+    the instrument behind the metric-flip experiment of section 03.</p>
+  </div>
+</section>
+
+<!-- ======================================================================= -->
+<section id="repro">
+  <div class="wrap">
+    <p class="kicker">08 · The contract</p>
+    <h2>Reproducibility is a specification, not luck</h2>
+    <p>Randomized feature selection has a credibility problem: rerun someone's experiment and you get a
+    different subset. FST4 treats determinism as a contract with a test suite:</p>
+    <ul>
+      <li><strong>One owned PRNG.</strong> All randomness flows through FST4's own generator with identical
+      streams on Windows, macOS and Linux — the same <code>--seed</code> yields the same splits, the same
+      sampled candidates, the same subsets, on every platform. An unseeded run equals <code>--seed 1</code>:
+      even the default is reproducible.</li>
+      <li><strong>Structural determinism.</strong> Components needing training-time randomness derive it
+      structurally — the Random Forest seeds each training run from a hash of (candidate subset, seed, split),
+      making every evaluation a pure function of its inputs. Logistic regression, both native SVMs, LDA and
+      ridge are RNG-free outright.</li>
+      <li><strong>Threading changes wall time, never answers.</strong> Threaded runs are bit-identical to
+      sequential at matched seed for any thread count — across the sequential, floating, Monte Carlo,
+      exhaustive, and all four Branch &amp; Bound searches, and the stochastic sampled evaluator.
+      <code>--threads 8</code> is free of scientific cost.</li>
+      <li><strong>A golden gate.</strong> A 112-scenario golden-output suite pins the entire CLI surface
+      byte-for-byte (106 scenarios in the default run plus a slow tier for the hours-long protocols). If a
+      result can drift, the gate fails.</li>
+    </ul>
+    <p>The single deliberate exception is the external bridge — beyond the protocol line, determinism is your
+    tool's job.</p>
+  </div>
+</section>
+
+<!-- ======================================================================= -->
+<section id="tooling">
+  <div class="wrap">
+    <p class="kicker">09 · From experiment to pipeline</p>
+    <h2>Reports for humans, streams for machines</h2>
+    <p><code>--report detailed</code> upgrades any run into a small research report: the best-per-size
+    criterion curve with holdout re-validation of every subset (the overfitting curve of section 03), tabular
+    ROC and precision–recall curves of the validating classifier, confusion matrices, and any hyperparameters
+    the run tuned. <code>--curves-svg</code> renders those curves as a self-contained picture — no plotting
+    library, nothing fetched from anywhere — and keeps the criterion and the holdout on separate axes, so the
+    overfitting panel cannot be misread as one quantity. <code>--dump-scores</code> writes the per-sample
+    holdout predictions and class scores, for error analysis or an ROC variant of your own. For automation,
+    the CLI is pipe-clean by design in <em>both</em> directions: with <code>--output json</code> or
+    <code>csv</code>, <em>all</em> prose goes to stderr and stdout carries only the result —
+    <code>./fst4 … --output json | jq</code> just works — while <code>--data -</code> takes the dataset from
+    standard input, so fst4 sits in the middle of a pipeline like any other filter:
+    <code>zcat data.trn.gz | ./fst4 --data - --format trn … | jq</code>. <code>--progress json</code> emits one
+    JSON line per improved solution for live dashboards, config files capture whole scenarios
+    (<code>--config demos/demo10.cfg</code>), and <code>--seed</code> makes every pipeline rerun byte-comparable
+    to the last.</p>
+  </div>
+</section>
+
+<!-- ======================================================================= -->
+<section id="tour">
+  <div class="wrap">
+    <p class="kicker">10 · See for yourself</p>
+    <h2>A runnable tour</h2>
+    <p>Every capability on this page ships as a ready-to-run config — <code>./fst4 --config demos/demoNN.cfg</code>
+    from the repository root; the demo datasets are included in <code>data/</code> (see
+    <code>data/readme.txt</code>). A guided selection:</p>
+    <div class="tblwrap">
+    <table class="spec">
+      <tr><th>config</th><th>what it shows</th></tr>
+      <tr><td><code>demo10.cfg</code></td><td>filter selection + independent validation — the basic protocol</td></tr>
+      <tr><td><code>demo14.cfg</code></td><td>balanced vs. plain accuracy changing <em>what gets selected</em> (IATI ≈ 0.14)</td></tr>
+      <tr><td><code>demo15.cfg</code> / <code>demo16.cfg</code></td><td>AUC-driven selection / cost-sensitive selection (<code>--class-weights</code>)</td></tr>
+      <tr><td><code>demo17.cfg</code> / <code>demo19.cfg</code></td><td>regression selection by R² — neighbours / ridge</td></tr>
+      <tr><td><code>demo18.cfg</code> / <code>demo38.cfg</code></td><td>Random Forest vs. linear-SVM wrappers on spam data</td></tr>
+      <tr><td><code>demo29.cfg</code></td><td>RBF-SVM wrapper with built-in C/γ tuning</td></tr>
+      <tr><td><code>demo41.cfg</code></td><td>optimal Branch &amp; Bound</td></tr>
+      <tr><td><code>demo34.cfg</code></td><td>DAF ranking at high dimensionality</td></tr>
+      <tr><td><code>demo36.cfg</code> / <code>demo37t.cfg</code></td><td>budgeted stochastic search at 5 000 and 10 105 features</td></tr>
+      <tr><td><code>demo54.cfg</code> / <code>demo55.cfg</code></td><td>selection stability / process-similarity comparison</td></tr>
+      <tr><td><code>demo64.cfg</code></td><td>your-own-model selection via the external bridge</td></tr>
+    </table>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================================= -->
+<section id="start">
+  <div class="wrap">
+    <p class="kicker">11 · Ninety seconds</p>
+    <h2>Getting started</h2>
+<pre class="cmd"><code><span class="c"># build (CMake ≥ 3.x, any C++17 compiler; no external libraries needed):</span>
+cmake -S . -B build <span class="f">-DCMAKE_BUILD_TYPE</span>=Release
+cmake --build build --parallel --target fst4
+
+<span class="c"># first result:</span>
+build/bin/fst4 <span class="f">--config</span> demos/demo10.cfg
+
+<span class="c"># what else is in the box:</span>
+build/bin/fst4 <span class="f">--list</span>
+build/bin/fst4 <span class="f">--help</span></code></pre>
+    <p>From there: <code>doc/FST4_CLI.md</code> is the complete flag reference,
+    the ready-to-run configs in <code>demos/</code> map protocols to command lines, and the C++ API is documented in the
+    source headers (Doxygen configuration in <code>doc/</code>). The library itself is header-only — C++
+    consumers include and go; the demo sources in <code>demos/</code> show the idiom.</p>
+  </div>
+</section>
+
+<!-- ======================================================================= -->
+<section id="scope">
+  <div class="wrap">
+    <p class="kicker">12 · The fine print, honestly</p>
+    <h2>Scope, limits, dependencies, licensing</h2>
+    <ul>
+      <li>The Gaussian-model filters are <strong>two-class only</strong>, and all normal-model components fail —
+      loudly, not silently — on singular covariances: constant features, or subsets larger than class sample
+      counts. The multinomial filters and all wrappers handle any class count.</li>
+      <li>Wrapper selection costs classifier trainings by the thousand; that is what the hybrid evaluator,
+      threading, and the budgeted stochastic search are for.</li>
+      <li>The optimality of Branch &amp; Bound is exactly as good as the monotonicity of the criterion — FST4
+      warns when the property is not declared.</li>
+      <li><strong>Dependencies:</strong> the core is header-only C++17 with zero mandatory external libraries.
+      Building the <code>fst4</code> command-line tool additionally uses CLI11 for argument parsing — vendored
+      in-tree (BSD-3-licensed), so there is nothing to fetch, and library-only consumers carry no CLI11
+      obligations. Exactly two optional external libraries exist — LibSVM (enables the
+      <code>wrapper-svm</code> kernel zoo; drop-in, auto-detected) and Eigen (optional swap-in for the
+      internal matrix kernels, used to cross-verify the built-in solvers — which it matches at print
+      precision). Everything else,
+      Random Forest to ridge to both native SVMs, is implemented in the library itself, keeping the licensing
+      story a one-liner.</li>
+      <li><strong>License:</strong> FST4 is Copyright © 2000–present ÚTIA (Institute of Information Theory and
+      Automation of the Czech Academy of Sciences) and dual-licensed. It is free software under the GNU Affero General
+      Public License, version 3 (the full text ships as <code>LICENSE</code>): anyone, including commercial
+      users, may use, modify and redistribute it, provided that modified versions they distribute or serve over
+      a network stay under the AGPL with complete source. Organizations that want FST4 in closed-source products
+      without those obligations need a commercial license from ÚTIA. <code>LICENSING.md</code> explains
+      both options and the contributor license agreement. In case of interest in a commercial license, or with
+      any licensing question, write to <a href="mailto:utia@utia.cas.cz">utia@utia.cas.cz</a>; technical
+      questions and pull requests: <a href="mailto:somol@utia.cas.cz">somol@utia.cas.cz</a>, with "FST" in the
+      subject line.</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>FST4 — Feature Selection Toolbox 4.2 · ÚTIA, Czech Academy of Sciences ·
+    <a href="https://fst.utia.cz">fst.utia.cz</a></p>
+    <p>This page is self-contained: no scripts, no network resources, prints cleanly. Figures marked
+    <em>schematic</em> illustrate behavior patterns rather than plot measured data; every command shown is
+    runnable as written from the repository root.</p>
+  </div>
+</footer>
+
+</body>
+</html>

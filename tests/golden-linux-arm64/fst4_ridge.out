@@ -1,0 +1,9 @@
+{
+  "version": "4.2.0",
+  "invocation": {"data": "data/wdbc_30.trn", "format": "trn", "splitter": "5050", "splitter2": "cv", "splitter2_cv_folds": 3, "validate": "same", "wrapper_metric": "r2", "scaler": "void", "criterion": "wrapper-ridge", "ridge_lambda": 0.01, "search": "sfs", "target_d": 5, "threads": 1, "seed": 1, "top_k": 5, "stable_output": true},
+  "data": {"file": "data/wdbc_30.trn", "format": "trn", "classes": 2, "features": 30, "samples": 569, "class_sizes": [357, 212]},
+  "result": {"features": [20, 21, 23, 24, 27], "size": 5, "value": 0.710019989325},
+  "per_split": [0.711765392685, 0.694927503993, 0.723367071296],
+  "validation": [{"classifier": "ridge", "accuracy": 0.961403508772, "metric": "r2", "metric_value": 0.717893392913}],
+  "top_k": [{"value": 0.710019989325, "size": 5, "features": [20, 21, 23, 24, 27]}, {"value": 0.708198085705, "size": 4, "features": [20, 21, 24, 27]}, {"value": 0.700688491936, "size": 3, "features": [20, 21, 27]}, {"value": 0.672409998846, "size": 2, "features": [20, 27]}, {"value": 0.619363003783, "size": 1, "features": [27]}]
+}

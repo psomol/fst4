@@ -1,0 +1,8 @@
+{
+  "version": "4.2.0",
+  "invocation": {"data": "data/wdbc_30.trn", "format": "trn", "splitter": "5050", "validate": "knn", "scaler": "void", "criterion": "bhattacharyya", "search": "bb-fast", "target_d": 10, "bb_gamma": 1, "bb_delta": 1, "threads": 1, "seed": 1, "top_k": 5, "stable_output": true},
+  "data": {"file": "data/wdbc_30.trn", "format": "trn", "classes": 2, "features": 30, "samples": 569, "class_sizes": [357, 212]},
+  "result": {"features": [0, 3, 10, 12, 13, 19, 20, 22, 23, 29], "size": 10, "value": 4.661830377},
+  "validation": [{"classifier": "knn", "accuracy": 0.929824561404}],
+  "top_k": [{"value": 4.661830377, "size": 10, "features": [0, 3, 10, 12, 13, 19, 20, 22, 23, 29]}, {"value": 4.61236715755, "size": 10, "features": [0, 3, 6, 10, 13, 16, 20, 22, 23, 25]}, {"value": 4.58640341191, "size": 10, "features": [0, 3, 10, 12, 13, 19, 20, 22, 23, 25]}, {"value": 4.55691657371, "size": 10, "features": [0, 3, 10, 13, 16, 20, 22, 23, 25, 26]}, {"value": 4.54659767905, "size": 10, "features": [0, 2, 3, 10, 13, 16, 20, 22, 23, 25]}]
+}

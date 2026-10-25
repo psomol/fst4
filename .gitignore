@@ -1,0 +1,25 @@
+# CMake build trees (configure with -S . -B build)
+/build/
+/build-*/
+CMakeUserPresets.json
+
+# Compiled objects and executables outside a build tree
+*.o
+*.obj
+/fst4
+/fst4.exe
+
+# Generated API reference (doxygen doxygen.cfg, run from doc/)
+doc/html/
+
+# Golden-harness scratch outputs (the goldens themselves ARE tracked)
+tests/last_run/
+
+# LibSVM drop-in: not distributed with FST4; fetch per libsvm/readme.txt,
+# which IS tracked
+/libsvm/*
+!/libsvm/readme.txt
+
+# Editor backups and OS noise
+*.bak
+.DS_Store

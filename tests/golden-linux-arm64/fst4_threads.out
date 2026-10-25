@@ -1,0 +1,7 @@
+{
+  "version": "4.2.0",
+  "invocation": {"data": "data/wdbc_30.trn", "format": "trn", "splitter": "5050", "scaler": "void", "criterion": "wrapper-knn", "knn_k": 3, "knn_distance": "L2", "search": "sfs", "target_d": 7, "threads": 4, "seed": 1, "top_k": 5, "stable_output": true},
+  "data": {"file": "data/wdbc_30.trn", "format": "trn", "classes": 2, "features": 30, "samples": 569, "class_sizes": [357, 212]},
+  "result": {"features": [0, 1, 4, 5, 6, 7, 22], "size": 7, "value": 0.943859649123},
+  "top_k": [{"value": 0.943859649123, "size": 3, "features": [0, 1, 22]}, {"value": 0.943859649123, "size": 4, "features": [0, 1, 4, 22]}, {"value": 0.943859649123, "size": 5, "features": [0, 1, 4, 5, 22]}, {"value": 0.943859649123, "size": 6, "features": [0, 1, 4, 5, 6, 22]}, {"value": 0.943859649123, "size": 7, "features": [0, 1, 4, 5, 6, 7, 22]}]
+}

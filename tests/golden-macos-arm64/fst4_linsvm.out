@@ -1,0 +1,9 @@
+{
+  "version": "4.2.0",
+  "invocation": {"data": "data/wdbc_30.trn", "format": "trn", "splitter": "5050", "splitter2": "cv", "splitter2_cv_folds": 3, "validate": "same", "scaler": "void", "criterion": "wrapper-linsvm", "linsvm_c": 1, "linsvm_loss": "l2", "search": "sfs", "target_d": 4, "threads": 1, "seed": 1, "top_k": 5, "stable_output": true},
+  "data": {"file": "data/wdbc_30.trn", "format": "trn", "classes": 2, "features": 30, "samples": 569, "class_sizes": [357, 212]},
+  "result": {"features": [6, 19, 21, 22], "size": 4, "value": 0.975251182033},
+  "per_split": [0.968085106383, 0.968085106383, 0.989583333333],
+  "validation": [{"classifier": "linsvm", "accuracy": 0.940350877193}],
+  "top_k": [{"value": 0.975251182033, "size": 4, "features": [6, 19, 21, 22]}, {"value": 0.971778959811, "size": 3, "features": [6, 21, 22]}, {"value": 0.950576241135, "size": 2, "features": [21, 22]}, {"value": 0.911790780142, "size": 1, "features": [22]}]
+}

@@ -1,0 +1,301 @@
+# FST4 golden harness manifest — one line per demo:
+#   name  mode  timeout_seconds  [tier]  [command...]
+# command (5th column onward, optional): full command line to run instead of
+#   ./<name> — used for fst4 CLI scenarios. Scenario commands use
+#   --stable-output (strips timings) and --verbosity silent (suppresses
+#   library progress prose) so output is byte-stable; tier column must be
+#   present ("-" for fast) when a command is given.
+# modes:
+#   exact  — normalized full output must byte-match the golden (<baseline dir>/<name>.out)
+#   result — only the final result signature must match (<baseline dir>/<name>.result);
+#            used where full output is not run-stable (thread interleaving)
+#   smoke  — no golden: demo must exit 0 within the timeout and print at least one
+#            "Criterion value" line; used for wall-clock-budgeted (load-dependent) demos
+#   skip   — not run by the harness; reason in trailing comment
+# tier (4th column, optional): "slow" = excluded from the default check/capture run;
+#   include with FST_GOLDEN_SLOW=1 or by naming the demo explicitly. Run the slow tier
+#   at least before every release (see tests/README.md, which also explains the per-platform
+#   baseline directories tests/golden-<platform>/).
+# Timeouts are ~3x observed runtime, sized to the slowest machine in regular use
+# (see tests/README.md "Portability"); a timeout is a FAILURE.
+# --- compiled demo exemplars (all other demos ship as fst4 configs in demos/ and are
+#     covered by the equivalent fst4_* scenarios below) ---
+demo10	exact	300
+demo52t	exact	2400	slow	# threaded SFRS + tracker regularization: ~9 min ref machine, ~12 min laptop
+demo55	exact	600
+smoke_type_erasure	exact	300	-	# type-erasure smoke test: 4 runtime-selected component combinations against the abstract bases, ~15 s; build via the CMake smoke_tests target
+smoke_generalized_step	exact	300	-	# generalized-step probe: C(n,g) counts + overflow throws + threaded-vs-sequential (G)SFS G=2; build via the CMake smoke_tests target
+# --- fst4 CLI scenarios (build via the CMake fst4 target) ---
+# fst4_demo10 reproduces the demo10 protocol exactly (same subset + criterion value: 3 10 16 20 21 26 27, 12.1045) — the demo-parity anchor
+fst4_demo10	exact	300	-	./fst4 --data data/wdbc_30.trn --criterion gmahalanobis --search sfs --target-d 7 --output json --stable-output --verbosity silent
+fst4_wknn_cv_sffs	exact	600	-	./fst4 --data data/wdbc_30.trn --criterion wrapper-knn --knn-k 3 --splitter cv --cv-folds 3 --search sffs --output json --stable-output --verbosity silent
+fst4_bhat_sbs	exact	300	-	./fst4 --data data/wdbc_30.trn --criterion bhattacharyya --search sbs --target-d 7 --output csv --stable-output --verbosity silent
+fst4_wbayes_dos_resub	exact	600	-	./fst4 --data data/wdbc_30.trn --criterion wrapper-bayes --splitter resub --search dos --output text --stable-output --verbosity silent
+fst4_bif_holdout_to01	exact	300	-	./fst4 --data data/wdbc_30.trn --criterion gmahalanobis --splitter holdout --holdout-train 70 --scaler to01 --search bif --target-d 7 --output json --stable-output --verbosity silent
+# fst4_scaler_fit_train: per-split TRAIN-part scaler fitting (--scaler-fit train: leakage-free normalization) — wrapper+cv so the transform re-fits on every fold change inside each evaluation; must DIFFER from the same run with the default --scaler-fit all in top_k values (the leakage-closure proof lives in the captured values)
+fst4_scaler_fit_train	exact	300	-	./fst4 --data data/wdbc_30.trn --scaler white --scaler-fit train --criterion wrapper-knn --knn-k 3 --splitter cv --cv-folds 3 --search sfs --target-d 7 --output json --stable-output --verbosity silent
+fst4_os_seeded	exact	300	-	./fst4 --data data/wdbc_30.trn --criterion gmahalanobis --search os --target-d 7 --os-delta 3 --seed 1 --output json --stable-output --verbosity silent
+fst4_arff_wknn	exact	600	-	./fst4 --data data/ionosphere.arff --criterion wrapper-knn --search sfs --target-d 5 --output csv --stable-output --verbosity silent
+fst4_threads	exact	600	-	./fst4 --data data/wdbc_30.trn --criterion wrapper-knn --search sfs --target-d 7 --threads 4 --output json --stable-output --verbosity silent
+# --- demo protocols recast as CLI invocations (parity with the corresponding demo outputs
+#     verified at introduction) ---
+fst4_validate_demo10	exact	300	-	./fst4 --data data/wdbc_30.trn --criterion gmahalanobis --search sfs --target-d 7 --validate knn --output json --stable-output --verbosity silent
+# fst4_validate_native: every native classifier as a --validate entry (lda/rf/linsvm/rbfsvm alongside knn/bayes/logreg) on one filter-selected subset
+fst4_validate_native	exact	600	-	./fst4 --data data/wdbc_30.trn --criterion bhattacharyya --splitter 5050 --search sfs --target-d 7 --validate knn,bayes,lda,logreg,rf,linsvm,rbfsvm --output json --stable-output --verbosity silent
+fst4_nested_demo26	exact	600	-	./fst4 --data data/wdbc_30.trn --criterion wrapper-bayes --splitter 5050 --splitter2 cv --search sffs --validate same,knn --output json --stable-output --verbosity silent
+fst4_sfrs_demo20	exact	900	-	./fst4 --data data/wdbc_30.trn --criterion wrapper-knn --splitter 5050 --splitter2 leave1out --search sfrs --validate same --output csv --stable-output --verbosity silent
+fst4_g2_demo21	exact	900	-	./fst4 --data data/wdbc_30.trn --criterion wrapper-knn --knn-k 5 --splitter 5050 --splitter2 cv --search sffs --generalization-level 2 --validate same --output json --stable-output --verbosity silent
+fst4_bb_demo41	exact	600	-	./fst4 --data data/wdbc_30.trn --criterion bhattacharyya --search bb-improved --target-d 10 --knn-distance Lp --validate knn --output csv --stable-output --verbosity silent
+fst4_bbfast_demo43	exact	600	-	./fst4 --data data/wdbc_30.trn --criterion bhattacharyya --search bb-fast --target-d 10 --knn-distance Lp --validate knn --output json --stable-output --verbosity silent
+fst4_exhaustive_small	exact	300	-	./fst4 --data data/wdbc_30.trn --criterion gmahalanobis --search exhaustive --target-d 3 --output csv --stable-output --verbosity silent
+fst4_mc_seeded	exact	600	-	./fst4 --data data/wdbc_30.trn --criterion wrapper-knn --splitter 5050 --splitter2 cv --search montecarlo --mc-trials 500 --mc-card-min 4 --mc-card-max 10 --output json --stable-output --verbosity silent
+fst4_restarts_demo22	exact	900	-	./fst4 --data data/sonar_60.trn --criterion bhattacharyya --splitter randrand --rr-splits 1 --rr-train 75 --rr-test 25 --search os --os-delta 10 --target-d 30 --restarts-nonimproving 4 --validate knn --output csv --stable-output --verbosity silent
+fst4_svmalt_demo23	exact	900	-	./fst4 --data data/sonar_60.trn --criterion wrapper-svm --svm-kernel rbf --svm-optimize alternating --splitter randrand --rr-splits 1 --rr-train 50 --rr-test 40 --splitter2 cv --search dos --dos-delta 3 --validate same --output csv --stable-output --verbosity silent
+fst4_multinom_demo30	exact	600	-	./fst4 --data data/mushroom_125.trn --criterion wrapper-multinom --splitter randrand --rr-splits 1 --rr-train 50 --rr-test 40 --splitter2 cv --splitter2-cv-folds 5 --search dos --dos-delta 10 --validate same --output csv --stable-output --verbosity silent
+fst4_hybrid_demo53	exact	900	-	./fst4 --data data/wdbc_30.trn --criterion wrapper-svm --scaler to01 --splitter randrand --rr-splits 1 --rr-train 50 --rr-test 40 --splitter2 cv --search sbs --evaluator hybrid --hybrid-prefilter bhattacharyya --hybrid-keep-perc 50 --validate same --output csv --stable-output --verbosity silent
+# fst4_hybrid_threads is the SAME scenario at --threads 4 - the threaded hybrid main phase
+# is bit-identical to sequential except the echoed threads count in the stats line. The
+# ensemble twin runs threaded in the scenario itself (--threads 4 on fst4_ensemble_demo50;
+# results bit-identical, and the csv output carries no threads echo).
+fst4_hybrid_threads	exact	900	-	./fst4 --data data/wdbc_30.trn --criterion wrapper-svm --scaler to01 --splitter randrand --rr-splits 1 --rr-train 50 --rr-test 40 --splitter2 cv --search sbs --evaluator hybrid --hybrid-prefilter bhattacharyya --hybrid-keep-perc 50 --validate same --output csv --stable-output --verbosity silent --threads 4
+fst4_stability_demo54	exact	900	-	./fst4 --data data/wdbc_30.trn --criterion wrapper-knn --splitter randrand --rr-splits 10 --rr-train 80 --rr-test 20 --splitter2 cv --search sfs --repeat-over-splits --tracker stabileval --output json --stable-output --verbosity silent
+# fst4_repeat_threads: the demo54 trial protocol under --threads 4 - the worker criterion clones must follow the depth-0 split from trial to trial; the output equals fst4_stability_demo54's except for the echoed thread count
+fst4_repeat_threads	exact	900	-	./fst4 --data data/wdbc_30.trn --criterion wrapper-knn --splitter randrand --rr-splits 10 --rr-train 80 --rr-test 20 --splitter2 cv --search sfs --repeat-over-splits --tracker stabileval --threads 4 --output json --stable-output --verbosity silent
+fst4_bias_demo56	exact	600	-	./fst4 --data data/sonar_60.trn --criterion wrapper-knn --splitter 5050 --splitter2 cv --search dos --dos-delta 1 --bias-estimate --validate same --output json --stable-output --verbosity silent
+fst4_regularize_demo51	exact	1200	-	./fst4 --data data/waveform_40.trn --criterion wrapper-knn --splitter 5050 --splitter2 cv --search dos --dos-delta 3 --tracker regularizer --regularize-by subsetsize --regularize-margins 0.001,0.002,0.003,0.004,0.005,0.006,0.007,0.008,0.009 --validate same --output json --stable-output --verbosity silent
+fst4_weights_demo61	exact	600	-	./fst4 --data data/wdbc_30.trn --criterion wrapper-knn --splitter 5050 --splitter2 cv --search sffs --tracker regularizer --regularize-by weights --feature-costs 1,1.2,1,1.3,1.02,2.4,3.9,1.2,7.1,22,9.52,1.08,3.27,1.44,1.04,2.1,1.15,5.6,1.02,3.4,12,1.33,2.05,1.1,8.4,1.7,4.2,1.06,2.9,6.3 --regularize-margins 0,0.005,0.01,0.015,0.02,0.025,0.03,0.035,0.04,0.045 --validate same --output json --stable-output --verbosity silent
+fst4_sweep_demo11reg	exact	900	-	./fst4 --data data/wdbc_30.trn --criterion wrapper-regressor --splitter 5050 --splitter2 cv --search sffs --regr-multipliers 0.3,0.35,0.4 --validate same --output json --stable-output --verbosity silent
+fst4_classify_demo63	exact	600	-	./fst4 --data data/wdbc_30.trn --criterion wrapper-knn --splitter 5050 --splitter2 cv --search sffs --validate same --classify-samples tests/demo63_samples.txt --output csv --stable-output --verbosity silent
+# fst4_classify_scaled / fst4_classify_fit_train: --classify-samples under a non-identity scaler. tests/classify_probe_wdbc.txt holds
+#   five class-0 and five class-1 rows copied verbatim from the depth-0 TRAIN part (the 5050 split's first halves), so a 1-NN classifier
+#   trained on that part must return 0 0 0 0 0 1 1 1 1 1 exactly when each row receives its feature's own transform (whitening here;
+#   the second scenario fits the transform on the train part of the split the classifier is trained on)
+fst4_classify_scaled	exact	300	-	./fst4 --data data/wdbc_30.trn --criterion wrapper-knn --knn-k 1 --splitter 5050 --scaler white --search sfs --target-d 5 --validate same --classify-samples tests/classify_probe_wdbc.txt --output csv --stable-output --verbosity silent
+fst4_classify_fit_train	exact	300	-	./fst4 --data data/wdbc_30.trn --criterion wrapper-knn --knn-k 1 --splitter 5050 --scaler to01 --scaler-fit train --search sfs --target-d 5 --validate same --classify-samples tests/classify_probe_wdbc.txt --output csv --stable-output --verbosity silent
+fst4_daf_legacy	exact	600	-	./fst4 --data data/wdbc_30.trn --criterion wrapper-knn --splitter 5050 --splitter2 cv --search montecarlo --mc-trials 1000 --mc-card-min 5 --mc-card-max 10 --tracker feature-stats --daf-rank 0 --validate knn --daf-validate-every 5 --output json --stable-output --verbosity silent
+fst4_config_file	exact	300	-	./fst4 --config tests/fst4_demo10.cfg
+fst4_progress_json	exact	300	-	./fst4 --data data/wdbc_30.trn --criterion gmahalanobis --search sfs --target-d 7 --stable-output --progress json
+fst4_progress_quiet	exact	300	-	./fst4 --data data/wdbc_30.trn --criterion gmahalanobis --search sfs --target-d 7 --stable-output --progress quiet
+fst4_compare_demo55	exact	900	-	./fst4 --data data/wdbc_30.trn --criterion wrapper-knn --knn-k 3 --knn-distance L1 --splitter randrand --rr-splits 10 --rr-train 95 --rr-test 5 --splitter2 cv --splitter2-cv-folds 3 --search dos --dos-delta 10 --repeat-over-splits --tracker stabileval --compare-config tests/fst4_compare_demo55_b.cfg --output json --stable-output --verbosity silent	# M6: cross-scenario similarity (demo55 protocol: wrapper-knn DOS vs bhattacharyya SFFS, IATI/ICW/IANHI)
+fst4_ensemble_demo50	exact	3600	slow	./fst4 --data data/spambase_57.trn --criterion wrapper-knn --splitter 5050 --splitter2 cv --search sfs --evaluator ensemble --ensemble-knn-ks 1,5,9 --threads 4 --validate same --output csv --stable-output --verbosity silent
+# --- one results-exact scenario per further FST3 demo protocol not already covered above
+#     (parameters follow the demos/*.cfg configs). Wall-clock-budgeted protocols
+#     (demo24/24t --mc-seconds) and the hours-long ones (demo11t/32t/34/35t/36) have no
+#     golden by nature. ---
+fst4_verbose_demo10	exact	300	-	./fst4 --data data/wdbc_30.trn --criterion gmahalanobis --search sfs --target-d 7 --stable-output	# deliberately NON-silent: pins the default text search-progress + setup prose (the role the compiled demos' goldens play)
+fst4_svmpre_demo12	exact	900	-	./fst4 --data data/waveform_40.arff --criterion wrapper-svm --svm-kernel rbf --svm-optimize pre --splitter 5050 --splitter2 cv --search sfs --threads 2 --validate same --output json --stable-output --verbosity silent	# demo12t protocol (its active code path is SFS, not the DOS its title claims)
+fst4_search2_demo25	exact	2400	slow	./fst4 --data data/optdigits_64.trn --criterion wrapper-svm --svm-kernel sigmoid --svm-optimize pre --splitter 5050 --splitter2 cv --search dos --dos-delta 3 --search2 bif --search2-d 20 --threads 4 --validate same --output json --stable-output --verbosity silent	# demo25t: BIF top-20 seeds DOS; SVM re-optimized on the seed
+# fst4_search2_sfs / fst4_search2_sffs: --search2 bif seeding a NON-oscillating sequential search - the seed is the search's starting point
+#   (sfs/sffs/sfrs used to discard it silently); sfs extends the 3-feature BIF seed to d=7, sffs floats from the 3-feature seed to d=5
+fst4_search2_sfs	exact	300	-	./fst4 --data data/wdbc_30.trn --criterion bhattacharyya --search sfs --target-d 7 --search2 bif --search2-d 3 --output json --stable-output --verbosity silent
+fst4_search2_sffs	exact	600	-	./fst4 --data data/wdbc_30.trn --criterion wrapper-knn --splitter 5050 --splitter2 cv --search sffs --target-d 5 --search2 bif --search2-d 3 --validate same --output json --stable-output --verbosity silent
+fst4_bif_demo31	exact	600	-	./fst4 --data data/reuters_apte.arff --criterion multinom-bhattacharyya --splitter randrand --rr-splits 1 --rr-train 50 --rr-test 40 --search bif --target-d 500 --validate multinom --output json --stable-output --verbosity silent	# demo31: BIF top-500 on 10k-feature reuters
+fst4_bifos_demo33	exact	2400	slow	./fst4 --data data/reuters_apte.arff --criterion multinom-bhattacharyya --splitter randrand --rr-splits 1 --rr-train 50 --rr-test 40 --search os --os-delta 1 --search2 bif --target-d 500 --validate multinom --output json --stable-output --verbosity silent	# demo33: BIF-seeded OS delta=1 at d=500 on reuters
+fst4_exhaustive_demo40	exact	10800	slow	./fst4 --data data/wdbc_30.trn --criterion wrapper-knn --knn-k 3 --knn-distance Lp --splitter 5050 --splitter2 cv --search exhaustive --target-d 5 --tracker dupless --tracker-capacity 50000 --tracker-margin 0.05 --top-k 10 --validate knn --output json --stable-output --verbosity silent	# demo40: exhaustive kNN wrapper over C(30,5)=142506 subsets + margin-tracked alternatives (target-d 5 since the 4.2 WDBC substitution - the FST3 all-sizes run on 15-feature speech is infeasible at D=30)
+fst4_bbpp_demo42	exact	600	-	./fst4 --data data/wdbc_30.trn --criterion bhattacharyya --search bb-bbpp --target-d 10 --knn-distance Lp --tracker dupless --tracker-capacity 50000 --tracker-margin 0.05 --top-k 10 --validate knn --output json --stable-output --verbosity silent	# demo42: BBPP + margin-tracked alternatives
+fst4_margin_demo60	exact	2400	slow	./fst4 --data data/optdigits_64.trn --criterion wrapper-knn --knn-k 3 --splitter 5050 --splitter2 cv --search dos --dos-delta 3 --tracker dupless --tracker-margin 0.05 --tracker-attach evaluator --top-k 10 --validate knn --output json --stable-output --verbosity silent	# demo60: evaluator-attached margin tracking detects equal-value alternative subsets (no tracker capacity, matching demo60.cfg)
+fst4_missing_demo62	exact	900	-	./fst4 --data data/sonar_60_missing_data.trn --missing-value 5 --criterion wrapper-svm --svm-kernel rbf --svm-optimize alternating --splitter randrand --rr-splits 1 --rr-train 50 --rr-test 40 --splitter2 cv --search dos --dos-delta 3 --validate same --output json --stable-output --verbosity silent	# demo62: missing-data substitution (code 5) + alternating SVM optimize/search
+# --- budgeted stochastic (sampled) sequential step ---
+# fst4_sampled pins the sequential sampled path (fwd cap 8 + bwd cap 4 + warm-up, wdbc SFFS);
+# fst4_sampled_threads is the SAME scenario at --threads 4 - the threaded sampled mode is
+# bit-identical to sequential at matched seed BY DESIGN (proposals ride the master RNG, results
+# replay in proposal order), so its golden doubles as a permanent
+# regression test of that determinism contract (outputs differ only in the "threads" echo fields)
+fst4_sampled	exact	600	-	./fst4 --data data/wdbc_30.trn --criterion wrapper-knn --search sffs --target-d 8 --evaluator sampled --step-cap 8 --step-cap-backward 4 --step-explore 0.2 --step-tau 0 --step-decay 100 --step-stats zcontrast --warmup-probes 100 --warmup-card 5 --output json --stable-output --verbosity silent
+fst4_sampled_threads	exact	600	-	./fst4 --data data/wdbc_30.trn --criterion wrapper-knn --search sffs --target-d 8 --evaluator sampled --step-cap 8 --step-cap-backward 4 --step-explore 0.2 --step-tau 0 --step-decay 100 --step-stats zcontrast --warmup-probes 100 --warmup-card 5 --threads 4 --output json --stable-output --verbosity silent
+# fst4_sampled_cold pins the softmax-underflow degenerate branch: backward budget with NO
+# warm-up -> tied cold scores -> tau at the 1e-9 floor -> complete weight underflow from step 2
+# on; the deterministic degenerate branch (argmax/argmin, lowest index wins ties) must select,
+# and the golden pins the scenario's environment invariance
+fst4_sampled_cold	exact	600	-	./fst4 --data data/madelon_train_nips_500.trn --criterion gmahalanobis --search sbs --target-d 490 --evaluator sampled --step-cap 25 --step-cap-backward 10 --step-explore 0.2 --step-tau 0 --step-decay 100 --step-stats zcontrast --output json --stable-output --verbosity silent
+# --- wrapper-logreg (multinomial logistic regression classifier) ---
+# fst4_logreg pins the two-class path incl. internal standardization and the damped-Newton
+# solver (wdbc SFFS, the wrapper reference protocol); fst4_logreg_multiclass pins the
+# true multinomial (3-class softmax) path plus --validate logreg on the depth-0 holdout.
+# Training is RNG-free (zero-init, fixed traversal order): byte-identical at any
+# --seed and --threads by construction, so no threaded twin is needed here.
+fst4_logreg	exact	600	-	./fst4 --data data/wdbc_30.trn --criterion wrapper-logreg --search sffs --target-d 7 --output json --stable-output --verbosity silent
+fst4_logreg_multiclass	exact	600	-	./fst4 --data data/waveform_40.trn --criterion wrapper-logreg --search sfs --target-d 10 --splitter holdout --validate logreg --output json --stable-output --verbosity silent
+# --- DAF ranking (the published 2011 method: montecarlo + feature-stats). fst4_daf_pairs pins
+#     the opt-in pairwise (group) DAF statistics over the top-K DAF0 features;
+#     fst4_daf_pairs_threads is the SAME scenario at --threads 4 - threaded evaluate_stream
+#     (montecarlo, exhaustive) is bit-identical to sequential at matched seed (master-RNG
+#     generation + in-order replay), so its golden doubles as the permanent regression test of
+#     that determinism contract (outputs differ only in the "threads" invocation-echo field)
+fst4_daf_pairs	exact	600	-	./fst4 --data data/wdbc_30.trn --criterion wrapper-knn --splitter 5050 --splitter2 cv --search montecarlo --mc-trials 1000 --mc-card-min 5 --mc-card-max 10 --tracker feature-stats --daf-rank 0 --daf-pairs 6 --daf-pairs-top 8 --validate knn --output json --stable-output --verbosity silent
+fst4_daf_pairs_threads	exact	600	-	./fst4 --data data/wdbc_30.trn --criterion wrapper-knn --splitter 5050 --splitter2 cv --search montecarlo --mc-trials 1000 --mc-card-min 5 --mc-card-max 10 --tracker feature-stats --daf-rank 0 --daf-pairs 6 --daf-pairs-top 8 --validate knn --threads 4 --output json --stable-output --verbosity silent
+# fst4_sffs_delta pins the --sffs-delta bounded floating frontier (the demo36/demo37t
+# protocols): SFFS runs to target-d+delta, floats back, reports best-at-target-d
+fst4_sffs_delta	exact	300	-	./fst4 --data data/wdbc_30.trn --criterion wrapper-knn --splitter 5050 --splitter2 cv --search sffs --target-d 5 --sffs-delta 2 --validate same --output json --stable-output --verbosity silent
+# fst4_metric_* pin the wrapper-metric surface (--wrapper-metric/--class-weights): criterion optimizes the selected metric, --validate reports accuracy + metric.
+fst4_metric_balacc	exact	300	-	./fst4 --data data/wdbc_30.trn --criterion wrapper-knn --knn-k 3 --splitter 5050 --splitter2 cv --search sfs --target-d 4 --wrapper-metric balanced-accuracy --validate same --output json --stable-output --verbosity silent
+fst4_metric_f1	exact	300	-	./fst4 --data data/wdbc_30.trn --criterion wrapper-bayes --splitter 5050 --splitter2 cv --search sfs --target-d 3 --wrapper-metric f1 --validate same --output json --stable-output --verbosity silent
+# fst4_metric_f1_positive0 pins --f1-positive: the SAME scenario as fst4_metric_f1 with the
+# positive class flipped to index 0. The two goldens MUST differ - that difference is the proof the flag
+# reaches the metric (f1 of the wdbc majority class scores higher, and the search optimizes a different objective).
+fst4_metric_f1_positive0	exact	300	-	./fst4 --data data/wdbc_30.trn --criterion wrapper-bayes --splitter 5050 --splitter2 cv --search sfs --target-d 3 --wrapper-metric f1 --f1-positive 0 --validate same --output json --stable-output --verbosity silent
+fst4_metric_auc	exact	300	-	./fst4 --data data/wdbc_30.trn --criterion wrapper-logreg --splitter 5050 --splitter2 cv --search sfs --target-d 3 --wrapper-metric auc --validate same --output json --stable-output --verbosity silent
+fst4_metric_weights	exact	300	-	./fst4 --data data/wdbc_30.trn --criterion wrapper-knn --knn-k 3 --splitter 5050 --splitter2 cv --search sfs --target-d 3 --class-weights 1,5 --validate same --output json --stable-output --verbosity silent
+fst4_metric_r2	exact	300	-	./fst4 --data data/wdbc_30.trn --criterion wrapper-regressor --splitter 5050 --splitter2 cv --search sfs --target-d 3 --wrapper-metric r2 --validate same --output json --stable-output --verbosity silent
+# fst4_metric_aucmacro* pin the one-vs-rest macro AUC on K>2 classes (the binary auc goldens
+# above stay byte-identical — the two-class path is untouched). The _svm variant
+# additionally pins the LibSVM per-class score mapping (one-vs-one decision-value aggregation).
+fst4_metric_aucmacro	exact	600	-	./fst4 --data data/waveform_40.trn --criterion wrapper-logreg --wrapper-metric auc --splitter 5050 --splitter2 cv --search sfs --target-d 5 --validate same --output json --stable-output --verbosity silent
+fst4_metric_aucmacro_svm	exact	900	-	./fst4 --data data/waveform_40.trn --criterion wrapper-svm --svm-kernel rbf --wrapper-metric auc --splitter 5050 --splitter2 cv --search sfs --target-d 3 --threads 2 --validate same --output json --stable-output --verbosity silent
+# fst4_rf pins the dependency-free Random Forest wrapper (--criterion wrapper-rf): training seeds derive from (subset content, --seed, split index),
+# never the fst_rand stream — evaluations are pure functions, bit-identical at any --threads.
+fst4_rf	exact	300	-	./fst4 --data data/wdbc_30.trn --criterion wrapper-rf --rf-trees 25 --splitter 5050 --splitter2 cv --search sfs --target-d 4 --validate same --output json --stable-output --verbosity silent
+fst4_rf_threads	exact	300	-	./fst4 --data data/wdbc_30.trn --criterion wrapper-rf --rf-trees 25 --splitter 5050 --splitter2 cv --search sfs --target-d 4 --validate same --output json --stable-output --verbosity silent --threads 4
+# fst4_ridge pins the closed-form ridge regression wrapper (--criterion wrapper-ridge): criterion
+# value = R2 by default (the normalized metric), --validate same reports the plain test() value + R2.
+fst4_ridge	exact	300	-	./fst4 --data data/wdbc_30.trn --criterion wrapper-ridge --splitter 5050 --splitter2 cv --search sfs --target-d 5 --validate same --output json --stable-output --verbosity silent
+# fst4_linsvm* pin the dependency-free linear SVM wrapper (--criterion wrapper-linsvm): dual
+# coordinate descent, FIXED cyclic order = RNG-free and
+# deterministic (bit-identical at any --threads); binary = one model, multiclass = one-vs-rest.
+fst4_linsvm	exact	300	-	./fst4 --data data/wdbc_30.trn --criterion wrapper-linsvm --splitter 5050 --splitter2 cv --search sfs --target-d 4 --validate same --output json --stable-output --verbosity silent
+fst4_linsvm_multiclass	exact	300	-	./fst4 --data data/waveform_40.trn --criterion wrapper-linsvm --splitter 5050 --splitter2 cv --search sfs --target-d 5 --validate same --output json --stable-output --verbosity silent
+# fst4_lda pins the shared-covariance linear discriminant wrapper (--criterion wrapper-lda):
+# pooled covariance through the Indexed_Matrix LU machinery
+# (Eigen-path parity), closed-form, deterministic.
+fst4_lda	exact	300	-	./fst4 --data data/waveform_40.trn --criterion wrapper-lda --splitter 5050 --splitter2 cv --search sfs --target-d 5 --validate same --output json --stable-output --verbosity silent
+# fst4_extern pins the external-classifier bridge (--criterion wrapper-extern --extern-cmd):
+# persistent child process, TRAIN/TEST line protocol, driven here by the reference awk
+# nearest-centroid classifier. Both platform paths are golden-verified: POSIX (fork/exec) on
+# macOS/Linux, Windows (CreateProcess) on Windows.
+fst4_extern	exact	300	-	./fst4 --data data/wdbc_30.trn --criterion wrapper-extern --extern-cmd "awk -f tests/extern_centroid.awk" --splitter 5050 --splitter2 cv --search sfs --target-d 3 --validate same --output json --stable-output --verbosity silent
+# fst4_rbfsvm* pin the dependency-free RBF kernel SVM wrapper (--criterion wrapper-rbfsvm):
+# C-SVC kernel dual coordinate descent with the penalized-bias
+# kernel offset, FIXED cyclic order = RNG-free and deterministic (bit-identical at any --threads —
+# the multiclass scenario runs the thread-pooled engine); binary = one model, multiclass =
+# one-vs-rest; gamma default 1/d on internally standardized features. NOT bit-comparable to the
+# LibSVM wrapper by design (cross-checked at matched C/gamma: near-identical accuracy).
+fst4_rbfsvm	exact	300	-	./fst4 --data data/wdbc_30.trn --criterion wrapper-rbfsvm --splitter 5050 --splitter2 cv --search sfs --target-d 4 --validate same --output json --stable-output --verbosity silent
+fst4_rbfsvm_multiclass	exact	600	-	./fst4 --data data/waveform_40.trn --criterion wrapper-rbfsvm --splitter 5050 --splitter2 cv --search sfs --target-d 5 --threads 4 --validate same --output json --stable-output --verbosity silent
+# fst4_rbfsvm_opt pins --rbfsvm-optimize (the native C/gamma search mirroring --svm-optimize; fst_rand
+# on the master thread, deterministic at matched --seed): the demo23 alternating protocol on the native
+# kernel machine (= demo29.cfg).
+fst4_rbfsvm_opt	exact	600	-	./fst4 --data data/sonar_60.trn --criterion wrapper-rbfsvm --rbfsvm-optimize alternating --splitter randrand --rr-splits 1 --rr-train 50 --rr-test 40 --splitter2 cv --search dos --dos-delta 3 --validate same --output csv --stable-output --verbosity silent
+# fst4_report_* pin --report detailed: curve_over_d (best-per-size criterion
+# value + holdout re-validation — the overfitting curve), tabular ROC/PR curves (per-class one-vs-rest
+# on multiclass), confusion matrices, tuned optimize-protocol hyperparameters. Standard mode stays
+# byte-identical (all pre-existing goldens prove it).
+fst4_report_detailed	exact	300	-	./fst4 --data data/wdbc_30.trn --criterion wrapper-logreg --splitter 5050 --splitter2 cv --search sfs --target-d 4 --validate same --report detailed --output json --stable-output --verbosity silent
+fst4_report_multiclass	exact	600	-	./fst4 --data data/waveform_40.trn --criterion wrapper-logreg --wrapper-metric auc --splitter 5050 --splitter2 cv --search sfs --target-d 4 --validate same --report detailed --output json --stable-output --verbosity silent
+fst4_report_tuned	exact	600	-	./fst4 --data data/sonar_60.trn --criterion wrapper-rbfsvm --rbfsvm-optimize pre --splitter 5050 --splitter2 cv --search sfs --target-d 3 --validate same --report detailed --output csv --stable-output --verbosity silent
+# Direction-symmetry scenarios: single-run backward searches + threaded-engine×backward
+# pairing + bb-basic + a backward --repeat-over-splits protocol (its second trial exercises
+# the state re-initialization that single-run backward goldens cannot catch).
+fst4_sbfs	exact	300	-	./fst4 --data data/wdbc_30.trn --criterion gmahalanobis --search sbfs --target-d 7 --output json --stable-output --verbosity silent
+fst4_sbrs	exact	300	-	./fst4 --data data/wdbc_30.trn --criterion gmahalanobis --search sbrs --target-d 7 --output json --stable-output --verbosity silent
+fst4_sbs_threads	exact	600	-	./fst4 --data data/wdbc_30.trn --criterion wrapper-knn --search sbs --target-d 7 --threads 4 --output json --stable-output --verbosity silent
+fst4_bbbasic	exact	600	-	./fst4 --data data/wdbc_30.trn --criterion bhattacharyya --search bb-basic --target-d 10 --knn-distance Lp --validate knn --output csv --stable-output --verbosity silent
+fst4_repeat_sbfs	exact	900	-	./fst4 --data data/wdbc_30.trn --criterion bhattacharyya --splitter randrand --rr-splits 3 --rr-train 80 --rr-test 20 --search sbfs --target-d 7 --repeat-over-splits --tracker stabileval --output json --stable-output --verbosity silent
+# multinom-mi (Criterion_Multinomial_MI exposed as a CLI criterion): individual-MI ranking, subset value = sum of per-feature MI.
+fst4_multinom_mi	exact	600	-	./fst4 --data data/reuters_apte.arff --criterion multinom-mi --splitter randrand --rr-splits 1 --rr-train 50 --rr-test 40 --search bif --target-d 500 --validate multinom --output json --stable-output --verbosity silent
+# Threaded-IBB engine pin: the same command as fst4_bb_demo41 + --threads 4; the batch engine fires callbacks in candidate
+# order, so the output must be byte-identical to the sequential golden (csv carries no
+# threads echo) - captured as its own golden anyway.
+fst4_bb_threads	exact	600	-	./fst4 --data data/wdbc_30.trn --criterion bhattacharyya --search bb-improved --target-d 10 --knn-distance Lp --validate knn --threads 4 --output csv --stable-output --verbosity silent
+# divergence: the criterion's only coverage (no FST3 demo used it). Implementation verified
+# against an independent closed-form Gaussian J-divergence reference (exhaustive d=1/2/3 on a
+# 15-feature data set, all 575 subsets, max relative deviation 3.8e-12, identical rankings).
+# Known numerical instability -> golden only, deliberately NO demo config.
+fst4_divergence	exact	300	-	./fst4 --data data/wdbc_30.trn --criterion divergence --search sfs --target-d 7 --validate knn --output json --stable-output --verbosity silent
+# randfix: the splitter's only coverage (no FST3 demo used it). Semantics verified 4 ways: randfix 50/50
+# result-identical to holdout-50 (trailing fixed test interval); deterministic 60/40 3-NN
+# validation accuracy reproduced exactly in python (test = trailing 40% per class);
+# seed-invariant at train+test=100 / seed-variant below; stabileval trials identical at
+# 50/50, train-varying at 30/40. The scenario pins the distinctive protocol: random train,
+# fixed test, per-trial stability.
+fst4_randfix	exact	300	-	./fst4 --data data/wdbc_30.trn --criterion gmahalanobis --splitter randfix --rr-splits 3 --rr-train 30 --rr-test 40 --search sfs --target-d 7 --repeat-over-splits --tracker stabileval --output json --stable-output --verbosity silent
+# The remaining three wrapper metrics (the rest of the palette is pinned at fst4_metric_*).
+# Each verified against an independent pure-python reference on live CLI values (resub
+# exhaustive probes): f1-macro via from-scratch 3-class QDA + macro-F1 on waveform_40 (40
+# singletons, max rel dev 4.9e-13), neg-rmse/neg-mae via a full reproduction of the ridge
+# pipeline (biased-moment standardization, ZtZ/N+lambda normal equations, 0-based class label
+# as dependent; 105 pairs each, max rel dev 5.0e-13). House protocol (5050 + splitter2 cv,
+# SFS, --validate same).
+fst4_metric_f1macro	exact	300	-	./fst4 --data data/waveform_40.trn --criterion wrapper-bayes --splitter 5050 --splitter2 cv --search sfs --target-d 4 --wrapper-metric f1-macro --validate same --output json --stable-output --verbosity silent
+fst4_metric_negrmse	exact	300	-	./fst4 --data data/wdbc_30.trn --criterion wrapper-ridge --splitter 5050 --splitter2 cv --search sfs --target-d 3 --wrapper-metric neg-rmse --validate same --output json --stable-output --verbosity silent
+fst4_metric_negmae	exact	300	-	./fst4 --data data/wdbc_30.trn --criterion wrapper-regressor --splitter 5050 --splitter2 cv --search sfs --target-d 3 --wrapper-metric neg-mae --validate same --output json --stable-output --verbosity silent
+# B&B candidate-level threading: all four variants batch candidate evaluations through the
+# injected engine; --threads N is bit-identical
+# to sequential (FBB/BBPP predict-vs-compute decided upfront on the master - exact by the
+# per-feature predictor contract - with learns replayed in add-order; leafs via the base
+# engine body + leaf_result hook; BBPP/BBB post-process batches). fst4_bbpp adds first-ever
+# BBPP scenario coverage (the demo41/43 wdbc protocol); the *_threads twins ran
+# byte-identical to sequential csv at threads {2,4,8} before capture (csv carries no
+# threads echo, so threaded goldens equal their sequential counterparts byte-for-byte;
+# fst4_bbfast_threads is csv for exactly that reason - the sequential demo43 pin is json).
+fst4_bbpp	exact	600	-	./fst4 --data data/wdbc_30.trn --criterion bhattacharyya --search bb-bbpp --target-d 10 --knn-distance Lp --validate knn --output csv --stable-output --verbosity silent
+fst4_bbpp_threads	exact	600	-	./fst4 --data data/wdbc_30.trn --criterion bhattacharyya --search bb-bbpp --target-d 10 --knn-distance Lp --validate knn --threads 4 --output csv --stable-output --verbosity silent
+fst4_bbfast_threads	exact	600	-	./fst4 --data data/wdbc_30.trn --criterion bhattacharyya --search bb-fast --target-d 10 --knn-distance Lp --validate knn --threads 4 --output csv --stable-output --verbosity silent
+fst4_bbbasic_threads	exact	600	-	./fst4 --data data/wdbc_30.trn --criterion bhattacharyya --search bb-basic --target-d 10 --knn-distance Lp --validate knn --threads 4 --output csv --stable-output --verbosity silent
+# extern VALUE mode: --criterion extern-value sends the train part ONCE per
+# split (DATA block), each evaluation is an index-only VALUE request and the external tool
+# returns the criterion value itself; --extern-monotonic asserts monotonicity and admits
+# bb-* (optimality rests on the assertion). Reference tool = sum of per-feature
+# |class-mean differences| (monotonic by construction). Verified at introduction on a
+# 15-feature data set: all resub singleton values matched a pure-python reference at
+# 4.8e-13, and the bb d=3 optimum equalled python brute force over all triples AND
+# exhaustive AND bb-fast. Needs awk on PATH (like fst4_extern).
+fst4_extern_value	exact	300	-	./fst4 --data data/wdbc_30.trn --criterion extern-value --extern-cmd "awk -f tests/extern_value_meandiff.awk" --splitter resub --search sfs --target-d 3 --output json --stable-output --verbosity silent
+fst4_extern_value_bb	exact	300	-	./fst4 --data data/wdbc_30.trn --criterion extern-value --extern-cmd "awk -f tests/extern_value_meandiff.awk" --extern-monotonic --splitter resub --search bb-improved --target-d 3 --output json --stable-output --verbosity silent
+# --extern-no-data: DATA suppressed entirely - FST4 as a black-box
+# set-function optimizer over index sets. The synthetic reference w(f)=((f*37)%19)+1 is
+# positive-additive hence monotonic; the pinned bb optimum [1,2,3,4,5] value 85 equals the
+# python top-5-weights computation AND the exhaustive-search result (verified at introduction).
+fst4_extern_value_nodata	exact	300	-	./fst4 --data data/wdbc_30.trn --criterion extern-value --extern-no-data --extern-monotonic --extern-cmd "awk -f tests/extern_value_setfunc.awk" --search bb-improved --target-d 5 --output json --stable-output --verbosity silent
+# --features N: the fully data-file-free entry - no --data at all, the
+# universe is abstract (Data_Accessor_Universe: N features, 0 classes, one trivial split).
+# Same protocol as fst4_extern_value_nodata but with --features 15 replacing the dummy data
+# file, and the result line MUST equal that scenario's ([1,2,3,4,5] value 85): the entry
+# points differ, the optimization is identical. The invocation echo carries "features": 15
+# with no data/format keys, and the data block is degenerate-honest (classes 0, samples 0).
+# The nodata scenario deliberately KEEPS its data file - it pins the file-backed no-data
+# path, which remains legal and distinct.
+fst4_features_setfunc	exact	300	-	./fst4 --features 30 --criterion extern-value --extern-no-data --extern-monotonic --extern-cmd "awk -f tests/extern_value_setfunc.awk" --search bb-improved --target-d 5 --output json --stable-output --verbosity silent
+# fst4_arff_skiptypes_dense / _sparse pin the ARFF loader's graceful column skipping:
+# unsupported attribute types (STRING, DATE) are SKIPPED instead of aborting the load, and the
+# remaining columns become the feature indices. Fixtures live in tests/data/ and carry the skipped
+# columns in first/middle/last positions plus quoted values containing commas; both parsers (dense
+# tokenizer and sparse index remap) must yield the SAME result as the hand-cleaned equivalent.
+fst4_arff_skiptypes_dense	exact	300	-	./fst4 --data tests/data/mixedtypes_dense.arff --criterion bhattacharyya --search exhaustive --target-d 2 --splitter resub --output csv --stable-output --verbosity silent
+fst4_arff_skiptypes_sparse	exact	300	-	./fst4 --data tests/data/mixedtypes_sparse.arff --criterion bhattacharyya --search exhaustive --target-d 2 --splitter resub --output csv --stable-output --verbosity silent
+# fst4_arff_quoted: dense ARFF with quoted attribute names containing blanks ('first attr', "third one"), quoted numeric values and quoted
+#   nominal (class) values - all Weka-style output; must load 3 features x 8 rows (the "data" block pins it)
+fst4_arff_quoted	exact	300	-	./fst4 --data tests/quoted.arff --criterion wrapper-knn --knn-k 1 --splitter resub --search sfs --target-d 1 --output json --stable-output --verbosity silent
+# fst4_csv_basic / _semicolon pin the CSV loader: same 20 records in two
+# dialects (comma+header+dot-decimals vs semicolon+no-header+decimal-commas+one missing-value row)
+# — both scenarios must report the IDENTICAL result line, that equivalence is the point:
+fst4_csv_basic	exact	300	-	./fst4 --data tests/data/csv_basic.csv --criterion gmahalanobis --search sfs --target-d 2 --splitter 5050 --validate knn --output csv --stable-output --verbosity silent
+fst4_csv_semicolon	exact	300	-	./fst4 --data tests/data/csv_semicolon.csv --criterion gmahalanobis --search sfs --target-d 2 --splitter 5050 --validate knn --output csv --stable-output --verbosity silent
+# fst4_csv_missing_to pins --csv-missing-to (skip turned into imputation): the semicolon fixture's
+# missing-value row is KEPT, its missing cell mapped to -999 and substituted by the per-feature
+# training average via --missing-value. JSON output deliberately (like fst4_missing_demo62, the
+# other --missing-value scenario) rather than the csv of its sibling scenarios: it pins the "samples"
+# count at 21 vs the skip-mode 20 - the most direct evidence the mapping fired - and the csv_missing_to
+# echo, which is in the invocation block because this flag changes WHICH RECORDS load (the --csv-*
+# dialect flags are absent from the echo by contrast, being result-neutral by construction).
+# All three modes are separated: the criterion value differs from skip-mode fst4_csv_semicolon (the
+# extra row moves the 5050 split), the validation from a map-only run (substitution changes a test
+# cell) - so a regression in either the mapping or the substitution fails this scenario.
+fst4_csv_missing_to	exact	300	-	./fst4 --data tests/data/csv_semicolon.csv --csv-missing-to -999 --missing-value -999 --criterion gmahalanobis --search sfs --target-d 2 --splitter 5050 --validate knn --output json --stable-output --verbosity silent
+# fst4_stdin_trn pins --data -: the dataset arrives on standard
+# input and --format names its format, there being no file name to infer it from. Verified at
+# implementation time to reproduce the file-based run exactly - the echoed "data" field is the
+# ONLY difference ("-" instead of the path), which is why this cannot be a byte-identical twin
+# of a path-based scenario the way the csv_basic/_semicolon pair is.
+fst4_stdin_trn	exact	300	-	./fst4 --data - --format trn --criterion gmahalanobis --search sfs --target-d 3 --splitter 5050 --validate knn --output json --stable-output --verbosity silent < data/wdbc_30.trn
+# fst4_dump_scores / fst4_curves_svg pin the two file-writing report outputs. Both scenarios CAT the written artifact, so the file content itself is goldened, not
+# merely the exit code; artifacts go to the gitignored scratch dir golden.sh creates, reached as
+# $FST_LASTRUN so a run with an overridden scratch dir does not collide with a concurrent one
+# (golden.sh normalizes the path back to the canonical tests/last_run/ token, so these goldens
+# stay byte-identical and machine-independent wherever the scratch dir actually is).
+# The shared base run holds out 20% of wdbc_30 (115 samples, 3 of them misclassified),
+# so the dump has rows where predicted != true and the ROC has a real shape rather than a
+# degenerate perfect-separation step. dump_scores runs in STANDARD report mode deliberately -
+# the flag is independent of --report detailed; curves_svg goldens the JSON curve tables AND the
+# rendered picture together, which pins the tabular->SVG correspondence.
+fst4_dump_scores	exact	300	-	./fst4 --data data/wdbc_30.trn --criterion wrapper-bayes --splitter holdout --holdout-train 80 --search sfs --target-d 3 --validate same --dump-scores "$FST_LASTRUN"/dump_scores.csv --output json --stable-output --verbosity silent && cat "$FST_LASTRUN"/dump_scores.csv
+fst4_curves_svg	exact	300	-	./fst4 --data data/wdbc_30.trn --criterion wrapper-bayes --splitter holdout --holdout-train 80 --search sfs --target-d 3 --validate same --report detailed --curves-svg "$FST_LASTRUN"/curves.svg --output json --stable-output --verbosity silent && cat "$FST_LASTRUN"/curves.svg

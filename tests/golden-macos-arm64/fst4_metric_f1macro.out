@@ -1,0 +1,9 @@
+{
+  "version": "4.2.0",
+  "invocation": {"data": "data/waveform_40.trn", "format": "trn", "splitter": "5050", "splitter2": "cv", "splitter2_cv_folds": 3, "validate": "same", "wrapper_metric": "f1-macro", "scaler": "void", "criterion": "wrapper-bayes", "search": "sfs", "target_d": 4, "threads": 1, "seed": 1, "top_k": 5, "stable_output": true},
+  "data": {"file": "data/waveform_40.trn", "format": "trn", "classes": 3, "features": 40, "samples": 5000, "class_sizes": [1692, 1653, 1655]},
+  "result": {"features": [5, 10, 14, 15], "size": 4, "value": 0.776574010095},
+  "per_split": [0.776200751874, 0.778458836128, 0.775062442283],
+  "validation": [{"classifier": "bayes", "accuracy": 0.779288284686, "metric": "f1-macro", "metric_value": 0.777926916512}],
+  "top_k": [{"value": 0.776574010095, "size": 4, "features": [5, 10, 14, 15]}, {"value": 0.750825538716, "size": 3, "features": [5, 10, 15]}, {"value": 0.693418083577, "size": 2, "features": [10, 15]}, {"value": 0.520896454557, "size": 1, "features": [15]}]
+}

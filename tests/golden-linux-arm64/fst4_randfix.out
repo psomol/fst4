@@ -1,0 +1,9 @@
+{
+  "version": "4.2.0",
+  "invocation": {"data": "data/wdbc_30.trn", "format": "trn", "splitter": "randfix", "rr_splits": 3, "rr_train": 30, "rr_test": 40, "scaler": "void", "criterion": "gmahalanobis", "search": "sfs", "target_d": 7, "tracker": "stabileval", "repeat_over_splits": true, "threads": 1, "seed": 1, "top_k": 5, "stable_output": true},
+  "data": {"file": "data/wdbc_30.trn", "format": "trn", "classes": 2, "features": 30, "samples": 569, "class_sizes": [357, 212]},
+  "result": {"features": [3, 14, 20, 21, 23, 27, 28], "size": 7, "value": 13.5137729302},
+  "trials": [{"trial": 1, "value": 13.0714471854, "size": 7, "features": [10, 17, 20, 21, 23, 24, 27]}, {"trial": 2, "value": 15.9067298528, "size": 7, "features": [0, 7, 15, 20, 21, 23, 27]}, {"trial": 3, "value": 13.5137729302, "size": 7, "features": [3, 14, 20, 21, 23, 27, 28]}],
+  "stability": {"value_mean": 14.1639833228, "value_stddev": 1.24546835022, "size_mean": 7, "size_stddev": 0, "CWrel": 0.571428571429, "ATI": 0.4, "CW": 0.571428571429, "ANHI": 0.8, "SH": 0.571428571429, "PH": 0.8, "C": 0.307692307692},
+  "top_k": []
+}

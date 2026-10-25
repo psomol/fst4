@@ -1,0 +1,9 @@
+{
+  "version": "4.2.0",
+  "invocation": {"data": "data/wdbc_30.trn", "format": "trn", "splitter": "5050", "splitter2": "cv", "splitter2_cv_folds": 3, "validate": "same", "scaler": "void", "criterion": "wrapper-knn", "knn_k": 3, "knn_distance": "L2", "search": "sffs", "target_d": 5, "sffs_delta": 2, "threads": 1, "seed": 1, "top_k": 5, "stable_output": true},
+  "data": {"file": "data/wdbc_30.trn", "format": "trn", "classes": 2, "features": 30, "samples": 569, "class_sizes": [357, 212]},
+  "result": {"features": [6, 7, 8, 15, 17], "size": 5, "value": 0.918956855792},
+  "per_split": [0.882978723404, 0.946808510638, 0.927083333333],
+  "validation": [{"classifier": "knn", "accuracy": 0.894736842105}],
+  "top_k": [{"value": 0.922502955083, "size": 6, "features": [6, 7, 8, 9, 15, 16]}, {"value": 0.922502955083, "size": 7, "features": [6, 7, 8, 9, 15, 16, 17]}, {"value": 0.918956855792, "size": 5, "features": [6, 7, 8, 15, 17]}, {"value": 0.918956855792, "size": 5, "features": [6, 7, 8, 9, 15]}, {"value": 0.911938534279, "size": 1, "features": [7]}]
+}

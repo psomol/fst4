@@ -1,0 +1,165 @@
+================================================================================
+FST4 — SAMPLE DATA SETS: ORIGIN, ATTRIBUTION AND TERMS
+================================================================================
+
+The data sets in this directory are third-party research data. They are NOT
+covered by the FST4 copyright and licence (README.md, LICENSE): each one carries
+its own terms, reproduced below and repeated in each data file's own header
+(exception: the .csv files — the CSV format has no comment syntax, so they
+carry no in-file header and this file is their attribution record).
+
+Every file here is referenced by at least one exemplar demo, demos/*.cfg parity
+config, or golden test scenario; nothing is bundled that the toolbox does not
+actually use.
+
+If you redistribute FST4, this file and the data file headers must travel with
+it.
+
+--------------------------------------------------------------------------------
+1. DATA SETS FROM THE UCI MACHINE LEARNING REPOSITORY  —  CC BY 4.0
+--------------------------------------------------------------------------------
+
+The following are licensed under the Creative Commons Attribution 4.0
+International licence (CC BY 4.0):
+
+    https://creativecommons.org/licenses/by/4.0/
+
+CC BY 4.0 permits redistribution and adaptation for any purpose, provided that
+appropriate credit is given, a link to the licence is provided, and CHANGES ARE
+INDICATED. FST4's copies are modified — at minimum by conversion into the TRN
+or ARFF formats the toolbox reads — and each modification is stated below.
+
+The data sets are provided "as is", without warranties or conditions of any
+kind, either express or implied.
+
+Each entry gives the citation exactly as published by the UCI Machine Learning
+Repository.
+
+
+  data/wdbc_30.trn
+  data/wdbc_30.csv
+    Wolberg, W., Mangasarian, O., Street, N., & Street, W. (1993). Breast
+    Cancer Wisconsin (Diagnostic) [Dataset]. UCI Machine Learning Repository.
+    https://doi.org/10.24432/C5DW2B.
+    Licence: CC BY 4.0.
+    MODIFIED: converted to FST TRN format (569 samples, 30 features, 2
+    classes). One row that an earlier TRN conversion had duplicated in error
+    was removed. wdbc_30.csv is a CSV conversion of the same file (identical
+    values and sample order; class labels benign/malignant), included so the
+    demos can exercise the CSV reader.
+
+  data/ionosphere.arff
+    Sigillito, V., Wing, S., Hutton, L., & Baker, K. (1989). Ionosphere
+    [Dataset]. UCI Machine Learning Repository.
+    https://doi.org/10.24432/C5W01B.
+    Licence: CC BY 4.0.
+    MODIFIED: supplied in ARFF form.
+
+  data/mushroom_125.trn
+    Mushroom [Dataset]. (1981). UCI Machine Learning Repository.
+    https://doi.org/10.24432/C5959T.
+    Licence: CC BY 4.0.
+    UCI records no named creator for this data set; its abstract states the
+    data is drawn from an Audubon Society field guide to North American
+    mushrooms (1981).
+    MODIFIED: converted to FST TRN format and BINARIZED — the original 22
+    categorical attributes are expanded into 125 binary features
+    (8124 samples, 2 classes).
+
+  data/optdigits_64.trn
+    Alpaydin, E. & Kaynak, C. (1998). Optical Recognition of Handwritten
+    Digits [Dataset]. UCI Machine Learning Repository.
+    https://doi.org/10.24432/C50P49.
+    Licence: CC BY 4.0.
+    MODIFIED: converted to FST TRN format, with the original training and test
+    parts COMBINED into a single set (5620 samples, 64 features, 10 classes).
+
+  data/spambase_57.trn
+  data/spambase_57.csv
+    Hopkins, M., Reeber, E., Forman, G., & Suermondt, J. (1999). Spambase
+    [Dataset]. UCI Machine Learning Repository.
+    https://doi.org/10.24432/C53G6X.
+    Licence: CC BY 4.0.
+    MODIFIED: converted to FST TRN format (4601 samples, 57 features,
+    2 classes). spambase_57.csv is a CSV conversion of the same file
+    (identical values and sample order; class labels spam/nonspam), included
+    so the demos can exercise the CSV reader.
+
+  data/waveform_40.trn
+  data/waveform_40.arff
+    Breiman, L. & Stone, C. (1984). Waveform Database Generator (Version 2)
+    [Dataset]. UCI Machine Learning Repository.
+    https://doi.org/10.24432/C56014.
+    Licence: CC BY 4.0.
+    MODIFIED: Version 2 of the generated database (40 features, 5000 samples,
+    3 classes), supplied twice — converted to FST TRN format, and in ARFF
+    form (waveform_40.arff, named waveform-5000.arff before FST4 4.2; the
+    TRN is the class-major reordering of the same rows). NOTE: the
+    descriptive comment block inherited inside the ARFF file describes
+    Version 1 (21 attributes); the data itself is Version 2.
+
+  data/sonar_60.trn
+  data/sonar_60.arff
+  data/sonar_60_missing_data.trn
+    Sejnowski, T. & Gorman, R. (1988). Connectionist Bench (Sonar, Mines vs.
+    Rocks) [Dataset]. UCI Machine Learning Repository.
+    https://doi.org/10.24432/C5T01Q.
+    Licence: CC BY 4.0.
+    MODIFIED: 208 samples, 60 features, 2 classes; converted to FST TRN format
+    and supplied in ARFF form (sonar_60.arff, named sonar.arff before FST4
+    4.2). The historical TRN conversion declared a wrong class split (103
+    rocks / 105 mines); FST4 4.2 corrected both TRN variants to the official
+    UCI split (97 rocks / 111 mines), matching the ARFF, which was always
+    correct. sonar_60_missing_data.trn is a FURTHER MODIFIED
+    variant created for FST's missing-value demonstrations, in which 30% of the
+    values are marked as missing (encoded as the integer value 5).
+
+  data/madelon_train_nips_500.trn
+    Guyon, I. (2004). Madelon [Dataset]. UCI Machine Learning Repository.
+    https://doi.org/10.24432/C5602H.
+    Licence: CC BY 4.0.
+    Originally prepared for the NIPS 2003 Feature Selection Challenge. The data
+    is entirely SYNTHETIC — generated, with no real-world source.
+    MODIFIED: the TRAINING part only (2000 samples, 500 features, 2 classes),
+    converted to FST TRN format.
+
+  data/gisette_valid_nips_5000.trn
+    Guyon, I., Gunn, S., Ben-Hur, A., & Dror, G. (2004). Gisette [Dataset].
+    UCI Machine Learning Repository. https://doi.org/10.24432/C5HP5B.
+    Licence: CC BY 4.0.
+    Originally prepared for the NIPS 2003 Feature Selection Challenge, and
+    constructed from the MNIST handwritten digit database (the confusable
+    digits 4 and 9) of Y. LeCun, C. Cortes and C. Burges. Roughly half of the
+    5000 features are synthetic distractor probes.
+    MODIFIED: the VALIDATION part only (1000 samples, 5000 features,
+    2 classes), converted to FST TRN format.
+
+--------------------------------------------------------------------------------
+2. REUTERS-21578  —  RESEARCH USE ONLY
+--------------------------------------------------------------------------------
+
+  data/reuters_apte.arff
+
+    Reuters-21578 text categorization test collection, Distribution 1.0,
+    "Apte" (ModApte) split. Compiled by David D. Lewis.
+    https://www.daviddlewis.com/resources/testcollections/reuters21578/
+
+    The copyright for the text of the newswire articles and Reuters
+    annotations in the Reuters-21578 collection resides with Reuters Ltd.
+    Reuters Ltd. and Carnegie Group, Inc. have agreed to allow the free
+    distribution of this data FOR RESEARCH PURPOSES ONLY. Publications based
+    on it should acknowledge its use and refer to the collection by the name
+    "Reuters-21578, Distribution 1.0".
+
+    THIS RESTRICTION IS NARROWER THAN CC BY 4.0 AND TRAVELS WITH EVERY COPY.
+
+    MODIFIED: converted to a sparse ARFF term-frequency matrix — 8941
+    documents, 10105 numeric features, 33 categories. The representation is
+    ANONYMIZED: attributes are named a1..a10105 and classes cls0..cls32, so
+    neither the vocabulary nor the category labels are part of the file and no
+    article text can be reconstructed from it.
+
+================================================================================
+Questions about the data sets, or about FST4 more generally: see the Contacts
+section of README.md, or https://fst.utia.cz
+================================================================================

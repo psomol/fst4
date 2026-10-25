@@ -1,0 +1,170 @@
+/* FST4 Doxygen theme
+ *
+ * Re-themes the stock Doxygen 1.17 HTML output (AUTO_LIGHT colorstyle) to
+ * match the palette established in ../FST4_INTRO.html: a warm paper
+ * background, near-black ink, and blue as the single accent (rather than
+ * the old FST3 site's saturated all-blue "doxygen tabs" skin archived in
+ * web_mirror/). Loaded via HTML_EXTRA_STYLESHEET, after doxygen.css, so it
+ * only needs to override CSS custom properties -- doxygen's own rules keep
+ * consuming var(--xxx) unchanged. Syntax-highlight token colors (keyword,
+ * comment, string, ...) and the note/warning/todo/bug callout boxes are
+ * left at doxygen's defaults: they already work on any near-white/near-black
+ * background and aren't part of the FST4_INTRO token set.
+ */
+
+:root {
+  /* FST4_INTRO palette (light) */
+  --fst4-page: #f9f9f7;
+  --fst4-surface: #fcfcfb;
+  --fst4-ink: #0b0b0b;
+  --fst4-ink-2: #52514e;
+  --fst4-muted: #898781;
+  --fst4-grid: #e1e0d9;
+  --fst4-axis: #c3c2b7;
+  --fst4-border: rgba(11,11,11,0.10);
+  --fst4-s1: #2a78d6;  /* blue   -- primary accent / links */
+  --fst4-s5: #4a3aa7;  /* violet -- secondary accent */
+  --fst4-s6: #e34948;  /* red    -- caveats / param names */
+  --fst4-tint-info: rgba(42,120,214,0.07);
+
+  /* page base colors */
+  --page-background-color: var(--fst4-page);
+  --page-foreground-color: var(--fst4-ink);
+  --page-link-color: var(--fst4-s1);
+  --page-visited-link-color: var(--fst4-s1);
+  --page-external-link-color: var(--fst4-s5);
+
+  /* index */
+  --index-odd-item-bg-color: var(--fst4-surface);
+  --index-even-item-bg-color: var(--fst4-page);
+  --index-header-color: var(--fst4-ink);
+  --index-separator-color: var(--fst4-border);
+
+  /* header/footer/title */
+  --header-background-color: var(--fst4-surface);
+  --header-separator-color: var(--fst4-border);
+  --group-header-separator-color: var(--fst4-border);
+  --group-header-color: var(--fst4-s1);
+  --footer-foreground-color: var(--fst4-muted);
+  --citation-label-color: var(--fst4-s1);
+  --glow-color: var(--fst4-s1);
+  --title-background-color: var(--fst4-surface);
+  --title-separator-color: var(--fst4-border);
+
+  --blockquote-background-color: var(--fst4-tint-info);
+  --blockquote-border-color: var(--fst4-s1);
+
+  --scrollbar-thumb-color: var(--fst4-axis);
+  --scrollbar-background-color: var(--fst4-page);
+
+  /* icons */
+  --icon-background-color: var(--fst4-s1);
+  --icon-foreground-color: #ffffff;
+  --icon-folder-open-fill-color: var(--fst4-grid);
+  --icon-folder-fill-color: var(--fst4-grid);
+  --icon-folder-border-color: var(--fst4-s1);
+  --icon-doc-fill-color: var(--fst4-grid);
+  --icon-doc-border-color: var(--fst4-s1);
+
+  /* brief member declaration list */
+  --memdecl-background-color: var(--fst4-surface);
+  --memdecl-foreground-color: var(--fst4-ink-2);
+  --memdecl-template-color: var(--fst4-s5);
+  --memdecl-border-color: var(--fst4-border);
+
+  /* detailed member list */
+  --memdef-border-color: var(--fst4-border);
+  --memdef-title-background-color: var(--fst4-surface);
+  --memdef-proto-background-color: var(--fst4-tint-info);
+  --memdef-proto-text-color: var(--fst4-ink);
+  --memdef-param-name-color: var(--fst4-s6);
+  --memdef-template-color: var(--fst4-s5);
+
+  /* tables */
+  --table-cell-border-color: var(--fst4-border);
+  --table-header-background-color: var(--fst4-s1);
+  --table-header-foreground-color: #ffffff;
+
+  /* labels */
+  --label-background-color: var(--fst4-s1);
+  --label-left-top-border-color: var(--fst4-s1);
+  --label-right-bottom-border-color: var(--fst4-border);
+  --label-foreground-color: #ffffff;
+
+  /* nav bar/tree/menu */
+  --nav-background-color: var(--fst4-surface);
+  --nav-foreground-color: var(--fst4-ink-2);
+  --nav-border-color: var(--fst4-border);
+  --nav-breadcrumb-separator-color: var(--fst4-border);
+  --nav-breadcrumb-active-bg: var(--fst4-tint-info);
+  --nav-breadcrumb-color: var(--fst4-ink);
+  --nav-splitbar-bg-color: var(--fst4-grid);
+  --nav-splitbar-handle-color: var(--fst4-axis);
+  --nav-text-normal-color: var(--fst4-ink-2);
+  --nav-menu-button-color: var(--fst4-ink-2);
+  --nav-menu-background-color: var(--fst4-surface);
+  --nav-menu-foreground-color: var(--fst4-ink-2);
+  --nav-menu-active-bg: var(--fst4-tint-info);
+  --nav-menu-active-color: var(--fst4-s1);
+  --nav-arrow-color: var(--fst4-axis);
+  --nav-arrow-selected-color: var(--fst4-s1);
+
+  /* sync icon */
+  --sync-icon-border-color: var(--fst4-border);
+  --sync-icon-background-color: var(--fst4-surface);
+  --sync-icon-selected-background-color: var(--fst4-tint-info);
+  --sync-icon-color: var(--fst4-axis);
+  --sync-icon-selected-color: var(--fst4-s1);
+
+  /* table of contents */
+  --toc-background-color: var(--fst4-surface);
+  --toc-border-color: var(--fst4-border);
+  --toc-header-color: var(--fst4-s1);
+
+  /* search field */
+  --search-background-color: var(--fst4-surface);
+  --search-foreground-color: var(--fst4-muted);
+  --search-active-color: var(--fst4-ink);
+  --search-box-border-color: var(--fst4-border);
+  --search-close-icon-bg-color: var(--fst4-muted);
+  --search-close-icon-fg-color: var(--fst4-surface);
+  --search-filter-highlight-text-color: #ffffff;
+  --search-filter-highlight-bg-color: var(--fst4-s1);
+  --search-results-foreground-color: var(--fst4-ink-2);
+  --search-results-border-color: var(--fst4-border);
+
+  /* code fragments (chrome only -- token colors stay Doxygen defaults) */
+  --fragment-background-color: var(--fst4-surface);
+  --fragment-foreground-color: var(--fst4-ink);
+  --fragment-border-color: var(--fst4-border);
+
+  --font-family-normal: system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-family-title: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not(.dark-mode) {
+    /* FST4_INTRO palette (dark) -- only the tokens themselves change;
+       every --xxx-color above stays declared as var(--fst4-yyy) and
+       re-resolves through this override. */
+    --fst4-page: #0d0d0d;
+    --fst4-surface: #1a1a19;
+    --fst4-ink: #ffffff;
+    --fst4-ink-2: #c3c2b7;
+    --fst4-muted: #898781;
+    --fst4-grid: #2c2c2a;
+    --fst4-axis: #383835;
+    --fst4-border: rgba(255,255,255,0.12);
+    --fst4-s1: #3987e5;
+    --fst4-s5: #9085e9;
+    --fst4-s6: #e66767;
+    --fst4-tint-info: rgba(57,135,229,0.12);
+  }
+}
+
+/* Doxygen omits its own ::-webkit-scrollbar rules once an extra stylesheet
+ * is present (see the HTML_EXTRA_STYLESHEET doc comment), so restate them
+ * here against the FST4 tokens directly. */
+::-webkit-scrollbar { background-color: var(--fst4-page); height: 12px; width: 12px; }
+::-webkit-scrollbar-thumb { border-radius: 6px; box-shadow: inset 0 0 12px 12px var(--fst4-axis); border: solid 2px transparent; }
+::-webkit-scrollbar-corner { background-color: var(--fst4-page); }
